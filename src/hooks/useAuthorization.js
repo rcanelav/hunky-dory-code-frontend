@@ -1,14 +1,13 @@
 import axios  from 'axios';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { facebookAuthProvider, googleAuthProvider, startSignIn } from '../firebase/firebaseConfig';
 
 const { REACT_APP_API_URL } = process.env;
-
 const authContext = createContext();
 
 function useAuthorization( params ){
     const context = useContext( authContext );
-
     if( !context ){
         console.log( 'context is not defined' );
         return;
@@ -18,10 +17,32 @@ function useAuthorization( params ){
 
 function AuthProvider( props ){
     const [ userSession, setUserSession ] = useState( localStorage.getItem( 'userSession' ) );
-
-    const [ userProfile, setUserProfile ] = useState({});
-
+    const [ userProfile, setUserProfile ] = useState();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (userSession) {
+            async function getUserProfile() {
+                try {
+                const config = {
+                    headers: {
+                    Authorization: `Bearer ${userSession}`,
+                    },
+                };
+
+                const response = await axios.get(
+                    `${REACT_APP_API_URL}/api/v1/auth/current`,
+                    config
+                );
+
+                setUserProfile(response.data);
+                } catch (error) {
+                    console.log("ERROR: ", error);
+                }
+            }
+            getUserProfile();
+        }
+    }, [userSession]);
 
     async function login( email, password ) {
 
@@ -44,29 +65,31 @@ function AuthProvider( props ){
         sessionStorage.setItem("userSession", null);
     }
 
-    // useEffect(() => {
-    //     if (userSession) {
-    //       async function getUserProfile(params) {
-    //         try {
-    //           const config = {
-    //             headers: {
-    //               Authorization: `Bearer ${userSession}`,
-    //             },
-    //           };
+    async function signInWithFirebaseAuth( type ){
+        try{
+            let credentials;
+            if( type === 'google'){
+                credentials = await startSignIn(googleAuthProvider);
+            }else{
+                credentials = await startSignIn(facebookAuthProvider);
+            }
+            const { idToken: id_token, email } = credentials;
+            const response = await axios.post( `${REACT_APP_API_URL}/api/v1/auth`, {
+                id_token,
+                email,
+            });
+            const { accessToken } = response.data;
+            setUserSession( accessToken );
+            localStorage.setItem( 'userSession', accessToken );
 
-    //           const response = await axios.get(
-    //             "http://localhost/api/auth/users/current",
-    //             config
-    //           );
+            console.log(credentials);
+            console.log( accessToken);
 
-    //           setUserProfile(response.data.user);
-    //         } catch (error) {
-    //           console.log("ERROR: ", error);
-    //         }
-    //       }
-    //       getUserProfile();
-    //     }
-    //   }, [userSession]);
+            navigate('/');
+        }catch( error ){
+            console.log(error);
+        }
+    }
 
     const value = {
         userSession,
@@ -74,6 +97,7 @@ function AuthProvider( props ){
         logout,
         userProfile,
         setUserProfile,
+        signInWithFirebaseAuth,
     };
 
     return <authContext.Provider value={value}> {props.children } </authContext.Provider>

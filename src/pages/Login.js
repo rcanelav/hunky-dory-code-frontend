@@ -6,8 +6,15 @@ import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-butto
 import { useAuthorization } from '../hooks/useAuthorization';
 
 export const Login = () => {
-    const { login } = useAuthorization();
+    const { login, signInWithFirebaseAuth } = useAuthorization();
     const [ error, setError ] = useState('');
+    const handleAuth = async (e) => {
+        e.preventDefault();
+        if(e.target.textContent.includes('Google')){
+            return signInWithFirebaseAuth('google');
+        }
+        return signInWithFirebaseAuth('facebook');
+    }
 
     return (
         <StyledWrapper>
@@ -91,10 +98,10 @@ export const Login = () => {
                             </StyledButton>
                             <span> OR </span>
                             <StyledSocialWrapper>
-                                <StyledGoogleButton />
+                                <StyledGoogleButton onClick={  handleAuth } />
                             </StyledSocialWrapper>
                             <StyledSocialWrapper>
-                                <StyledFacebookButton />
+                                <StyledFacebookButton onClick={ handleAuth } />
                             </StyledSocialWrapper>
                         </form>
                     )}
@@ -109,8 +116,6 @@ const StyledWrapper = styled.div`
     max-width: 81%;
     margin: 10vh auto;
     flex-flow: column wrap;
-    height: 80vh;
-
     & form {
         margin-top: 15vh;
         text-align: center;

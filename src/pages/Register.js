@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import axios from 'axios';
+import { useAuthorization } from '../hooks/useAuthorization';
 const { REACT_APP_API_URL } = process.env;
 
 export const Register = () => {
+    const { signInWithFirebaseAuth } = useAuthorization();
     const [ error, setError ] = useState('');
     const handleRegister = async( userData ) => {
         console.log( userData );
@@ -18,6 +20,13 @@ export const Register = () => {
             setError(errors[0].msg);
         }
     };
+    const handleAuth = async (e) => {
+        e.preventDefault();
+        if(e.target.textContent.includes('Google')){
+            return signInWithFirebaseAuth('google');
+        }
+        return signInWithFirebaseAuth('facebook');
+    }
     return (
         <StyledWrapper>
             <Typography
@@ -182,10 +191,10 @@ export const Register = () => {
                             </StyledButton>
                             <span> OR </span>
                             <StyledSocialWrapper>
-                                <StyledGoogleButton />
+                                <StyledGoogleButton onClick={  handleAuth } />
                             </StyledSocialWrapper>
                             <StyledSocialWrapper>
-                                <StyledFacebookButton />
+                                <StyledFacebookButton onClick={  handleAuth } />
                             </StyledSocialWrapper>
                         </form>
                     )}

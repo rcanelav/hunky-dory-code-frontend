@@ -2,28 +2,13 @@ import { TextField } from '@mui/material';
 import React from 'react'
 import styled from 'styled-components'
 import SearchIcon from '@mui/icons-material/Search';
-import axios from 'axios';
-const { REACT_APP_API_URL } = process.env;
+import { useNavigate } from 'react-router-dom';
 
 export const Search = ({ search, setSearch }) => {
+    const navigate = useNavigate();
     const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(search)
-        
-       const payload = {
-            searchBy: 'content',
-            value: search
-        }
-
-        const response = await axios({
-            method: 'post',
-            url: `${REACT_APP_API_URL}/api/v1/search`,
-            data: payload
-        }
-        )
-            
-
-        console.log(response.data)
+        navigate('/main?q=' + search);
     }
     return (
         <StyledWrapper>
@@ -32,12 +17,11 @@ export const Search = ({ search, setSearch }) => {
                 label="Search..."
                 variant="standard"
                 size="medium"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={ search }
+                onChange={ e => setSearch(e.target.value) }
                 onKeyDown={ e => e.key === 'Enter' && handleSubmit(e) }
             />
             <StyledSearchIcon onClick={ e => handleSubmit(e)} />
-
         </StyledWrapper>
     )
 }
