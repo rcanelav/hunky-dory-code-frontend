@@ -26,6 +26,8 @@ Menu.propTypes = {
 
 const StyledMenu = styled.nav`
   display: flex;
+  position: absolute;
+  z-index: 1;
   width: 100%;
   flex-direction: column;
   justify-content: center;

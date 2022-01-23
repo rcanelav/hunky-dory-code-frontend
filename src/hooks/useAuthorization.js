@@ -17,11 +17,12 @@ function useAuthorization( params ){
 
 function AuthProvider( props ){
     const [ userSession, setUserSession ] = useState( localStorage.getItem( 'userSession' ) );
-    const [ userProfile, setUserProfile ] = useState();
+    const [ userProfile, setUserProfile ] = useState( localStorage.getItem( 'userProfile' ) );
+    const [ isUserLoggedIn, setIsUserLoggedIn ] = useState( false );
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (userSession) {
+        if (userSession?.length > 0 && userSession !== null) {
             async function getUserProfile() {
                 try {
                 const config = {
@@ -35,7 +36,8 @@ function AuthProvider( props ){
                     config
                 );
 
-                setUserProfile(response.data);
+                setUserProfile(response?.data);
+                setIsUserLoggedIn(true);
                 } catch (error) {
                     console.log("ERROR: ", error);
                 }
@@ -54,6 +56,7 @@ function AuthProvider( props ){
             const { accessToken } = response.data.response;
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
+            setIsUserLoggedIn( true );
             navigate('/');
         } catch ( error ){
             return error.response;
@@ -61,8 +64,11 @@ function AuthProvider( props ){
     }
 
     function logout() {
+        localStorage.removeItem( 'userSession' );
         setUserSession(null);
-        sessionStorage.setItem("userSession", null);
+        // sessionStorage.setItem("userSession", null);
+        setIsUserLoggedIn(false);
+        console.log('Logged out');
     }
 
     async function signInWithFirebaseAuth( type ){
@@ -84,7 +90,7 @@ function AuthProvider( props ){
 
             console.log(credentials);
             console.log( accessToken);
-
+            setIsUserLoggedIn( true );
             navigate('/');
         }catch( error ){
             console.log(error);
@@ -98,6 +104,7 @@ function AuthProvider( props ){
         userProfile,
         setUserProfile,
         signInWithFirebaseAuth,
+        isUserLoggedIn,
     };
 
     return <authContext.Provider value={value}> {props.children } </authContext.Provider>
