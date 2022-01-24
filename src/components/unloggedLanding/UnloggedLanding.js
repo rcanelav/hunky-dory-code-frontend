@@ -66,7 +66,7 @@ const StyledText = styled.div`
     }
 `;
 const StyledLogout = styled(FiLogOut)`
-    font-size: 1.6em;
+    font-size: 2em;
     padding: 0;
     cursor: pointer;
     color: red;
@@ -89,7 +89,9 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-flow: row wrap;
-
+    & > *:first-child {
+        margin-left: 3em;
+    }
     & > * {
         margin: 0 1em;
     }
