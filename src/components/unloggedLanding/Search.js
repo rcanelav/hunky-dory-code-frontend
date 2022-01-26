@@ -8,7 +8,7 @@ export const Search = ({ search, setSearch }) => {
     const navigate = useNavigate();
     const handleSubmit = async(e) => {
         e.preventDefault();
-        navigate('/main?q=' + search);
+        navigate('/search?q=' + search);
     }
     return (
         <StyledWrapper>

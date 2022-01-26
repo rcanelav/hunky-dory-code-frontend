@@ -48,25 +48,23 @@ export const PostTitle = ({ title, date, author, userImage, userId, content }) =
 };
 
 const StyledWrapper = styled.div`
-max-width: 100%;
-min-width: 100%;
-min-height: 100px;
-max-height: 100px;
-background-color: rgba(206, 206, 206, 0.4);
-margin: 1.5em 0;
-display: flex;
-flex-flow: row wrap;
-border-radius: 10px;
-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-padding: 1%;
-overflow: hidden;
+    background-color: rgba(206, 206, 206, 0.4);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1%;
+
+    flex: 0 1 90%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 1em 0;
+    &:first-child {
+        margin-top: 2em;
+    }
 `;
 
 const StyledPostContent = styled.div`
 margin-left: 1.2em;
 flex: 0 0 60%;
-min-height: 100%;
-max-height: 100px;
 display: flex;
 flex-flow: row wrap;
 `;
@@ -92,7 +90,6 @@ const StyledTitle = styled.p`
     font-size: 1.3em;
     font-weight: bold;
     margin: 0;
-    height: max-content;
     @media (min-width: 768px) {
         font-size: 1.6em;
     }
@@ -127,5 +124,4 @@ const StyledPostDate = styled.div`
     flex: 0 0 100%;
     font-size: 0.9em;
     align-self: flex-end;
-    
 `;

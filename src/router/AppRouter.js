@@ -15,7 +15,7 @@ export const AppRouter = () => {
     return (
         <Routes>
             <Route path="/" element={ <LandingPage />} />
-            <Route path="/main" element={<Main />} />
+            <Route path="/search" element={<Main />} />
             <Route path="/contact" element={<LandingPage />} />
             <Route path="/login" element={  isUserLoggedIn ? <Navigate to='/' /> :  <Login /> } />
             <Route path="/register" element={ <Register /> } />

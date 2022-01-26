@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { SearchBar } from '../searchBar/SearchBar';
 
-export const Navbar = () => {
+export const Navbar = ({ search, setSearch }) => {
     return (
         <>
             <Nav>
@@ -23,23 +23,23 @@ export const Navbar = () => {
     )
 }
 const Nav = styled.nav`
-    with: 100%;
-    height: 15vh;
+    flex: 0 1 100%;
     padding: 0;
-    margin-top: 0px
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-
     & ul {
-        list-style: none;
+        list-style-type: none;
         display: flex;
-        justify-content: space-around;
+        flex-flow: row wrap;
+        justify-content: space-between;
         font-size: 1.2em;
     }
-
     & li {
-        flex: 1 1 33%;
+        flex: 1 0 auto;
         text-align: center;
+    }
+    & li > a {
+        display: none;
+    }
+    & li:nth-child(2) {
+        flex: 0 1 92%;
     }
 `;
