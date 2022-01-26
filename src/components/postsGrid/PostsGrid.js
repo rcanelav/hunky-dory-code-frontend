@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { PostTitle } from '../postslist/PostTitle';
 const { REACT_APP_API_URL } = process.env;
 
-export const PostsGrid = ({search}) => {
-
+export const PostsGrid = ({searchData}) => {
+  const { search, searchBy, technology, orderBy, from, to, numAnswers, direction } = searchData;
   const [ data, setData ] = useState([]);
   const [ posts, setPosts ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(true);
@@ -14,8 +14,9 @@ export const PostsGrid = ({search}) => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`${REACT_APP_API_URL}/api/v1/search?q=${search || ''}&page=${page}`);
-      setData( response.data);
+      const response = await axios.get(`${REACT_APP_API_URL}/api/v1/search?q=${search || ''}&page=${page}&searchBy=${searchBy || 'title'}${technology ? '&technology='+technology : ''}${ orderBy ? '&orderBy='+orderBy : ''}${from ? '&from='+from : ''}${to ? '&to='+to : ''}${numAnswers ? '&numAnswers='+numAnswers : ''}${ direction ? '&direction='+direction : ''}`);
+
+      setData( response.data );
       setPosts( prev => (
         [ ...prev, ...response.data.results]
       ))
@@ -23,7 +24,9 @@ export const PostsGrid = ({search}) => {
       
     }
     fetchData();
-  }, [ search, page ]);
+     
+  }, [ search, page, searchBy, technology, orderBy, from, to, numAnswers, direction ]);
+
   if( isLoading ) return <div> is loading </div>
   return (
     <>

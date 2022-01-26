@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Navbar } from '../components/navbar/Navbar';
 import { PostsGrid } from '../components/postsGrid/PostsGrid';
@@ -8,14 +8,32 @@ import { useQuery } from '../hooks/useQuery';
 export const Main = () => {
   const query = useQuery();
   const search = query.get('q');
-  console.log('query', search);
-  const debouncedSearch = useDebounce(search, 400);
-  return (
+  const searchBy = query.get('searchBy') || 'title';
+  const technology = query.get('technology') || '';
+  const orderBy = query.get('orderBy') || '';
+  const from = query.get('from') || '';
+  const to = query.get('to') || '';
+  const numAnswers = query.get('numAnswers') || '';
+  const direction = query.get('direction') || '';
+
+  let debouncedSearch = useDebounce(search, 400);
+  debouncedSearch = { 
+    search: debouncedSearch,
+    searchBy,
+    technology,
+    orderBy,
+    from,
+    to,
+    numAnswers,
+    direction,
+  }
+
+   return (
     <>
       <ContentWrapper>
         <StyledNavbar />
         <GridWrapper>
-          <PostsGrid key={ debouncedSearch } search={ debouncedSearch }/>
+          <PostsGrid key={ debouncedSearch.search + new Date().toISOString } searchData={ debouncedSearch}/>
         </GridWrapper>
       </ContentWrapper>
     </>

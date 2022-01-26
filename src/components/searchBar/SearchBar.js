@@ -1,4 +1,4 @@
-import { Button, FormControl, FormControlLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material';
+import { Alert, Button, FormControlLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +26,7 @@ export const SearchBar = () => {
             setTechnologyData( response.data.technologies );
         }
         getTechnologies();
+
     }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,13 +35,14 @@ export const SearchBar = () => {
                         `${ searchBy === 'content' ? '&searchBy='+searchBy: ''}`+
                         `${ (searchBy === 'technology' && technology.length > 1)
                             ? '&searchBy='+searchBy+'&technology='+technology:''}`+
-                        `${ searchBy === 'date' && initialDate.length > 0 && finalDate.length > 0 ? '&searchBy='+searchBy+'&from='+initialDate+'&to='+finalDate:''}`+
-                        `${ searchBy === 'numAnswers' && numAnswers && typeof numAnswers === Number ? '&searchBy='+searchBy+'&numAnswers='+numAnswers:''}`+
+                        `${ searchBy === 'date' && initialDate.length > 0 && finalDate.length > 0  && initialDate < finalDate ? '&searchBy='+searchBy+'&from='+initialDate+'&to='+finalDate:''}`+
+                        `${ searchBy === 'numAnswers' && numAnswers && typeof parseInt(numAnswers) === 'number' ? '&searchBy='+searchBy+'&numAnswers='+numAnswers:''}`+
                         `${ orderBy && orderBy !== 'init' ? '&orderBy='+orderBy : ''}`+
                         `${ direction && direction !== 'init' ? '&direction='+direction : ''}`
-                        );
+        );
     }
-    const handleReset = () => {
+    const handleReset = (e) => {
+        e.preventDefault();
         setSearchData( '')
         setTechnology('' )
         setSearchBy('title')
@@ -49,13 +51,10 @@ export const SearchBar = () => {
         setNumAnswers('')
         setOrderBy('postedAt')
         setDirection('DESC')
-        navigate('?q= ')
     }
-    console.log(searchData);
-    console.log(searchBy);
     return (
         <StyledSearchBarWrapper>
-            <FormControl onSubmit={ handleSubmit } onKeyDown={ e => e.key === 'Enter' && handleSubmit(e)} >
+            <form onSubmit={ handleSubmit } onKeyDown={ e => e.key === 'Enter' && handleSubmit(e)} >
                 <SearchContainer>
                     <p>Quick Search</p>
                     <TextField id="outlined-basic" label="Search" variant="outlined"
@@ -68,8 +67,8 @@ export const SearchBar = () => {
                         `${ searchBy === 'content' ? '&searchBy='+searchBy: ''}`+
                         `${ (searchBy === 'technology' && technology.length > 1)
                             ? '&searchBy='+searchBy+'&technology='+technology:''}`+
-                        `${ searchBy === 'date' && initialDate.length > 0 && finalDate.length > 0 ? '&searchBy='+searchBy+'&from='+initialDate+'&to='+finalDate:''}`+
-                        `${ searchBy === 'numAnswers' && numAnswers && typeof numAnswers === Number ? '&searchBy='+searchBy+'&numAnswers='+numAnswers:''}`+
+                        `${ searchBy === 'date' && initialDate.length > 0 && finalDate.length > 0  && initialDate < finalDate ? '&searchBy='+searchBy+'&from='+initialDate+'&to='+finalDate:''}`+
+                        `${ searchBy === 'numAnswers' && numAnswers && typeof parseInt(numAnswers) === 'number' ? '&searchBy='+searchBy+'&numAnswers='+numAnswers:''}`+
                         `${ orderBy && orderBy !== 'init' ? '&orderBy='+orderBy : ''}`+
                         `${ direction && direction !== 'init' ? '&direction='+direction : ''}`
                         );
@@ -79,8 +78,8 @@ export const SearchBar = () => {
                 <SearchByContainer>
                     <p>Search By</p>
                     <RadioGroup row aria-label="search By" name="row-radio-buttons-group" onChange={ (e) => setSearchBy( e.target.value )} value={searchBy}>
-                    <FormControlLabel value="title" control={<Radio />} label="Title" />
-                    <FormControlLabel value="content" control={<Radio />} label="Content" />
+                        <FormControlLabel value="title" control={<Radio />} label="Title" />
+                        <FormControlLabel value="content" control={<Radio />} label="Content" />
                         <FormControlLabel value="technology" control={<Radio />} label="Technology" />
                         <FormControlLabel value="date" control={<Radio />} label="Date" />
                         <FormControlLabel value="numAnswers" control={<Radio />} label="Nº Answers" />
@@ -136,6 +135,10 @@ export const SearchBar = () => {
                                 renderInput={(params) => <TextField {...params} />}
                             />
                         </LocalizationProvider>
+                        {
+                            initialDate > finalDate && 
+                            <Alert severity="error">Dates are wrong. Impossible to set end date before initial date.</Alert>
+                        }
                     </DateContainer>
                 }
 
@@ -185,9 +188,8 @@ export const SearchBar = () => {
                         </Select>
                     </div>
                 </SortContainer>
-                <ResetButton onClick={ handleReset }>Reset</ResetButton>
-
-            </FormControl>
+                <ResetButton onClick={ e => handleReset(e) }>Reset</ResetButton>
+            </form>
         </StyledSearchBarWrapper>
     )
 }
@@ -254,6 +256,12 @@ const DateContainer = styled.div`
     & > * {
         flex: 0 1 45%;
     }
+    & > :nth-child(3) {
+        flex: 0 1 100%;
+        margin-top: 0.5em;
+        font-size: 0.8em;
+    }
+    
 `;
 
 const TechnologiesContainer = styled.div`
@@ -324,7 +332,7 @@ const StyledSearchBarWrapper = styled.div`
     border-radius: 10px;
     border: 1px solid rgba(0,0,0, 0.2);
 
-    & > div {
+    & > form {
         flex: 0 1 100%;
         display: flex;
         flex-flow: row wrap;
