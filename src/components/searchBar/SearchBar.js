@@ -28,8 +28,7 @@ export const SearchBar = () => {
         getTechnologies();
 
     }, []);
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         navigate(`?q=${ searchData || ''}`+
                         `${ searchBy  === 'title' ? '&searchBy=title' : ''}`+
                         `${ searchBy === 'content' ? '&searchBy='+searchBy: ''}`+
@@ -41,9 +40,8 @@ export const SearchBar = () => {
                         `${ direction && direction !== 'init' ? '&direction='+direction : ''}`
         );
     }
-    const handleReset = (e) => {
-        e.preventDefault();
-        setSearchData( '')
+    const handleReset = () => {
+        setSearchData('')
         setTechnology('' )
         setSearchBy('title')
         setInitialDate( '')
@@ -54,25 +52,13 @@ export const SearchBar = () => {
     }
     return (
         <StyledSearchBarWrapper>
-            <form onSubmit={ handleSubmit } onKeyDown={ e => e.key === 'Enter' && handleSubmit(e)} >
+            <form onSubmit={ handleSubmit } onKeyDown={ e => e.key === 'Enter' && handleSubmit()} >
                 <SearchContainer>
                     <p>Quick Search</p>
                     <TextField id="outlined-basic" label="Search" variant="outlined"
-                    onKeyDown={ e => e.key === 'Enter' && handleSubmit(e) }
+                    onKeyDown={ e => e.key === 'Enter' && handleSubmit() }
                     value={ searchData }
-                    onChange={ (e) => {
-                        setSearchData(e.target.value);
-                        navigate(`?q=${ e.target.value || ''}`+
-                        `${ searchBy  === 'title' ? '&searchBy=title' : ''}`+
-                        `${ searchBy === 'content' ? '&searchBy='+searchBy: ''}`+
-                        `${ (searchBy === 'technology' && technology.length > 1)
-                            ? '&searchBy='+searchBy+'&technology='+technology:''}`+
-                        `${ searchBy === 'date' && initialDate.length > 0 && finalDate.length > 0  && initialDate < finalDate ? '&searchBy='+searchBy+'&from='+initialDate+'&to='+finalDate:''}`+
-                        `${ searchBy === 'numAnswers' && numAnswers && typeof parseInt(numAnswers) === 'number' ? '&searchBy='+searchBy+'&numAnswers='+numAnswers:''}`+
-                        `${ orderBy && orderBy !== 'init' ? '&orderBy='+orderBy : ''}`+
-                        `${ direction && direction !== 'init' ? '&direction='+direction : ''}`
-                        );
-                    }}
+                    onChange={ (e) => setSearchData(e.target.value)}
                     />
                 </SearchContainer>
                 <SearchByContainer>
@@ -159,7 +145,7 @@ export const SearchBar = () => {
                             id="demo-simple-select"
                             value={orderBy}
                             label="Technology"
-                            onChange={ (e) =>  setOrderBy( e.target.value ) }
+                            onChange={ (e) => setOrderBy( e.target.value ) }
                         >
                             <MenuItem disabled value="init">
                                 <em>Order By</em>
@@ -178,7 +164,7 @@ export const SearchBar = () => {
                             id="demo-simple-select"
                             value={direction}
                             label="Technology"
-                            onChange={ (e) =>  setDirection( e.target.value ) }
+                            onChange={ (e) => setDirection(e.target.value)}
                         >
                             <MenuItem disabled value="init">
                                 <em>Direction</em>
@@ -188,7 +174,7 @@ export const SearchBar = () => {
                         </Select>
                     </div>
                 </SortContainer>
-                <ResetButton onClick={ e => handleReset(e) }>Reset</ResetButton>
+                <ResetButton onClick={ () => handleReset() }>Reset</ResetButton>
             </form>
         </StyledSearchBarWrapper>
     )

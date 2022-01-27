@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Navbar } from '../components/navbar/Navbar';
 import { PostsGrid } from '../components/postsGrid/PostsGrid';
-import { useDebounce } from '../hooks/useDebounce';
 import { useQuery } from '../hooks/useQuery';
 
 export const Main = () => {
@@ -16,9 +15,9 @@ export const Main = () => {
   const numAnswers = query.get('numAnswers') || '';
   const direction = query.get('direction') || '';
 
-  let debouncedSearch = useDebounce(search, 400);
-  debouncedSearch = { 
-    search: debouncedSearch,
+  // let debouncedSearch = useDebounce(search, 400);
+  let debouncedSearch = { 
+    search,
     searchBy,
     technology,
     orderBy,
@@ -33,7 +32,7 @@ export const Main = () => {
       <ContentWrapper>
         <StyledNavbar />
         <GridWrapper>
-          <PostsGrid key={ debouncedSearch.search + new Date().toISOString } searchData={ debouncedSearch}/>
+          <PostsGrid key={ debouncedSearch.search + new Date().toISOString() } searchData={ debouncedSearch}/>
         </GridWrapper>
       </ContentWrapper>
     </>
