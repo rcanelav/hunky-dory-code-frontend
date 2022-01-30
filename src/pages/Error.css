@@ -1,0 +1,10 @@
+.error {
+  background-color: rgba(117, 100, 57, 0.26);
+  font-size: 30px;
+  align-items: center;
+  display: flex;
+  flex-flow: column wrap;
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
