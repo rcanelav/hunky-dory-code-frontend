@@ -47,7 +47,7 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
 `;
 const GridWrapper = styled.div`
-  flex: 0 1 95%;
+  flex: 0 1 100%;
   display: flex;
   flex-flow: row wrap;
   align-items: center;

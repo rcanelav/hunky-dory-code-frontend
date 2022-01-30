@@ -1,10 +1,11 @@
 import { Divider } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 const { REACT_APP_API_URL } = process.env;
 
-export const PostTitle = ({ title, date, author, userImage, userId, content }) => {
+export const PostTitle = ({ title, date, author, userImage, userId, content, postId }) => {
     const userName = author.split(' ')[0] + ' ' + author.split(' ')[1].slice(0, 1) + '.';
     const postContent = content.slice(0, 30) + '...';
     const postTitle = title.slice(0, 20) + '...';
@@ -22,27 +23,29 @@ export const PostTitle = ({ title, date, author, userImage, userId, content }) =
         getUserRating();
     }, [userId]);
   return (
-    <StyledWrapper>
-        <StyledProfileCard>
-            <img src={userImage} alt="author" />
-            <StyledUsername>
-                {userName}
-            </StyledUsername>
-            <StyledUserRating>
-                Rating: ({userRating})
-            </StyledUserRating>
-        </StyledProfileCard>
-        
-        <Divider orientation="vertical" variant='middle'  flexItem />
-    
-        <StyledPostContent>
-            <StyledTitle>{postTitle}</StyledTitle>
-            <StyledPostText>{postContent}</StyledPostText>
-            <Divider variant='middle' />
-            <StyledPostDate>
-                {new Date(date).toDateString("ES-es")}
-            </StyledPostDate>
-        </StyledPostContent>
+      <StyledWrapper>
+            <Link to={`/posts/${postId}`}>
+                <StyledProfileCard>
+                    <img src={userImage} alt="author" />
+                    <StyledUsername>
+                        {userName}
+                    </StyledUsername>
+                    <StyledUserRating>
+                        Rating: ({userRating})
+                    </StyledUserRating>
+                </StyledProfileCard>
+                
+                <Divider orientation="vertical" variant='middle'  flexItem />
+            
+                <StyledPostContent>
+                    <StyledTitle>{postTitle}</StyledTitle>
+                    <StyledPostText>{postContent}</StyledPostText>
+                    <Divider variant='middle' />
+                    <StyledPostDate>
+                        {new Date(date).toDateString("ES-es")}
+                    </StyledPostDate>
+                </StyledPostContent>
+    </Link>
     </StyledWrapper>
   )
 };
@@ -57,8 +60,13 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
     margin: 1em 0;
-    &:first-child {
-        margin-top: 2em;
+    & > * {
+        flex: 0 1 100%;
+        display: flex;
+        flex-flow: row wrap;
+        text-decoration: none;
+        color: black;
+
     }
 `;
 

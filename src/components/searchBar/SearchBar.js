@@ -29,7 +29,7 @@ export const SearchBar = () => {
 
     }, []);
     const handleSubmit = () => {
-        navigate(`?q=${ searchData || ''}`+
+        navigate(`/search?q=${ searchData || ''}`+
                         `${ searchBy  === 'title' ? '&searchBy=title' : ''}`+
                         `${ searchBy === 'content' ? '&searchBy='+searchBy: ''}`+
                         `${ (searchBy === 'technology' && technology.length > 1)

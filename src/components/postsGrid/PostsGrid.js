@@ -29,35 +29,35 @@ export const PostsGrid = ({searchData}) => {
 
   if( isLoading ) return <div> is loading </div>
   return (
-    <>
-      <StyledInfiniteScroll
-      dataLength={data.totalResults}
-      next={ () => setPage( prev => prev + 1 ) }
-      hasMore={ !!data.next}
-      >
-        <StyledPostsWrapper>
-          {
-            posts?.map(item => (
-              <PostTitle
-                key={item.id}
-                title={item.title}
-                date={item.postedAt}
-                author={`${item.userName} ${item.userLastname}`}
-                userImage={item.userImage}
-                userId={item.postedBy}
-                content={item.content}
-              />
-            ))
-          }
-        </StyledPostsWrapper>
-      </StyledInfiniteScroll>
-    </>
+    <StyledInfiniteScroll
+    dataLength={data.totalResults}
+    next={ () => setPage( prev => prev + 1 ) }
+    hasMore={ !!data.next}
+    >
+      <StyledPostsWrapper>
+        {
+          posts?.map(item => (
+            <PostTitle
+              key={item.id}
+              title={item.title}
+              date={item.postedAt}
+              author={`${item.userName} ${item.userLastname}`}
+              userImage={item.userImage}
+              userId={item.postedBy}
+              content={item.content}
+              postId={item.id}
+            />
+          ))
+        }
+      </StyledPostsWrapper>
+    </StyledInfiniteScroll>
   );
 };
 
 const StyledInfiniteScroll = styled(InfiniteScroll)`
 display: flex;
 flex-flow: row wrap;
+flex: 0 1 100%;
 `;
 
 const StyledPostsWrapper = styled.div`

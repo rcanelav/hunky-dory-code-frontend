@@ -9,6 +9,7 @@ import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
 import { Main } from '../pages/Main';
 import { useAuthorization } from '../hooks/useAuthorization';
+import { PostDetails } from '../pages/PostDetails';
 
 export const AppRouter = () => {
     const { isUserLoggedIn } = useAuthorization();
@@ -19,6 +20,7 @@ export const AppRouter = () => {
             <Route path="/contact" element={<LandingPage />} />
             <Route path="/login" element={  isUserLoggedIn ? <Navigate to='/' /> :  <Login /> } />
             <Route path="/register" element={ <Register /> } />
+            <Route path="/posts/:id" element={ <PostDetails /> } />
         </Routes>
     )
 };
