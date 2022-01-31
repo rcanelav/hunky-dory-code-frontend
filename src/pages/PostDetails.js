@@ -40,19 +40,21 @@ export const PostDetails = () => {
 
 const ContentWrapper = styled.div`
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: wrap;
+  justify-content: center;
   min-width: 100%;
   max-width: 100%;
   margin: 0 auto;
 `;
 const GridWrapper = styled.div`
-  flex: 0 1 90%;
+  flex: 0 0 92%;
+  max-width: 92%;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow:  wrap;
   align-items: center;
   justify-content: center;
 `;
 const StyledNavbar = styled(Navbar)`
-  flex: 0 1 100%;
+  flex: 0 0 100%;
 `;
 
