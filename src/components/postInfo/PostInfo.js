@@ -55,7 +55,6 @@ const StyledContentWrapper = styled.div`
   min-width: 0px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: ;
   word-break: break-all;
 
   & > p:first-child {

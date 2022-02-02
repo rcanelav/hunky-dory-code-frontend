@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Navbar } from '../components/navbar/Navbar';
+import { PostAnswers } from '../components/postAnswers/PostAnswers';
 import { PostInfo } from '../components/postInfo/PostInfo';
 const { REACT_APP_API_URL } = process.env;
 
@@ -22,16 +23,14 @@ export const PostDetails = () => {
         }
         getPostData();
     }, [id]);
-    console.log(postInfo);
-
     if( isLoading ) return <div>Loading</div>;
-
   return (
     <>
       <ContentWrapper>
         <StyledNavbar />
         <GridWrapper>
           <PostInfo post={postInfo} />
+          <PostAnswers post={postInfo} />
         </GridWrapper>
       </ContentWrapper>
     </>

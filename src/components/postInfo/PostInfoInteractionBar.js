@@ -6,15 +6,17 @@ import hunky from '../../assets/hdc-hunky.png';
 import { useAuthorization } from '../../hooks/useAuthorization';
 const { REACT_APP_API_URL } = process.env;
 
-export const PostInfoInteractionBar = ({ likes, postData }) => {
+export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
+    const { userProfile } = useAuthorization();
     const { isUserLoggedIn, userSession } = useAuthorization();
     const [ postLikes, setPostLikes ] = useState(likes.totalLikes);
+    const [ isLiked, setIsLiked ] = useState(false);
 
     const handleLike = async() => {
         const response = await axios(
             {
                 method: 'POST',
-                url: `${REACT_APP_API_URL}/api/v1/posts/${postData.id}/likes`,
+                url: `${REACT_APP_API_URL}/api/v1/${type}/${postData.id}/likes`,
                 headers: {'Authorization': `Bearer ${userSession}`}
             }
         );
@@ -23,18 +25,25 @@ export const PostInfoInteractionBar = ({ likes, postData }) => {
         }else{
             setPostLikes(postLikes + 1);
         }
+        setIsLiked(!isLiked);
     }
 
     useEffect(() => {
         setPostLikes( likes.totalLikes );
-    }, [likes.totalLikes]);
+        likes?.answerLikes?.forEach( like => {
+            if( userProfile && like.user_id === userProfile?.userData.id ){
+                setIsLiked( prev => !prev);
+            }
+        });
+
+    }, [ likes.totalLikes, likes.answerLikes, userProfile ]);
 
     return (
     <>
         <StyledLikes>
             <p>{postLikes} {postLikes === 1 ? 'hunky' : 'hunkies'}{ postLikes === 0 ? '😔' : <img src={hunky} alt='HUNKY'/>}</p>
             <StyledLikeButton >
-                <Button variant='contained' color='primary' disabled={ !isUserLoggedIn } onClick={  handleLike }>
+                <Button variant='contained' color={isLiked ? "warning" : "primary"} disabled={ !isUserLoggedIn } onClick={  handleLike }>
                     Dar un <img src={hunky} alt='HUNKY'/>
                 </Button>
             </StyledLikeButton>
