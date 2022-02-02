@@ -40,6 +40,9 @@ function AuthProvider( props ){
                 setIsUserLoggedIn(true);
                 } catch (error) {
                     console.log("ERROR: ", error);
+                    localStorage.removeItem( 'userSession' );
+                    setUserSession(null);
+                    setIsUserLoggedIn(false);
                 }
             }
             getUserProfile();
