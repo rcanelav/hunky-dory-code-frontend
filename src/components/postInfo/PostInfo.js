@@ -71,11 +71,12 @@ const StyledWrapper = styled.div`
   min-width: 0px;
   display: flex;
   flex-flow: row wrap;
-  flex: 0 0 90%;
+  flex: 0 1 100%;
   margin: 2em auto;
   border-radius: 10px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   padding: 2em;
+
 `;
 
 const StyledPostHeader = styled.div`

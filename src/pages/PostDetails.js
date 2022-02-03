@@ -5,12 +5,18 @@ import styled from 'styled-components';
 import { Navbar } from '../components/navbar/Navbar';
 import { PostAnswers } from '../components/postAnswers/PostAnswers';
 import { PostInfo } from '../components/postInfo/PostInfo';
+import {TextEditor} from '../components/textEditor/TextEditor';
+import { useAuthorization } from '../hooks/useAuthorization';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostDetails = () => {
+    const { userSession, userProfile } = useAuthorization();
     const { id } = useParams();
     const [ isLoading, setIsLoading ] = useState(true);
     const [ postInfo, setPostInfo ] = useState();
+    const [ newAnswer, setNewAnswer ] = useState('');
+    const [ postedAnswer, setPostedAnswer ] = useState( new Date().toLocaleString() );
+
     useEffect(() => {
         async function getPostData() {
             try{
@@ -23,6 +29,19 @@ export const PostDetails = () => {
         }
         getPostData();
     }, [id]);
+
+    const handleSubmit = async () => {
+      await axios(
+        {
+            method: 'POST',
+            url: `${REACT_APP_API_URL}/api/v1/posts/${id}/answers`,
+            headers: {'Authorization': `Bearer ${userSession}`},
+            data: {
+              content: newAnswer,
+            },
+        });
+        setPostedAnswer( new Date().toLocaleString() );
+    }
     if( isLoading ) return <div>Loading</div>;
   return (
     <>
@@ -30,7 +49,13 @@ export const PostDetails = () => {
         <StyledNavbar />
         <GridWrapper>
           <PostInfo post={postInfo} />
-          <PostAnswers post={postInfo} />
+          {
+            postInfo?.technology.id === userProfile?.userData?.technologies
+            ?
+            <TextEditor value={newAnswer} setValue={setNewAnswer} submit={ handleSubmit } />
+            : <p>Debes ser experto en esta tecnología para responder</p>
+          }
+          <PostAnswers key={postedAnswer} post={postInfo} />
         </GridWrapper>
       </ContentWrapper>
     </>
@@ -46,10 +71,9 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
 `;
 const GridWrapper = styled.div`
-  flex: 0 0 92%;
-  max-width: 92%;
+  flex: 0 1 90%;
   display: flex;
-  flex-flow:  wrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: center;
 `;
