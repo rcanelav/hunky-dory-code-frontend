@@ -34,18 +34,29 @@ const StyledWrapper = styled.div`
     margin: 0 auto;
     min-width: 80%;
     max-width: 80%;
+
+    @media (min-width: 768px) {
+        max-width: 50%;
+        min-width: 50%;
+    }
+
 `;
 
 const StyledSearchIcon = styled(SearchIcon)`
     && {
         position: absolute;
-        right: 0;
+        right: 0.2em;
         margin-top: 0.6em;
         border-radius: 50%;
         font-size: 1.8em;
         cursor: pointer;
+
+        @media (min-width: 768px) {
+            font-size: 1.6em;
+            right: 0.5em;
+        }
     }
-    `;
+`;
 
 const StyledSearchInput = styled(TextField)`
     &&  {
@@ -57,6 +68,11 @@ const StyledSearchInput = styled(TextField)`
         }
         & #standard-basic-label {
             font-size: 1.4em;
+            color: black;
+        }
+        & .MuiInput-underline {
+            color: black;
+            
         }
     }
 `;

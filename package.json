@@ -25,6 +25,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-social-login-buttons": "^3.6.0",
+    "react-useanimations": "^2.0.8",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.3"
   },
