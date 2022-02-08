@@ -6,6 +6,8 @@ import axios from 'axios';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import moment from 'moment';
+import UseAnimations from 'react-useanimations';
+import  maximizeMinimize2  from 'react-useanimations/lib/maximizeMinimize2';
 const { REACT_APP_API_URL } = process.env;
 
 export const SearchBar = () => {
@@ -18,6 +20,7 @@ export const SearchBar = () => {
     const [ numAnswers, setNumAnswers ] = useState('');
     const [ orderBy, setOrderBy ] = useState('init');
     const [ direction, setDirection ] = useState('init');
+    const [ open, setOpen ] = useState(false);
     const navigate = useNavigate();
 
     useEffect( () => {
@@ -61,7 +64,7 @@ export const SearchBar = () => {
                     onChange={ (e) => setSearchData(e.target.value)}
                     />
                 </SearchContainer>
-                <SearchByContainer>
+                <SearchByContainer open={open}>
                     <p>Search By</p>
                     <RadioGroup row aria-label="search By" name="row-radio-buttons-group" onChange={ (e) => setSearchBy( e.target.value )} value={searchBy}>
                         <FormControlLabel value="title" control={<Radio />} label="Title" />
@@ -137,7 +140,7 @@ export const SearchBar = () => {
                     </NumAnswersContainer>
                 }
 
-                <SortContainer>
+                <SortContainer open={open}>
                     <div>
                         <p>Order By</p>
                         <Select
@@ -174,18 +177,37 @@ export const SearchBar = () => {
                         </Select>
                     </div>
                 </SortContainer>
-                <ResetButton onClick={ () => handleReset() }>Reset</ResetButton>
+                <ResetButton onClick={ () => handleReset() } open={open}>Reset</ResetButton>
             </form>
+            <StyledWatchMore>
+                
+                <UseAnimations
+                    reverse={open}
+                    onClick={() => {
+                    setOpen(!open);
+                    }}
+                    size={25}
+                    wrapperStyle={{ marginTop: '1em', marginRight: 0 }}
+                    animation={maximizeMinimize2}
+                />
+            </StyledWatchMore>
+
         </StyledSearchBarWrapper>
     )
 }
+const StyledWatchMore = styled.div`
+    display: flex;
+    flex: 0 1 100%;
+    justify-content: flex-end;
+    cursor: pointer;
+`;
 
 const ResetButton = styled(Button)`
     flex: 0 1 100%;
     &&{
+        display: ${({ open }) => open ? 'flex' : ' none'};
         margin-top: 0.5em;
         color: black;
-        font-size: 0.8em;
         font-weight: medium;
         background-color: #f5f5f5;
 
@@ -196,7 +218,7 @@ const ResetButton = styled(Button)`
 `;
 const SortContainer = styled.div`
     flex: 0 1 100%;
-    display: flex;
+    display: ${({ open }) => open ? 'flex' : ' none'};
     flex-flow: row wrap;
     margin-top: 0.5em;
     justify-content: space-between;
@@ -209,7 +231,6 @@ const SortContainer = styled.div`
         }
         & p {
             flex: 0 1 100%;
-            font-size: 1.1em;
             font-weight: bold;
             text-align: left;
             margin-bottom: 0.5em;
@@ -226,7 +247,6 @@ const NumAnswersContainer = styled.div`
     }
     & p {
         flex: 0 1 100%;
-        font-size: 1.1em;
         font-weight: bold;
         text-align: left;
         margin-bottom: 0.2em;
@@ -245,7 +265,6 @@ const DateContainer = styled.div`
     & > :nth-child(3) {
         flex: 0 1 100%;
         margin-top: 0.5em;
-        font-size: 0.8em;
     }
     
 `;
@@ -261,7 +280,6 @@ const TechnologiesContainer = styled.div`
     }
     & p {
         flex: 0 1 100%;
-        font-size: 1.1em;
         font-weight: bold;
         text-align: left;
         margin-bottom: 0.2em;
@@ -270,12 +288,11 @@ const TechnologiesContainer = styled.div`
 
 const SearchByContainer = styled.div`
     flex: 0 1 100%;
-    display: flex;
+    display: ${({ open }) => open ? 'flex' : ' none'};
     flex-flow: row wrap;
     margin-top: 0.5em;
     & p {
         flex: 0 1 100%;
-        font-size: 1.1em;
         font-weight: bold;
         text-align: left;
         margin-bottom: 0.2em;
@@ -287,6 +304,9 @@ const SearchByContainer = styled.div`
         display: flex;
         flex-flow: row wrap;
     }
+    & span {
+        font-size: 0.8em;
+    }
 
 `;
 const SearchContainer = styled.div`
@@ -295,15 +315,26 @@ const SearchContainer = styled.div`
     flex-flow: row wrap;
     & p {
         flex: 0 1 100%;
-        font-size: 1.1em;
         font-weight: bold;
         justify-content: center;
         margin-bottom: 0.5em;
         text-align: left;
     }
-    & > div.MuiFormControl-root {
+    & > .MuiFormControl-root {
         flex: 0 1 100%;
     }
+
+    @media (min-width: 768px) {
+        & p {
+        }
+        & > div.MuiFormControl-root {
+            flex: 0 1 100%;
+        }
+        & #outlined-basic-label {
+        }
+        
+    }
+
 `;
 
 const StyledSearchBarWrapper = styled.div`
@@ -317,10 +348,16 @@ const StyledSearchBarWrapper = styled.div`
     padding: 1.5em;
     border-radius: 10px;
     border: 1px solid rgba(0,0,0, 0.2);
-
+    
     & > form {
         flex: 0 1 100%;
         display: flex;
         flex-flow: row wrap;
+    }
+
+    @media (min-width: 768px) {
+        & > form {
+            font-size: 0.8em;
+        }
     }
 `;
