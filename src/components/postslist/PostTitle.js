@@ -15,7 +15,7 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
         async function getUserRating() {
             try{
                 const response = await axios.get(`${REACT_APP_API_URL}/api/v1/users/${userId}/rating`);
-                setUserRating(response.data.rating);
+                setUserRating(response?.data.rating);
             }catch( error ){
                 console.log(error);
             }
@@ -45,7 +45,7 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
                         {new Date(date).toDateString("ES-es")}
                     </StyledPostDate>
                 </StyledPostContent>
-    </Link>
+            </Link>
     </StyledWrapper>
   )
 };
@@ -60,6 +60,7 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
     margin: 1em 0;
+    transition: all 0.3s ease-in-out;
     & > * {
         flex: 0 1 100%;
         display: flex;
@@ -67,6 +68,10 @@ const StyledWrapper = styled.div`
         text-decoration: none;
         color: black;
 
+    }
+
+    &:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     }
 `;
 
@@ -91,6 +96,12 @@ const StyledProfileCard = styled.div`
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         margin-bottom: 0.4em;
     }
+
+    @media (min-width: 768px) {
+        & > img {
+            width: 100%;
+            max-width: 40px;
+        }
 `;
 
 const StyledTitle = styled.p`
@@ -99,7 +110,7 @@ const StyledTitle = styled.p`
     font-weight: bold;
     margin: 0;
     @media (min-width: 768px) {
-        font-size: 1.6em;
+        font-size: 1.1em;
     }
 `;
 
@@ -107,7 +118,7 @@ const StyledUsername = styled.p`
     font-size: 1em;
     font-weight: bold;
     @media (min-width: 768px) {
-        font-size: 1.2em;
+        font-size: 1em;
     }
 `;
 
@@ -124,12 +135,14 @@ const StyledPostText = styled.p`
     margin: 0;
     height: max-content;
     @media (min-width: 768px) {
-        font-size: 1.2em;
+        font-size: 0.9em;
     }
 `;
 
 const StyledPostDate = styled.div`
     flex: 0 0 100%;
-    font-size: 0.9em;
+    font-size: 0.8em;
     align-self: flex-end;
+    color: #828282;
+    font-style: italic;
 `;

@@ -57,7 +57,6 @@ export const PostsGrid = ({searchData}) => {
 const StyledInfiniteScroll = styled(InfiniteScroll)`
 display: flex;
 flex-flow: row wrap;
-flex: 0 1 100%;
 `;
 
 const StyledPostsWrapper = styled.div`

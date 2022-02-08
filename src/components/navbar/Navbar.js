@@ -49,9 +49,9 @@ export const Navbar = ({ search, setSearch }) => {
 
 const StyledButton = styled(Button)`
     && {
+        margin: 1em 0.3em;
         background-color: #fff;
         color: #000;
-        
         padding: 0.5em;
         font-size: 0.5em;
         width: 50px;

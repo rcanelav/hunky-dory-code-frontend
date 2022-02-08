@@ -60,7 +60,7 @@ function AuthProvider( props ){
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
             setIsUserLoggedIn( true );
-            navigate('/');
+            navigate(-1);
         } catch ( error ){
             return error.response;
         }
@@ -94,7 +94,7 @@ function AuthProvider( props ){
             console.log(credentials);
             console.log( accessToken);
             setIsUserLoggedIn( true );
-            navigate('/');
+            navigate(-1);
         }catch( error ){
             console.log(error);
         }
