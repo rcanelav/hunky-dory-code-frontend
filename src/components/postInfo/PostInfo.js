@@ -9,11 +9,13 @@ export const PostInfo = ({ post }) => {
   const userName = author?.name + ' ' + author?.lastname.charAt(0) + '.';
   const [ userRating, setUserRating] = useState();
   const postDate = moment(postData?.createdAt).format('DD.MM.YYYY');
+  const [ views, setViews ] = useState(postData.views);
   useEffect(() => {
     async function getData() {
       try {
         const response = await getUserRating(author?.id);
         setUserRating(response);
+        setViews( prev => prev + 1 );
       } catch (error) {
         console.log(error);
       }
@@ -38,7 +40,7 @@ export const PostInfo = ({ post }) => {
             <p>Category: {technology.name}</p>
             <p>Date: {postDate} 📅</p>
           </div>
-          <p>Views: {postData.views} 👀</p>
+          <p>Views: {views} 👀</p>
         </div>
       </StyledPostHeader>
       <StyledContentWrapper>

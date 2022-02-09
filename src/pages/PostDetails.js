@@ -23,6 +23,7 @@ export const PostDetails = () => {
                 const post = await axios.get(`${REACT_APP_API_URL}/api/v1/posts/${id}`);
                 setPostInfo(post?.data);
                 setIsLoading(false);
+                await axios.put(`${REACT_APP_API_URL}/api/v1/posts/${id}/view`);
             }catch( error ){
                 console.log(error);
             }
