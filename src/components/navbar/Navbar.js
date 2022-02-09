@@ -16,7 +16,7 @@ export const Navbar = ({ search, setSearch }) => {
             <Nav>
                 <ul>
                     <li>
-                        <img src={hunky} alt="hunky"  onClick={ () => navigate('/') } />
+                        <img src={hunky} alt="hunky"  onClick={ () => navigate('/search?q=') } />
                     </li>
                     <li>
                         <SearchBar />
