@@ -81,14 +81,18 @@ const ContentWrapper = styled.div`
   max-width: 100%;
   margin: 0 auto;
   position: relative;
+  background-color: rgba(0,163,152, 1);
 `;
 const GridWrapper = styled.div`
   margin-top: 0.5em;
   flex: 0 1 100%;
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  & > * {
+    flex: 0 1 100%;
+  }
 
   @media (min-width: 768px) {
     flex: 0 1 60%;

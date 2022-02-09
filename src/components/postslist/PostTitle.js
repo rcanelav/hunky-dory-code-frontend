@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 const { REACT_APP_API_URL } = process.env;
 
-export const PostTitle = ({ title, date, author, userImage, userId, content, postId }) => {
+export const PostTitle = ({ title, date, author, userImage, userId, content, postId, data }) => {
     const userName = author.split(' ')[0] + ' ' + author.split(' ')[1].slice(0, 1) + '.';
     const postContent = content.slice(0, 30) + '...';
     const postTitle = title.slice(0, 20) + '...';
@@ -22,6 +22,7 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
         }
         getUserRating();
     }, [userId]);
+    console.log(data);
   return (
       <StyledWrapper>
             <Link to={`/posts/${postId}`}>
@@ -41,9 +42,15 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
                     <StyledTitle>{postTitle}</StyledTitle>
                     <StyledPostText>{postContent}</StyledPostText>
                     <Divider variant='middle' />
-                    <StyledPostDate>
-                        {new Date(date).toDateString("ES-es")}
-                    </StyledPostDate>
+                    <StyledRelatedData>
+                        <div>
+                            {new Date(date).toDateString("ES-es")}
+                        </div>
+                        <div id='info'>
+                            <p>⚡:{data.likes} 👀:{data.views} 📢:{data.numAnswers}</p>
+                        </div>
+
+                    </StyledRelatedData>
                 </StyledPostContent>
             </Link>
     </StyledWrapper>
@@ -51,23 +58,22 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
 };
 
 const StyledWrapper = styled.div`
-    background-color: rgba(206, 206, 206, 0.4);
+    background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 1%;
-
     flex: 0 1 90%;
     display: flex;
     flex-flow: row wrap;
     margin: 1em 0;
     transition: all 0.3s ease-in-out;
+
     & > * {
         flex: 0 1 100%;
         display: flex;
         flex-flow: row wrap;
         text-decoration: none;
         color: black;
-
     }
 
     &:hover {
@@ -76,17 +82,22 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledPostContent = styled.div`
-margin-left: 1.2em;
-flex: 0 0 60%;
-display: flex;
-flex-flow: row wrap;
+    margin-left: 1.2em;
+    flex: 0 1 70%;
+    display: flex;
+    flex-flow: row wrap;
 `;
 const StyledProfileCard = styled.div`
+    flex: 0 1 20%;
     display: flex;
-    flex-direction: column;
+    flex-flow: row wrap;
     align-items: center;
-    flex: 0 0 25%;
+    justify-content: center;
     overflow: hidden;
+    & > * {
+        flex: 0 1 100%;
+        text-align: center;
+    }
 
     & > img {
         border-radius: 10px;
@@ -105,7 +116,7 @@ const StyledProfileCard = styled.div`
 `;
 
 const StyledTitle = styled.p`
-    flex: 1 0 70%;
+    flex: 0 1 70%;
     font-size: 1.3em;
     font-weight: bold;
     margin: 0;
@@ -130,19 +141,30 @@ const StyledUserRating = styled.p`
 `;
 
 const StyledPostText = styled.p`
-    flex: 0 0 100%;
+    flex: 0 1 100%;
     font-size: 1.2em;
-    margin: 0;
     height: max-content;
     @media (min-width: 768px) {
         font-size: 0.9em;
     }
 `;
 
-const StyledPostDate = styled.div`
+const StyledRelatedData = styled.div`
     flex: 0 0 100%;
     font-size: 0.8em;
     align-self: flex-end;
     color: #828282;
     font-style: italic;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    & > * {
+        flex: 0 1 50%;
+    }
+
+    & > div#info {
+        text-align: right;
+    }
 `;

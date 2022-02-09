@@ -56,16 +56,21 @@ const StyledButton = styled(Button)`
         font-size: 0.5em;
         width: 50px;
         transition: all 0.3s ease-in-out;
+        box-shadow: rgba(50, 50, 93, 0.55) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        &:hover {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        }
 
         &:first-child {
-            background-color: rgba(255, 204, 3, 1);
+            background-color: rgba(255, 204, 3, 0.8);
             &:hover {
-                background-color: rgba(255, 204, 3, 0.8);
+                background-color: rgba(255, 204, 3, 1);
             }
         }
         &:last-child {
             border: 1px solid black;
             &:hover {
+                border-color: transparent;
                 background-color: rgba(0, 163, 152, 0.8);
             }
         }
@@ -92,7 +97,7 @@ const Nav = styled.nav`
         & li:nth-child(3) {
             margin-top: 0.8em;
             flex: 0 1 12%;
-            
+            background-color: rgba(255, 255, 255, 1);
             align-items: center;
             display: none;
                    

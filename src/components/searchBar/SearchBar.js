@@ -58,7 +58,7 @@ export const SearchBar = () => {
             <form onSubmit={ handleSubmit } onKeyDown={ e => e.key === 'Enter' && handleSubmit()} >
                 <SearchContainer>
                     <p>Quick Search</p>
-                    <TextField id="outlined-basic" label="Search" variant="outlined"
+                    <TextField id="outlined-basic" size='small' label="Search" variant="outlined"
                     onKeyDown={ e => e.key === 'Enter' && handleSubmit() }
                     value={ searchData }
                     onChange={ (e) => setSearchData(e.target.value)}
@@ -148,6 +148,7 @@ export const SearchBar = () => {
                             id="demo-simple-select"
                             value={orderBy}
                             label="Technology"
+                            size='small'
                             onChange={ (e) => setOrderBy( e.target.value ) }
                         >
                             <MenuItem disabled value="init">
@@ -166,7 +167,8 @@ export const SearchBar = () => {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={direction}
-                            label="Technology"
+                            label="Direction"
+                            size='small'
                             onChange={ (e) => setDirection(e.target.value)}
                         >
                             <MenuItem disabled value="init">
@@ -179,27 +181,36 @@ export const SearchBar = () => {
                 </SortContainer>
                 <ResetButton onClick={ () => handleReset() } open={open}>Reset</ResetButton>
             </form>
-            <StyledWatchMore>
-                
+            <BottomContainer>
+                <NewQuestion variant='contained' onClick={ () => navigate('/newPost')}>New question</NewQuestion>
                 <UseAnimations
                     reverse={open}
                     onClick={() => {
                     setOpen(!open);
                     }}
                     size={25}
-                    wrapperStyle={{ marginTop: '1em', marginRight: 0 }}
+                    wrapperStyle={{  marginRight: 0 }}
                     animation={maximizeMinimize2}
                 />
-            </StyledWatchMore>
+            </BottomContainer>
 
         </StyledSearchBarWrapper>
     )
 }
-const StyledWatchMore = styled.div`
+
+const NewQuestion = styled(Button)`
+    &&{
+        font-size: 0.6em;
+        font-weight: medium;
+    }
+`;
+const BottomContainer = styled.div`
     display: flex;
     flex: 0 1 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
+    margin-top: 0.5em;
 `;
 
 const ResetButton = styled(Button)`
@@ -345,10 +356,11 @@ const StyledSearchBarWrapper = styled.div`
     margin-top: 0.8em;
     box-shadow: 4px -4px 13px 1px rgba(0,0,0, 0.2),
                 -2px 3px 19px 1px rgba(0,0,0, 0.2);
-    padding: 1.5em;
+    padding: 1em 1.5em;
     border-radius: 10px;
     border: 1px solid rgba(0,0,0, 0.2);
-    
+    background-color: rgba(255, 255, 255, 1);
+ 
     & > form {
         flex: 0 1 100%;
         display: flex;

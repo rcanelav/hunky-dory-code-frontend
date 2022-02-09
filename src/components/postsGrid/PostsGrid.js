@@ -46,6 +46,7 @@ export const PostsGrid = ({searchData}) => {
               userId={item.postedBy}
               content={item.content}
               postId={item.id}
+              data={item}
             />
           ))
         }
@@ -55,11 +56,14 @@ export const PostsGrid = ({searchData}) => {
 };
 
 const StyledInfiniteScroll = styled(InfiniteScroll)`
-display: flex;
-flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: self-start;
 `;
 
 const StyledPostsWrapper = styled.div`
+  flex: 0 1 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
