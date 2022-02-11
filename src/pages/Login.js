@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import { useAuthorization } from '../hooks/useAuthorization';
+import logo from '../assets/logo2.png';
 
 export const Login = () => {
     const { login, signInWithFirebaseAuth } = useAuthorization();
@@ -111,6 +112,12 @@ export const Login = () => {
 }
 
 const StyledWrapper = styled.div`
+    background-color: rgba(255,255,255,1);
+    border-radius: 10px;
+    box-shadow: 4px -4px 13px 1px rgba(0,0,0, 0.2),
+                -2px 3px 19px 1px rgba(0,0,0, 0.2);
+    border: 1px solid rgba(0,0,0, 0.2);
+    padding: 1em;
     display: flex;
     min-width: 81%;
     max-width: 81%;
@@ -123,6 +130,36 @@ const StyledWrapper = styled.div`
             display: block;
             font-size: 1.5em;
             margin: 2vh auto;
+        }
+    }
+    transition: all 0.3s ease-in-out;
+
+    @media (min-width: 768px) {
+        min-width: 30%;
+        max-width: 30%;
+        background-color: rgba(255,255,255,0.85);
+        padding: 3em 3em;
+        margin: 5% auto 0 auto;
+        & form {
+            margin-top: 0vh;
+            & span {
+                font-size: 1.1em;
+            }
+        }
+        &:before {
+            background-image: url(${logo});
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            content: "";
+            display: block;
+            height: 80%;
+            left: 27%;
+            position: absolute;
+            top: 1%;
+            width: 50%;
+            z-index: -1;
+            overflow: hidden;
         }
     }
 `;
@@ -170,9 +207,9 @@ const StyledField = styled(TextField)`
 
 const StyledButton = styled(Button)`
     && {
-        margin-top: 1vh;
+        margin-top: 2vh;
         min-width: 100%;
-        margin-bottom: 2vh;
+        margin-bottom: 1vh;
         font-size: 1.1em;
     }
 `;

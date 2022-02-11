@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import axios from 'axios';
 import { useAuthorization } from '../hooks/useAuthorization';
+import logo from '../assets/logo2.png';
 const { REACT_APP_API_URL } = process.env;
 
 export const Register = () => {
@@ -192,8 +193,6 @@ export const Register = () => {
                             <span> OR </span>
                             <StyledSocialWrapper>
                                 <StyledGoogleButton onClick={  handleAuth } />
-                            </StyledSocialWrapper>
-                            <StyledSocialWrapper>
                                 <StyledFacebookButton onClick={  handleAuth } />
                             </StyledSocialWrapper>
                         </form>
@@ -211,6 +210,12 @@ const StyledFieldWrapper = styled.div`
 `;
 
 const StyledWrapper = styled.div`
+    background-color: rgba(255,255,255,1);
+    border-radius: 10px;
+    box-shadow: 4px -4px 13px 1px rgba(0,0,0, 0.2),
+                -2px 3px 19px 1px rgba(0,0,0, 0.2);
+    border: 1px solid rgba(0,0,0, 0.2);
+    padding: 1em;
     display: flex;
     min-width: 80%;
     max-width: 80%;
@@ -226,8 +231,32 @@ const StyledWrapper = styled.div`
             margin: 2vh auto;
         }
     }
+
+    @media (min-width: 768px) {
+        min-width: 30%;
+        max-width: 30%;
+        background-color: rgba(255,255,255,0.85);
+        padding: 4em;
+        &:before {
+            background-image: url(${logo});
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            content: "";
+            display: block;
+            height: 90%;
+            left: 27%;
+            position: absolute;
+            top: 0;
+            width: 50%;
+            z-index: -1;
+            overflow: hidden;
+
+        }
+    }
 `;
 const StyledSocialWrapper = styled.div`
+    flex: 0 1 100%;
     margin: 1vh auto;
 }
 `;
@@ -249,6 +278,7 @@ const styledButton = ( button ) => {
         && {
             min-width: 100%;
             max-width: 100%;
+            margin-left: 0 !important;
         }
     `;
 }
