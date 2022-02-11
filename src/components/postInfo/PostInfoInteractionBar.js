@@ -41,7 +41,7 @@ export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
     return (
     <>
         <StyledLikes>
-            <p>{postLikes} {postLikes === 1 ? 'hunky' : 'hunkies'}{ postLikes === 0 ? '😔' : <img src={hunky} alt='HUNKY'/>}</p>
+            <p>{postLikes} {postLikes === 1 ? '' : 'hunkies'}{ postLikes === 0 ? '😔' : <img src={hunky} alt='HUNKY'/>}</p>
             <StyledLikeButton >
                 <Button variant='contained' color={isLiked ? "warning" : "primary"} disabled={ !isUserLoggedIn } onClick={  handleLike }>
                     Dar un <img src={hunky} alt='HUNKY'/>
@@ -63,12 +63,13 @@ const StyledLikeButton = styled.div`
 `;
 const StyledLikes = styled.div`
   flex: 0 1 100%;
-  font-size: 1.6em;
+  font-size: 1.2em;
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 0.5em auto 0.1em auto;
+  padding: 0 1em;
   &  img {
     margin-left: 0.3em;
     width: 20px;

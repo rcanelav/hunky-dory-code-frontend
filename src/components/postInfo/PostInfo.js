@@ -29,7 +29,7 @@ export const PostInfo = ({ post }) => {
       <StyledPostHeader>
         <div>
           <img src={author.image} alt={author.name} />
-          <p>{userName}</p>
+            <p>{userName}</p>
           <div>
             <p>{userRating} </p> {<img id='hunky' src={hunky} alt='HUNKY'/>}
           </div>
@@ -52,7 +52,7 @@ export const PostInfo = ({ post }) => {
 };
 
 const StyledContentWrapper = styled.div`
-  margin: 1em auto 1.5em auto;
+  margin: 1.5em auto;
   flex: 0 1 100%;
   min-width: 0px;
   display: flex;
@@ -61,53 +61,56 @@ const StyledContentWrapper = styled.div`
 
   & > p:first-child {
     text-indent: 1em;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-align: justify;
-    text-justify: inter-word;
     flex: 0 1 100%;
     align-self: center;
   }
 `;
 
 const StyledWrapper = styled.div`
-  min-width: 0px;
   display: flex;
   flex-flow: row wrap;
-  flex: 0 1 100%;
-  margin: 2em auto;
+  margin: 1.5em auto;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  padding: 2em;
+  padding: 1em;
+
+  @media (min-width: 768px) {
+    flex: 0 1 83.5%;
+  }
 
 `;
 
 const StyledPostHeader = styled.div`
-  flex: 0 0 100%;
+  flex: 0 1 100%;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  padding: 10px;
 
   & > :first-child {
-    flex: 0 1 20%;
+    flex: 0 1 25%;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     & > img {
-      width: 3.5em;
+      flex: 0 1 100%;
+      width: 50%;
+      min-width: 3em;
+      max-width: 5em;
       border-radius: 10px;
       margin: 1em auto 0.2em auto;
     }
 
     & > p  {
       flex: 0 1 100%;
-      font-size: 1.4em;
+      font-size: 1em;
       align-self: center;
       justify-self: center;
-      max-width: max-content;
     }
 
     & > div {
@@ -131,7 +134,7 @@ const StyledPostHeader = styled.div`
   }
 
   & > :nth-child(2) {
-    flex: 0 1 75%;
+    flex: 0 1 70%;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -142,13 +145,18 @@ const StyledPostHeader = styled.div`
       flex: 0 1 100%;
     }
 
+    & > h1 {
+      flex: 0 1 100%;
+      font-size: 1.3em;
+    }
+
     & > div {
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
 
       & > * {
-        font-size: 1.2em;
+        font-size: 1em;
         max-width: max-content;
         flex: 0 1 50%;
       }

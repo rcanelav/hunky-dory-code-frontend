@@ -61,7 +61,7 @@ const StyledWrapper = styled.div`
     background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 1%;
+    padding: 2% 1% 1.5% 1%;
     flex: 0 1 90%;
     display: flex;
     flex-flow: row wrap;
@@ -86,6 +86,7 @@ const StyledPostContent = styled.div`
     flex: 0 1 70%;
     display: flex;
     flex-flow: row wrap;
+
 `;
 const StyledProfileCard = styled.div`
     flex: 0 1 20%;
@@ -102,7 +103,7 @@ const StyledProfileCard = styled.div`
     & > img {
         border-radius: 10px;
         width: 60%;
-        max-width: 55px;
+        max-width: 60%;
         aligh-self: flex-start;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         margin-bottom: 0.4em;
@@ -117,7 +118,7 @@ const StyledProfileCard = styled.div`
 
 const StyledTitle = styled.p`
     flex: 0 1 70%;
-    font-size: 1.3em;
+    font-size: 5vw;
     font-weight: bold;
     margin: 0;
     @media (min-width: 768px) {
@@ -126,7 +127,7 @@ const StyledTitle = styled.p`
 `;
 
 const StyledUsername = styled.p`
-    font-size: 1em;
+    font-size: 2.5vw;
     font-weight: bold;
     @media (min-width: 768px) {
         font-size: 1em;
@@ -136,13 +137,13 @@ const StyledUsername = styled.p`
 const StyledUserRating = styled.p`
     font-size: 0.8em;
     @media (min-width: 768px) {
-        font-size: 1vw;
+        font-size: 0.8em;
     }
 `;
 
 const StyledPostText = styled.p`
     flex: 0 1 100%;
-    font-size: 1.2em;
+    font-size: 4vw;
     height: max-content;
     @media (min-width: 768px) {
         font-size: 0.9em;
