@@ -27,7 +27,7 @@ export function TextEditor({ limit, value, setValue, submit}) {
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className="animate__animated animate__fadeIn animate__slower">
       <Editor
         apiKey="b2mjlchj9oig4j8de3o60g2cqwemte7h9mo7lv648pf7gnoi"
         onInit={handleInit}
@@ -35,7 +35,7 @@ export function TextEditor({ limit, value, setValue, submit}) {
         onBeforeAddUndo={handleBeforeAddUndo}
         value={value}
         init={{
-          height: 500,
+          height: 200,
           menubar: false,
           plugins: [
             "advlist autolink lists link image charmap print preview anchor",
@@ -52,7 +52,7 @@ export function TextEditor({ limit, value, setValue, submit}) {
         }}
       />
       <p><em>Remaining: {sizeLimit - length}</em></p>
-      <Button variant="contained" color="primary" onClick={ submit }>Enviar</Button>
+      <Button variant="contained" color="primary" onClick={ submit } disabled={!value}>Enviar</Button>
     </StyledWrapper>
   );
 }
@@ -65,10 +65,9 @@ const StyledWrapper = styled.div`
   align-items: center;
    & > div {
     flex: 0 1 100%;
-
-       border-radius: 10px;
-       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-       margin-bottom: 1em;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-bottom: 1em;
     }
    & > p {
     flex: 1 1 50%;
@@ -78,8 +77,12 @@ const StyledWrapper = styled.div`
    }
    & > button {
     max-width: 9em;
-    flex: 1 1 100%;
+    flex: 0 1 100%;
     padding: 0.5em;
-    font-size: 1.2em;
+    font-size: 1em;
+
+    &:disabled {
+      background-color: #ccc;
+    }
    }
 `;

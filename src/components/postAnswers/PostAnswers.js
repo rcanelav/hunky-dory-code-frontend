@@ -20,7 +20,7 @@ export const PostAnswers = ({post}) => {
             { answers.map( answer => (
                 <StyledAnswerCard key={answer.id}>
                     <PostAnswersHeader date={answer.createdAt} author={answer.postedBy}  />
-                    <p>{answer.content}</p>
+                    <p dangerouslySetInnerHTML={{__html: answer.content}} />
                     <PostInfoInteractionBar likes={answer.likes} postData={answer} type={'answers'} />
                 </StyledAnswerCard>
                 ))
@@ -30,14 +30,11 @@ export const PostAnswers = ({post}) => {
 };
 
 const StyledAnswerCard = styled.div`
-    min-width: 0px;
     display: flex;
     flex-flow: row wrap;
-    flex: 0 0 90%;
-    margin: 2em auto;
+    margin: 0.5em auto;
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     background-color: rgba(255, 255, 255, 1);
     padding: 2em;
-
 `;

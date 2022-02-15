@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
+import hunky from '../../assets/hdc-hunky.png';
 const { REACT_APP_API_URL } = process.env;
 export const PostAnswersHeader = ({ date, author }) => {
     const [ authorData, setAuthorData ] = useState('');
@@ -19,12 +21,18 @@ export const PostAnswersHeader = ({ date, author }) => {
     return (
         <StyledHeaderWrapper>
             <StyledProfileCard>
-                <img src={ authorData?.image } alt={`${ authorData?.name } ${authorData?.lastname}`}/>
+                <div>
+                    <img src={ authorData?.image } alt={`${ authorData?.name } ${authorData?.lastname}`}/>
+                </div>
                 <p>{authorData?.name} { authorData?.lastname?.charAt(0) }</p>
-                <p>rating { authorData?.rating }</p>
+                <div id='rating'>
+                    (<p>{authorData?.rating}</p>
+                    <img src={ hunky } alt='hunky'/>
+                    )
+                </div>
             </StyledProfileCard>
             <StyledHeaderText>
-                {date}
+                Date: {moment(date).format('DD.MM.YYYY')}📅
             </StyledHeaderText>
         </StyledHeaderWrapper>
     )
@@ -37,20 +45,43 @@ const StyledHeaderText = styled.div`
     justify-content: right;
 `;
 const StyledProfileCard = styled.div`
-    flex: 0 1 25%;
+    flex: 0 1 20%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
 
-    & > img {
-        border-radius: 10px;
-        width: 3.5em;
+    & > * {
+        flex: 0 1 100%;
+        text-align: center;
+    }
+
+    & > div {
+        flex: 0 1 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
     }
     &  > p {
+        margin-top: 0.5em;
         width: max-content;
-        font-size: 1.5em;
+        font-size: 1.2em;
     }
+    & > div#rating {
+        img {
+            position: relative;
+            top: 0.2em;
+            box-shadow: none;
+            border: none;
+            width: 0.7em;
+        }
 `;
 
 const StyledHeaderWrapper = styled.div`
@@ -59,5 +90,5 @@ const StyledHeaderWrapper = styled.div`
     flex-flow: row wrap;
     align-items: space-between;
     justify-content: space-between;
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
 `;

@@ -11,48 +11,48 @@ import { AsidePostsInfo } from '../components/AsidePostsInfo/AsidePostsInfo';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostDetails = () => {
-    const { userSession, userProfile } = useAuthorization();
-    const { id } = useParams();
-    const [ isLoading, setIsLoading ] = useState(true);
-    const [ postInfo, setPostInfo ] = useState();
-    const [ newAnswer, setNewAnswer ] = useState('');
-    const [ postedAnswer, setPostedAnswer ] = useState( new Date().toLocaleString() );
+  const { userSession, userProfile } = useAuthorization();
+  const { id } = useParams();
+  const [ isLoading, setIsLoading ] = useState(true);
+  const [ postInfo, setPostInfo ] = useState();
+  const [ newAnswer, setNewAnswer ] = useState('');
+  const [ postedAnswer, setPostedAnswer ] = useState( new Date().toLocaleString() );
 
-    useEffect(() => {
-        async function getPostData() {
-            try{
-                const post = await axios.get(`${REACT_APP_API_URL}/api/v1/posts/${id}`);
-                setPostInfo(post?.data);
-                setIsLoading(false);
-                await axios.put(`${REACT_APP_API_URL}/api/v1/posts/${id}/view`);
-            }catch( error ){
-                console.log(error);
-            }
+  useEffect(() => {
+    async function getPostData() {
+        try{
+            const post = await axios.get(`${REACT_APP_API_URL}/api/v1/posts/${id}`);
+            setPostInfo(post?.data);
+            setIsLoading(false);
+            await axios.put(`${REACT_APP_API_URL}/api/v1/posts/${id}/view`);
+        }catch( error ){
+            console.log(error);
         }
-        getPostData();
-    }, [id]);
-
-    const handleSubmit = async () => {
-      await axios(
-        {
-            method: 'POST',
-            url: `${REACT_APP_API_URL}/api/v1/posts/${id}/answers`,
-            headers: {'Authorization': `Bearer ${userSession}`},
-            data: {
-              content: newAnswer,
-            },
-        });
-        setPostedAnswer( new Date().toLocaleString() );
     }
-    if( isLoading ) return <div>Loading</div>;
+    getPostData();
+  }, [id]);
+
+  const handleSubmit = async () => {
+    await axios(
+    {
+      method: 'POST',
+      url: `${REACT_APP_API_URL}/api/v1/posts/${id}/answers`,
+      headers: {'Authorization': `Bearer ${userSession}`},
+      data: {
+        content: newAnswer,
+      },
+    });
+    setPostedAnswer( new Date().toLocaleString() );
+  }
 
   const mostRecentPosts = 'search?searchBy=date&direction=desc&order=date&limit=5';
   const mostLikedPosts = 'search?searchBy=titles&direction=desc&order=likes&limit=5';
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
+  if( isLoading ) return <div>Loading</div>;
   return (
     <>
-      <ContentWrapper>
+      <ContentWrapper className='animate__animated animate__fadeIn'>
         <StyledNavbar />
         <AsideWrapper>
           <AsidePostsInfo url={mostRecentPosts}>
@@ -140,7 +140,6 @@ const GridWrapper = styled.div`
       }
     }
   }
-}
 
   @media (min-width: 768px) {
     flex: 0 1 60%;
@@ -149,6 +148,7 @@ const GridWrapper = styled.div`
     }
     & > div#disallowed-reply {
       flex: 0 1 90%;
+      margin-bottom: 1em;
     }
 
   }
