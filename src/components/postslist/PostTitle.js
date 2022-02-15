@@ -65,7 +65,7 @@ const StyledWrapper = styled.div`
     flex: 0 1 90%;
     display: flex;
     flex-flow: row wrap;
-    margin: 1em 0;
+    margin: 0.3em 0;
     transition: all 0.3s ease-in-out;
 
     & > * {

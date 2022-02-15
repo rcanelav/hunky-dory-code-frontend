@@ -8,7 +8,7 @@ export const PostInfo = ({ post }) => {
   const { postData, technology, author, likes } = post;
   const userName = author?.name + ' ' + author?.lastname.charAt(0) + '.';
   const [ userRating, setUserRating] = useState();
-  const postDate = moment(postData?.createdAt).format('DD.MM.YYYY');
+  const postDate = moment(postData?.createdAt).format('LL');
   const [ views, setViews ] = useState(postData.views);
   useEffect(() => {
     async function getData() {
@@ -38,7 +38,7 @@ export const PostInfo = ({ post }) => {
           <h1>{postData.title}</h1>
           <div>
             <p>Category: {technology.name}</p>
-            <p>Date: {postDate} 📅</p>
+            <p>📅{postDate}</p>
           </div>
           <p>Views: {views} 👀</p>
         </div>

@@ -64,7 +64,7 @@ export const SearchBar = () => {
                     onChange={ (e) => setSearchData(e.target.value)}
                     />
                 </SearchContainer>
-                <SearchByContainer open={open}>
+                <SearchByContainer open={open} className="animate__animated animate__fadeIn">
                     <p>Search By</p>
                     <RadioGroup row aria-label="search By" name="row-radio-buttons-group" onChange={ (e) => setSearchBy( e.target.value )} value={searchBy}>
                         <FormControlLabel value="title" control={<Radio />} label="Title" />
@@ -140,7 +140,7 @@ export const SearchBar = () => {
                     </NumAnswersContainer>
                 }
 
-                <SortContainer open={open}>
+                <SortContainer open={open} className="animate__animated animate__fadeIn">
                     <div>
                         <p>Order By</p>
                         <Select
@@ -179,7 +179,7 @@ export const SearchBar = () => {
                         </Select>
                     </div>
                 </SortContainer>
-                <ResetButton onClick={ () => handleReset() } open={open}>Reset</ResetButton>
+                <ResetButton onClick={ () => handleReset() } open={open} className="animate__animated animate__fadeIn">Reset</ResetButton>
             </form>
             <BottomContainer>
                 <NewQuestion variant='contained' onClick={ () => navigate('/newPost')}>New question</NewQuestion>

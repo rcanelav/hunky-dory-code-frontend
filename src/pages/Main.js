@@ -34,9 +34,9 @@ export const Main = () => {
 
    return (
     <>
-      <ContentWrapper>
+      <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
-        <AsideWrapper>
+        <AsideWrapper className="animate__animated animate__fadeIn">
           <AsidePostsInfo url={mostRecentPosts}>
             Recent posts
           </AsidePostsInfo>
@@ -44,10 +44,10 @@ export const Main = () => {
             Top rated posts
           </AsidePostsInfo>
         </AsideWrapper>
-        <GridWrapper>
-          <PostsGrid key={ debouncedSearch.search + new Date().toISOString() } searchData={ debouncedSearch}/>
+        <GridWrapper className="animate__animated animate__fadeIn">
+          <PostsGrid key={ debouncedSearch.search + new Date().toISOString() } searchData={ debouncedSearch} />
         </GridWrapper>
-        <AsideWrapper>
+        <AsideWrapper className="animate__animated animate__fadeIn">
           <AsidePostsInfo url={mostAnsweredPosts}>
             Most answered posts
           </AsidePostsInfo>
@@ -84,7 +84,7 @@ const ContentWrapper = styled.div`
   background-color: rgba(0,163,152, 1);
 `;
 const GridWrapper = styled.div`
-  margin-top: 0.5em;
+  margin-top: 1.15em;
   flex: 0 1 100%;
   display: flex;
   flex-flow: row wrap;

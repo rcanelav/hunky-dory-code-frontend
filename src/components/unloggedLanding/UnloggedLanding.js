@@ -17,7 +17,7 @@ export const UnloggedLanding = () => {
     return (
         <>
             <Menu open={ open } setOpen={ setOpen } search={search} setSearch={setSearch} />
-            <StyledHeader>
+            <StyledHeader className="animate__animated animate__fadeIn">
                 <div />
                 <div className='logo'>
                     <img src={ logo } alt="logo" />
@@ -44,10 +44,10 @@ export const UnloggedLanding = () => {
                 
 
             </StyledHeader>
-                <BodyWrapper>
+                <BodyWrapper className="animate__animated animate__fadeIn">
                     <Search search={search} setSearch={setSearch} />
                 </BodyWrapper>
-            <StyledText>
+            <StyledText className="animate__animated animate__fadeIn">
                 <p> Don't let the code </p>
                 <p> knock you out </p>
             </StyledText>

@@ -13,7 +13,7 @@ export const Navbar = ({ search, setSearch }) => {
 
     return (
         <>
-            <Nav>
+            <Nav className="animate__animated animate__fadeIn">
                 <ul>
                     <li>
                         <img src={hunky} alt="hunky"  onClick={ () => navigate('/search?q=') } />

@@ -123,13 +123,14 @@ const GridWrapper = styled.div`
   }
 
   & > div#disallowed-reply {
-    flex: 0 1 100%;
+    flex: 0 1 90%;
     border: 1px solid black;
     padding: 0.5em;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 1);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     p {
+
       text-align: center;
       font-style: italic;
       font-size: 1em;

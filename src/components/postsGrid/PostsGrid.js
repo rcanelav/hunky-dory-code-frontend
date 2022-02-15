@@ -33,6 +33,7 @@ export const PostsGrid = ({searchData}) => {
     dataLength={data.totalResults}
     next={ () => setPage( prev => prev + 1 ) }
     hasMore={ !!data.next}
+    className="animate__animated animate__fadeIn"
     >
       <StyledPostsWrapper>
         {
@@ -47,6 +48,7 @@ export const PostsGrid = ({searchData}) => {
               content={item.content}
               postId={item.id}
               data={item}
+              className="animate__animated animate__fadeIn"
             />
           ))
         }
