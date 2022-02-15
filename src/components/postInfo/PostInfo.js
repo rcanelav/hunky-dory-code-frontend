@@ -66,6 +66,11 @@ const StyledContentWrapper = styled.div`
     flex: 0 1 100%;
     align-self: center;
   }
+
+  @media (min-width: 768px) {
+    & > p:first-child {
+      font-size: 1em;
+  }
 `;
 
 const StyledWrapper = styled.div`

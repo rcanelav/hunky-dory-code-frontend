@@ -68,7 +68,9 @@ export const PostDetails = () => {
             postInfo?.technology.id === userProfile?.userData?.technologies
             ?
             <TextEditor value={newAnswer} setValue={setNewAnswer} submit={ handleSubmit } />
-            : <p>Debes ser experto en esta tecnología para responder</p>
+            : <div id='disallowed-reply'>
+                <p>Debes ser experto en esta tecnología para responder a esa pregunta.</p>
+            </div>
           }
           <PostAnswers key={postedAnswer} post={postInfo} />
         </GridWrapper>
@@ -120,8 +122,35 @@ const GridWrapper = styled.div`
     flex: 0 1 100%;
   }
 
+  & > div#disallowed-reply {
+    flex: 0 1 100%;
+    border: 1px solid black;
+    padding: 0.5em;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    p {
+      text-align: center;
+      font-style: italic;
+      font-size: 1em;
+      padding: 0.2em;
+      :after{
+        content: '👩‍🏫';
+        font-style: normal;
+      }
+    }
+  }
+}
+
   @media (min-width: 768px) {
     flex: 0 1 60%;
+    & > * {
+      flex: 0 1 88%;
+    }
+    & > div#disallowed-reply {
+      flex: 0 1 90%;
+    }
+
   }
 `;
 const StyledNavbar = styled(Navbar)`
