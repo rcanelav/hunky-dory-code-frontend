@@ -44,7 +44,7 @@ export const PostInfo = ({ post }) => {
         </div>
       </StyledPostHeader>
       <StyledContentWrapper>
-        <p>{postData.content}</p>
+        <p dangerouslySetInnerHTML={{__html: postData.content}} />
       </StyledContentWrapper>
       <PostInfoInteractionBar likes={likes} postData={postData} />
     </StyledWrapper>

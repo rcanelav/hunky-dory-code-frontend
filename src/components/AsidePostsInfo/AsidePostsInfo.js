@@ -28,7 +28,7 @@ export const AsidePostsInfo = ({children, url }) => {
                         </div>
                         <div id='content-container'>
                             <h2>{post.title.slice(0, 20)} <span> [...] </span></h2>
-                            <p>{post.content.slice(0, 40)} <span> [...]</span></p>
+                            <p dangerouslySetInnerHTML={{__html: post.content.slice(0, 30)+ '[...]'}} />
                         </div>
                         <div id='info'>
                             <p>⚡:{post.likes} 👀:{post.views} 📢:{post.numAnswers}</p>

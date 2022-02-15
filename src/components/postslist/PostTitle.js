@@ -7,10 +7,10 @@ const { REACT_APP_API_URL } = process.env;
 
 export const PostTitle = ({ title, date, author, userImage, userId, content, postId, data }) => {
     const userName = author.split(' ')[0] + ' ' + author.split(' ')[1].slice(0, 1) + '.';
-    const postContent = content.slice(0, 30) + '...';
-    const postTitle = title.slice(0, 20) + '...';
+    const postContent = content.slice(0, 52);
+    const postTitle = title.slice(0, 30) + '[...]';
     const [ userRating, setUserRating ] = useState();
-    
+
     useEffect(() => {
         async function getUserRating() {
             try{
@@ -22,9 +22,8 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
         }
         getUserRating();
     }, [userId]);
-    console.log(data);
-  return (
-      <StyledWrapper>
+    return (
+        <StyledWrapper>
             <Link to={`/posts/${postId}`}>
                 <StyledProfileCard>
                     <img src={userImage} alt="author" />
@@ -40,7 +39,10 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
             
                 <StyledPostContent>
                     <StyledTitle>{postTitle}</StyledTitle>
-                    <StyledPostText>{postContent}</StyledPostText>
+                    <StyledPostText>
+                        <p dangerouslySetInnerHTML={{__html: postContent+ '[...]'}} />
+                    </StyledPostText>
+
                     <Divider variant='middle' />
                     <StyledRelatedData>
                         <div>
@@ -53,8 +55,8 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
                     </StyledRelatedData>
                 </StyledPostContent>
             </Link>
-    </StyledWrapper>
-  )
+        </StyledWrapper>
+    )
 };
 
 const StyledWrapper = styled.div`
