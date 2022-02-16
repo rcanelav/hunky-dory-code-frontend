@@ -8,6 +8,8 @@ import { PostInfo } from '../components/postInfo/PostInfo';
 import {TextEditor} from '../components/textEditor/TextEditor';
 import { useAuthorization } from '../hooks/useAuthorization';
 import { AsidePostsInfo } from '../components/AsidePostsInfo/AsidePostsInfo';
+import UseAnimations from 'react-useanimations';
+import alertOctagon from 'react-useanimations/lib/alertOctagon';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostDetails = () => {
@@ -69,6 +71,11 @@ export const PostDetails = () => {
             ?
             <TextEditor value={newAnswer} setValue={setNewAnswer} submit={ handleSubmit } />
             : <div id='disallowed-reply'>
+                <UseAnimations
+                    size={30}
+                    animation={alertOctagon}
+                    strokeColor='red'
+                />
                 <p>Debes ser experto en esta tecnología para responder a esa pregunta.</p>
             </div>
           }
@@ -123,15 +130,18 @@ const GridWrapper = styled.div`
   }
 
   & > div#disallowed-reply {
-    flex: 0 1 90%;
-    border: 1px solid black;
+    flex: 0 1 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
     padding: 0.5em;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 1);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-bottom: 1em;
     p {
-
-      text-align: center;
       font-style: italic;
       font-size: 1em;
       padding: 0.2em;
@@ -140,18 +150,27 @@ const GridWrapper = styled.div`
         font-style: normal;
       }
     }
+    animation: 2s infinite alternate ease-in-out breathing-colour;
+    @keyframes breathing-colour {
+      from {
+        border-color: rgba(232,55,128,1);
+        box-shadow: rgba(232,55,128,0.25) 0px 2px 5px -1px, rgba(232,55,128,0.3) 0px 1px 3px -1px;
+      }
+      to {
+        border-color: rgba(0,163,152,1);
+        box-shadow: rgba(0,163,152,0.25) 0px 2px 5px -1px, rgba(0,163,152,0.3) 0px 1px 3px -1px;
+      }
+    }
   }
 
   @media (min-width: 768px) {
-    flex: 0 1 60%;
+    flex: 0 1 56%;
     & > * {
       flex: 0 1 88%;
     }
     & > div#disallowed-reply {
       flex: 0 1 90%;
-      margin-bottom: 1em;
     }
-
   }
 `;
 const StyledNavbar = styled(Navbar)`
