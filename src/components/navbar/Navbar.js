@@ -13,7 +13,7 @@ export const Navbar = ({ search, setSearch }) => {
 
     return (
         <>
-            <Nav className="animate__animated animate__fadeIn">
+            <Nav className="animate__animated animate__fadeIn" isUserLoggedIn={isUserLoggedIn} >
                 <ul>
                     <li>
                         <img src={hunky} alt="hunky"  onClick={ () => navigate('/search?q=') } />
@@ -34,7 +34,7 @@ export const Navbar = ({ search, setSearch }) => {
                                 </StyledButton>
                             </>
                             :
-                            <div>
+                            <div id='profile-card'>
                                 <img src={userProfile.userData.image} alt='user' />
                                 <p onClick={ () => logout() }>Salir <FiLogOut /></p>
                             </div>
@@ -58,11 +58,11 @@ const StyledButton = styled(Button)`
         transition: all 0.3s ease-in-out;
         box-shadow: rgba(50, 50, 93, 0.55) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         &:hover {
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            box-shadow: rgba(50, 50, 93, 0.45) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         }
 
         &:first-child {
-            background-color: rgba(255, 204, 3, 0.8);
+            background-color: rgba(255, 204, 3, 1);
             &:hover {
                 background-color: rgba(255, 204, 3, 1);
             }
@@ -70,8 +70,9 @@ const StyledButton = styled(Button)`
         &:last-child {
             border: 1px solid black;
             &:hover {
-                border-color: transparent;
+                border-color: rgba(0, 0, 0 , 1);
                 background-color: rgba(0, 163, 152, 0.8);
+                color: rgba(255, 255, 255, 1);
             }
         }
     }
@@ -88,7 +89,6 @@ const Nav = styled.nav`
         & > * {
             flex: 0 1 10%;
             display: none;
-
         }
         & li:nth-child(2) {
             flex: 0 1 92%;
@@ -96,11 +96,10 @@ const Nav = styled.nav`
         }
         & li:nth-child(3) {
             margin-top: 0.8em;
-            flex: 0 1 12%;
-            background-color: rgba(255, 255, 255, 1);
+            flex: 0 1 10%;
+            background-color: ${({ isUserLoggedIn }) => isUserLoggedIn && 'rgba(255, 255, 255, 1);'};
             align-items: center;
             display: none;
-                   
         }
 
         @media (min-width: 768px) {
@@ -121,39 +120,47 @@ const Nav = styled.nav`
                 flex: 0 1 70%;
             }
             & > li:nth-child(3) {
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                box-shadow: ${({ isUserLoggedIn }) => isUserLoggedIn && 'box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;'}
                 border-radius: 10px;
                 display: flex;
                 align-self: flex-start;
                 flex-flow: row wrap;
                 justify-content: space-evenly;
-                flex: 0 1 17%;
-                & img{
-                    margin-top: 2.5em;
-                    width: 2.5em;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    transition: transform .2s;
-                    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                flex: 0 1 10%;
 
-                    &:hover {
-                        transform: scale(1.1);
+                > div#profile-card {
+                    display: flex;
+                    flex-flow: row wrap;
+                    align-items: self-start;
+                    justify-content: center;
+                    & img{
+                        margin-top: 1em;
+                        width: 2.5em;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        transition: transform .3s;
+                        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+
+                        &:hover {
+                            transform: scale(1.1);
+                        }
                     }
-                }
-                & p {
-                    margin: 2em auto;
-                    font-size: 0.8em;
-                    color: red;
-                    cursor: pointer;
-                    align-self: flex-end;
+                    & p {
+                        text-align: center;
+                        flex: 0 1 100%;
+                        margin: 2em auto;
+                        font-size: 0.8em;
+                        color: red;
+                        cursor: pointer;
+                    }
                 }
             }
         }
         @media (min-width: 1024px) {
             & > li:nth-child(3) {
-                flex: 0 1 13%;
+                flex: 0 1 10%;
             }
-            
         }
     }
 `;
