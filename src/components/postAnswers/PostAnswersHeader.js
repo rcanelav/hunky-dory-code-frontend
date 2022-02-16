@@ -32,20 +32,20 @@ export const PostAnswersHeader = ({ date, author }) => {
                 </div>
             </StyledProfileCard>
             <StyledHeaderText>
-                Date: {moment(date).format('DD.MM.YYYY')}📅
+                📅 {moment(date).format('LL')}
             </StyledHeaderText>
         </StyledHeaderWrapper>
     )
 };
 
 const StyledHeaderText = styled.div`
-    flex: 0 1 50%;
+    flex: 0 1 70%;
     display: flex;
     flex-flow: row wrap;
     justify-content: right;
 `;
 const StyledProfileCard = styled.div`
-    flex: 0 1 20%;
+    flex: 0 1 25%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -64,6 +64,7 @@ const StyledProfileCard = styled.div`
         align-items: center;
         img {
             width: 50%;
+            max-width: 5em;
             border-radius: 10px;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
             border: 1px solid rgba(0, 0, 0, 0.1);
@@ -91,4 +92,5 @@ const StyledHeaderWrapper = styled.div`
     align-items: space-between;
     justify-content: space-between;
     margin-bottom: 1em;
+    padding: 0.5em;
 `;

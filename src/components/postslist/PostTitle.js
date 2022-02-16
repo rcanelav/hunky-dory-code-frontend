@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import hunky from '../../assets/hdc-hunky.png';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostTitle = ({ title, date, author, userImage, userId, content, postId, data }) => {
@@ -31,7 +32,10 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
                         {userName}
                     </StyledUsername>
                     <StyledUserRating>
-                        Rating: ({userRating})
+                        (
+                            {userRating}
+                            <img src={hunky} alt="hunky" />
+                        )
                     </StyledUserRating>
                 </StyledProfileCard>
                 
@@ -39,10 +43,7 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
             
                 <StyledPostContent>
                     <StyledTitle>{postTitle}</StyledTitle>
-                    <StyledPostText>
-                        <p dangerouslySetInnerHTML={{__html: postContent+ '[...]'}} />
-                    </StyledPostText>
-
+                    <StyledPostText dangerouslySetInnerHTML={{__html: `${postContent} [...]`}} />
                     <Divider variant='middle' />
                     <StyledRelatedData>
                         <div>
@@ -119,8 +120,8 @@ const StyledProfileCard = styled.div`
 `;
 
 const StyledTitle = styled.p`
-    flex: 0 1 70%;
-    font-size: 5vw;
+    flex: 0 1 100%;
+    font-size: 4vw;
     font-weight: bold;
     margin: 0;
     @media (min-width: 768px) {
@@ -137,7 +138,12 @@ const StyledUsername = styled.p`
 `;
 
 const StyledUserRating = styled.p`
-    font-size: 0.8em;
+    font-size: 0.9em;
+    > img {
+        position: relative;
+        top: 0.5em;
+        width: 0.65em;
+    }
     @media (min-width: 768px) {
         font-size: 0.8em;
     }
@@ -147,6 +153,7 @@ const StyledPostText = styled.p`
     flex: 0 1 100%;
     font-size: 4vw;
     height: max-content;
+    word-break: break-all;
     @media (min-width: 768px) {
         font-size: 0.9em;
     }

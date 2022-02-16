@@ -77,6 +77,7 @@ const AsideWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
   min-width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -95,7 +96,7 @@ const GridWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    flex: 0 1 60%;
+    flex: 0 1 56%;
   }
 `;
 const StyledNavbar = styled(Navbar)`
