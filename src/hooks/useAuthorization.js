@@ -25,16 +25,11 @@ function AuthProvider( props ){
         if (userSession?.length > 0 && userSession !== null) {
             async function getUserProfile() {
                 try {
-                const config = {
-                    headers: {
-                    Authorization: `Bearer ${userSession}`,
-                    },
-                };
-
-                const response = await axios.get(
-                    `${REACT_APP_API_URL}/api/v1/auth/current`,
-                    config
-                );
+                const response = await axios({
+                    method: "GET",
+                    url: `${REACT_APP_API_URL}/api/v1/auth/current`,
+                    headers: { Authorization: `Bearer ${userSession}` },
+                  });
 
                 setUserProfile(response?.data);
                 setIsUserLoggedIn(true);
@@ -52,6 +47,7 @@ function AuthProvider( props ){
     async function login( email, password ) {
 
         try{
+            console.log(email,password)
             const response = await axios.post( `${REACT_APP_API_URL}/api/v1/auth/login`, {
                 email,
                 password
@@ -60,16 +56,18 @@ function AuthProvider( props ){
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
             setIsUserLoggedIn( true );
-            navigate(-1);
+            navigate('/search?q=');
         } catch ( error ){
             return error.response;
         }
     }
 
     function logout() {
+        navigate('/search?q=')
         localStorage.removeItem( 'userSession' );
+        localStorage.removeItem( 'userProfile' );
         setUserSession(null);
-        // sessionStorage.setItem("userSession", null);
+        setUserProfile(null);
         setIsUserLoggedIn(false);
         console.log('Logged out');
     }
@@ -94,7 +92,7 @@ function AuthProvider( props ){
             console.log(credentials);
             console.log( accessToken);
             setIsUserLoggedIn( true );
-            navigate(-1);
+            navigate('/');
         }catch( error ){
             console.log(error);
         }

@@ -35,7 +35,7 @@ export const Navbar = ({ search, setSearch }) => {
                             </>
                             :
                             <div id='profile-card'>
-                                <img src={userProfile.userData.image} alt='user' />
+                                <img src={userProfile?.userData.image} onClick={ () => navigate('/profile')} alt='user'  />
                                 <p onClick={ () => logout() }>Salir <FiLogOut /></p>
                             </div>
                         }
