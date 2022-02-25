@@ -61,7 +61,7 @@ function AuthProvider( props ){
     }
 
     function logout() {
-        navigate('/search?q=')
+        navigate('/search?q=');
         localStorage.removeItem( 'userSession' );
         localStorage.removeItem( 'userProfile' );
         setUserSession(null);
@@ -87,7 +87,7 @@ function AuthProvider( props ){
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
             setIsUserLoggedIn( true );
-            navigate('/');
+            navigate('/search?q=');
         }catch( error ){
             console.log(error);
         }
