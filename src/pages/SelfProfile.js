@@ -22,6 +22,7 @@ const { REACT_APP_API_URL } = process.env;
 export const SelfProfile = () => {
   const { userProfile, userSession, logout } = useAuthorization();
   const { userData } = userProfile;
+  const [ userName, setUserName ] = useState(userData.name);
   const [userRole, setUserRole] = useState(userData?.role);
   const [userTechnology, setUserTechnology] = useState("0");
   const [technologyData, setTechnologyData] = useState([]);
@@ -44,7 +45,7 @@ export const SelfProfile = () => {
         ...data,
       }
     }
-
+    setUserName(data.name);
     updateUserRole(handleRole(), userSession);
     updateUserInfo(userInfo, userSession);
     if(!userInfo.password){
@@ -74,13 +75,12 @@ export const SelfProfile = () => {
   const handleRole = () => {
     let data = {
       userId: userData.id,
-      role: userRole,
-      technology: userTechnology,
+      role: userRole || userData.role,
+      technology: userTechnology !== "0" ? userTechnology : userData.technologies,
     }
     if(userRole === "STUDENT"){
       data.technology = undefined;
     }
-
     return data;
   };
 
@@ -93,7 +93,6 @@ export const SelfProfile = () => {
     }
     getTechnologies();
   }, [userData.image]);
-  console.log(userData)
 
   const mostRecentPosts =
     "search?searchBy=date&direction=desc&order=date&limit=5";
@@ -114,7 +113,7 @@ export const SelfProfile = () => {
         <Formik
           initialValues={{
             email: userData.email,
-            name: userData.name,
+            name: userName,
             lastname: userData.lastname,
             password: "",
             repeatPassword: "",
@@ -255,6 +254,9 @@ export const SelfProfile = () => {
                       label="Expert"
                     />
                   </RadioGroup>
+                  { userData.role === "EXPERT" &&
+                    <p>Current technology: { userData.technologyName } 📚</p>
+                  }
                   {
                     userRole === "EXPERT" && (
                       <Select
@@ -262,14 +264,18 @@ export const SelfProfile = () => {
                         id="demo-simple-select"
                         value={userTechnology}
                         label="Technology"
-                        onChange={(e) => setUserTechnology(e.target.value)}
+                        onChange={(e) => {
+                          setUserTechnology(e.target.value);
+                        }}
                         size="small"
                       >
                         <MenuItem disabled value="0">
                           <em>Select a technology</em>
                         </MenuItem>
                         {technologyData?.map((item) => (
-                          <MenuItem key={item.id} value={item.id}>
+                          <MenuItem key={item.id} 
+                            value={item.id}
+                          >
                             {item.name}
                           </MenuItem>
                         ))}
@@ -411,6 +417,12 @@ const ProfileWrapper = styled.div`
         flex-flow: row wrap;
         align-items: center;
         justify-content: center;
+        margin: 0.3em auto;
+    }
+    & > p {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 0.2em;
     }
   }
 
