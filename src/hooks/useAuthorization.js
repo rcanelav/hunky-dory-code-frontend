@@ -9,20 +9,19 @@ const authContext = createContext();
 function useAuthorization( params ){
     const context = useContext( authContext );
     if( !context ){
-        console.log( 'context is not defined' );
-        return;
+        return console.log( 'context is not defined' );
     }
     return context;
 }
 
 function AuthProvider( props ){
     const [ userSession, setUserSession ] = useState( localStorage.getItem( 'userSession' ) );
-    const [ userProfile, setUserProfile ] = useState( localStorage.getItem( 'userProfile' ) );
+    const [ userProfile, setUserProfile ] = useState( localStorage.getItem( 'userProfile' ) || {} );
     const [ isUserLoggedIn, setIsUserLoggedIn ] = useState( false );
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (userSession?.length > 0 && userSession !== null) {
+        if (userSession) {
             async function getUserProfile() {
                 try {
                 const response = await axios({
@@ -45,7 +44,6 @@ function AuthProvider( props ){
     }, [userSession]);
 
     async function login( email, password ) {
-
         try{
             console.log(email,password)
             const response = await axios.post( `${REACT_APP_API_URL}/api/v1/auth/login`, {
@@ -88,9 +86,6 @@ function AuthProvider( props ){
             const { accessToken } = response.data;
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
-
-            console.log(credentials);
-            console.log( accessToken);
             setIsUserLoggedIn( true );
             navigate('/');
         }catch( error ){
@@ -107,7 +102,6 @@ function AuthProvider( props ){
         signInWithFirebaseAuth,
         isUserLoggedIn,
     };
-
     return <authContext.Provider value={value}> {props.children } </authContext.Provider>
 }
 
