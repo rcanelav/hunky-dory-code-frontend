@@ -11,10 +11,11 @@ export const PostsGrid = ({searchData}) => {
   const [ posts, setPosts ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(true);
   const [ page, setPage ] = useState(1);
+  const limit = 10;
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`${REACT_APP_API_URL}/api/v1/search?q=${search || ''}&page=${page}&searchBy=${searchBy || 'title'}${technology ? '&technology='+technology : ''}${ orderBy ? '&orderBy='+orderBy : ''}${from ? '&from='+from : ''}${to ? '&to='+to : ''}${numAnswers ? '&numAnswers='+numAnswers : ''}${ direction ? '&direction='+direction : ''}`);
+      const response = await axios.get(`${REACT_APP_API_URL}/api/v1/search?q=${search || ''}&page=${page}&searchBy=${searchBy || 'title'}${technology ? '&technology='+technology : ''}${ orderBy ? '&orderBy='+orderBy : ''}${from ? '&from='+from : ''}${to ? '&to='+to : ''}${numAnswers ? '&numAnswers='+numAnswers : ''}${ direction ? '&direction='+direction : ''}&limit=${limit}`);
 
       setData( response.data );
       setPosts( prev => (
@@ -26,11 +27,11 @@ export const PostsGrid = ({searchData}) => {
     fetchData();
      
   }, [ search, page, searchBy, technology, orderBy, from, to, numAnswers, direction ]);
-
   if( isLoading ) return <div> is loading </div>
+
   return (
     <StyledInfiniteScroll
-    dataLength={data.totalResults}
+    dataLength={ page * limit}
     next={ () => setPage( prev => prev + 1 ) }
     hasMore={ !!data.next}
     className="animate__animated animate__fadeIn"
