@@ -1,43 +1,22 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AsidePostsInfo } from '../components/AsidePostsInfo/AsidePostsInfo';
 import { Navbar } from '../components/navbar/Navbar';
-import { PostsGrid } from '../components/postsGrid/PostsGrid';
+import { UserPostsGrid } from '../components/userPosts/UserPostsGrid';
 import { useAuthorization } from '../hooks/useAuthorization';
-import { useQuery } from '../hooks/useQuery';
 
-export const Main = () => {
+export const UserPosts = () => {
   const { userProfile } = useAuthorization();
-  const query = useQuery();
-  const search = query.get('q');
-  const searchBy = query.get('searchBy') || 'title';
-  const technology = query.get('technology') || '';
-  const orderBy = query.get('orderBy') || '';
-  const from = query.get('from') || '';
-  const to = query.get('to') || '';
-  const numAnswers = query.get('numAnswers') || '';
-  const direction = query.get('direction') || '';
-
-  // let debouncedSearch = useDebounce(search, 400);
-  let debouncedSearch = { 
-    search,
-    searchBy,
-    technology,
-    orderBy,
-    from,
-    to,
-    numAnswers,
-    direction,
-  }
+  const userId = useLocation().pathname.split('/')[2];
   const mostRecentPosts = 'search?searchBy=date&direction=desc&order=date&limit=5';
   const mostLikedPosts = 'search?searchBy=titles&direction=desc&order=likes&limit=5';
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
 
-   return (
-    <>
-      <ContentWrapper className="animate__animated animate__fadeIn">
+  return (
+    <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
         <AsideWrapper className="animate__animated animate__fadeIn">
           <AsidePostsInfo url={mostRecentPosts}>
@@ -48,7 +27,7 @@ export const Main = () => {
           </AsidePostsInfo>
         </AsideWrapper>
         <GridWrapper className="animate__animated animate__fadeIn">
-          <PostsGrid key={ debouncedSearch.search + new Date().toISOString() } searchData={ debouncedSearch} />
+          <UserPostsGrid userId={userId} />
         </GridWrapper>
         <AsideWrapper className="animate__animated animate__fadeIn">
           <AsidePostsInfo url={mostAnsweredPosts}>
@@ -65,9 +44,10 @@ export const Main = () => {
           }
         </AsideWrapper>
       </ContentWrapper>
-    </>
-  );
+  )
 };
+
+
 const AsideWrapper = styled.div`
   display: none;
   position: sticky;
@@ -111,3 +91,4 @@ const GridWrapper = styled.div`
 const StyledNavbar = styled(Navbar)`
   flex: 0 1 100%;
 `;
+

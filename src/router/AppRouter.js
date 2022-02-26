@@ -12,6 +12,7 @@ import { useAuthorization } from '../hooks/useAuthorization';
 import { PostDetails } from '../pages/PostDetails';
 import { NewPost } from '../pages/NewPost';
 import { SelfProfile } from '../pages/SelfProfile';
+import { UserPosts } from '../pages/UserPosts';
 
 export const AppRouter = () => {
     const { isUserLoggedIn } = useAuthorization();
@@ -25,6 +26,7 @@ export const AppRouter = () => {
             <Route path="/login" element={  isUserLoggedIn ? <Navigate to='/' /> :  <Login /> } />
             <Route path="/register" element={ <Register /> } />
             <Route path="/posts/:id" element={ <PostDetails /> } />
+            <Route path="/users/:id/posts" element={ <UserPosts /> } />
         </Routes>
     )
 };

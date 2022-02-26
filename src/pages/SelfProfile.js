@@ -289,7 +289,7 @@ export const SelfProfile = () => {
                 </Button>
 
                 <div id="directions">
-                  <Button>
+                  <Button onClick={ () => navigate(`/users/${userData.id}/posts`)}>
                     My Posts
                   </Button>
                   <Button>
