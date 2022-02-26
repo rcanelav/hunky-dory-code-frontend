@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { AsidePostsInfo } from '../components/AsidePostsInfo/AsidePostsInfo';
 import { Navbar } from '../components/navbar/Navbar';
 import { PostsGrid } from '../components/postsGrid/PostsGrid';
+import { useAuthorization } from '../hooks/useAuthorization';
 import { useQuery } from '../hooks/useQuery';
 
 export const Main = () => {
+  const { userProfile } = useAuthorization();
   const query = useQuery();
   const search = query.get('q');
   const searchBy = query.get('searchBy') || 'title';
@@ -31,6 +33,7 @@ export const Main = () => {
   const mostLikedPosts = 'search?searchBy=titles&direction=desc&order=likes&limit=5';
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
+  const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
 
    return (
     <>
@@ -53,6 +56,9 @@ export const Main = () => {
           </AsidePostsInfo>
           <AsidePostsInfo url={mostViewedPosts}>
             Most viewed posts
+          </AsidePostsInfo>
+          <AsidePostsInfo url={myPosts}>
+            My Posts
           </AsidePostsInfo>
         </AsideWrapper>
       </ContentWrapper>

@@ -101,6 +101,7 @@ export const SelfProfile = () => {
   const mostAnsweredPosts =
     "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
   const mostViewedPosts = "search?&searchBy=content&orderBy=views";
+  const myPosts = `users/${userData.id}/posts?page=1&limit=5`;
 
   return (
     <>
@@ -286,6 +287,18 @@ export const SelfProfile = () => {
                 <Button type="submit" fullWidth>
                   Save profile
                 </Button>
+
+                <div id="directions">
+                  <Button>
+                    My Posts
+                  </Button>
+                  <Button>
+                    My Answers
+                  </Button>
+                  <Button>
+                    My Liked Posts
+                  </Button>
+                </div>
               </ProfileWrapper>
             </form>
           )}
@@ -296,6 +309,9 @@ export const SelfProfile = () => {
           </AsidePostsInfo>
           <AsidePostsInfo url={mostViewedPosts}>
             Most viewed posts
+          </AsidePostsInfo>
+          <AsidePostsInfo url={myPosts}>
+            My posts
           </AsidePostsInfo>
         </AsideWrapper>
       </ContentWrapper>
@@ -437,6 +453,20 @@ const ProfileWrapper = styled.div`
     }
   }
 
+  & #directions {
+    flex: 0 1 90%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1em;
+    & > * {
+        font-weight: bold;
+        margin: 0.5em auto;
+        flex: 0 1 100%;
+        background-color: rgba(255, 204, 3, 1);
+    }
+  }
 
   @media (min-width: 768px) {
     flex: 0 1 56%;
@@ -455,11 +485,26 @@ const ProfileWrapper = styled.div`
         margin-top: 0.5em;
         flex: 0 1 35%;
       }
+    }
+    & div#directions {
+      flex: 0 1 80%;
+      & > * {
+        flex: 0 1 45%;
+      }
+    }
   }
 
   @media (min-width: 1024px) {
     & div#name-container {
         margin-top: 1em;
+    }
+    & div#directions {
+      justify-content: space-between;
+      flex: 0 1 80%;
+      & > * {
+        font-size: 0.7em;
+        flex: 0 1 30%;
+      }
     }
   }
 `;
