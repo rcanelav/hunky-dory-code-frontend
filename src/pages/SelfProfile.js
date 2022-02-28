@@ -295,9 +295,6 @@ export const SelfProfile = () => {
                   <Button onClick={ () => navigate(`/users/${userData.id}/answers`)}>
                     My Answers
                   </Button>
-                  <Button>
-                    My Liked Posts
-                  </Button>
                 </div>
               </ProfileWrapper>
             </form>
