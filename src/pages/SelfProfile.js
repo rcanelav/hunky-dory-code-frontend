@@ -292,7 +292,7 @@ export const SelfProfile = () => {
                   <Button onClick={ () => navigate(`/users/${userData.id}/posts`)}>
                     My Posts
                   </Button>
-                  <Button>
+                  <Button onClick={ () => navigate(`/users/${userData.id}/answers`)}>
                     My Answers
                   </Button>
                   <Button>
