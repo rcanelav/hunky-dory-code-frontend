@@ -31,7 +31,7 @@ export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
     useEffect(() => {
         setPostLikes( likes.totalLikes );
         likes?.answerLikes?.forEach( like => {
-            if( userProfile && like.user_id === userProfile?.userData.id ){
+            if( userProfile && like.user_id === userProfile?.userData?.id ){
                 setIsLiked( prev => !prev);
             }
         });
