@@ -135,6 +135,7 @@ const Wrapper = styled.div`
             right: 0.5em;
             font-size: 0.8em;
         }
+        border: 1.5px solid rgba(0, 0, 0, 0.1);
         animation: 2s infinite alternate ease-in-out breathing-colour;
         @keyframes breathing-colour {
             from {

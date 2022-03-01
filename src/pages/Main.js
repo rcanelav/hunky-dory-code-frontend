@@ -94,10 +94,6 @@ const ContentWrapper = styled.div`
   max-width: 1620px;
   margin: 0 auto;
   position: relative;
-  background-image: url("../assets/background/bg3.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   `;
 const GridWrapper = styled.div`
   margin-top: 1.15em;
