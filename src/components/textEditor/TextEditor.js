@@ -63,6 +63,7 @@ const StyledWrapper = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0.5em;
    & > div {
     flex: 0 1 100%;
     border-radius: 10px;

@@ -76,7 +76,7 @@ const StyledContentWrapper = styled.div`
 const StyledWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
-  margin: 1.5em auto;
+  margin: 1.5em auto 0.5em auto;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
