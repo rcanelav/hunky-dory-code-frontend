@@ -15,7 +15,11 @@ const Normalize = createGlobalStyle`
     padding: 0px;
   }
   body {
-    background-color: rgba(0,163,152, 1);
+    background-image: url("https://res.cloudinary.com/rayci/image/upload/v1646156854/bg1_syd8wt.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
   }
 `;
 export default App;
