@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { SearchBar } from '../searchBar/SearchBar';
-import { FiLogOut } from 'react-icons/fi';
-import hunky from '../../assets/hdc-hunky.png';
+import hunky from '../../assets/logo-wb.png';
 
 export const Navbar = ({ search, setSearch }) => {
     const { isUserLoggedIn, userProfile, logout } = useAuthorization();
@@ -25,18 +24,20 @@ export const Navbar = ({ search, setSearch }) => {
                         {
                             !isUserLoggedIn 
                             ?
-                            <>
+                            <div id='auth-container'>
                                 <StyledButton onClick={ () => navigate('/register') } >
                                     Register
                                 </StyledButton>
                                 <StyledButton onClick={ () => navigate('/login') }>
                                     Login
                                 </StyledButton>
-                            </>
+                            </div>
                             :
                             <div id='profile-card'>
-                                <img src={userProfile?.userData.image} onClick={ () => navigate('/profile')} alt='user'  />
-                                <p onClick={ () => logout() }>Salir <FiLogOut /></p>
+                                <img src={userProfile?.userData.image} onClick={ () => navigate('/profile')} alt='hunky dory user'  />
+                                <div id='logout-container'>
+                                    <Button color='error' variant='contained' onClick={ () => logout() }>Salir</Button>
+                                </div>
                             </div>
                         }
 
@@ -52,9 +53,8 @@ const StyledButton = styled(Button)`
         margin: 1em 0.3em;
         background-color: #fff;
         color: #000;
-        padding: 0.5em;
+        padding: 0.5em 1em;
         font-size: 0.5em;
-        width: 50px;
         transition: all 0.3s ease-in-out;
         box-shadow: rgba(50, 50, 93, 0.55) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         &:hover {
@@ -64,14 +64,14 @@ const StyledButton = styled(Button)`
         &:first-child {
             background-color: rgba(255, 204, 3, 1);
             &:hover {
-                background-color: rgba(255, 204, 3, 1);
+                background-color: rgba(255, 175, 57, 1);
             }
         }
         &:last-child {
             border: 1px solid black;
             &:hover {
                 border-color: rgba(0, 0, 0 , 1);
-                background-color: rgba(0, 163, 152, 0.8);
+                background-color: rgba(0, 185, 165, 1);
                 color: rgba(255, 255, 255, 1);
             }
         }
@@ -97,7 +97,6 @@ const Nav = styled.nav`
         & li:nth-child(3) {
             margin-top: 0.8em;
             flex: 0 1 10%;
-            background-color: ${({ isUserLoggedIn }) => isUserLoggedIn && 'rgba(255, 255, 255, 1);'};
             align-items: center;
             display: none;
         }
@@ -107,17 +106,19 @@ const Nav = styled.nav`
                 display: block;
             }
             & > li:first-child {
+                flex: 0 1 15%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 & img {
-                    width: 50px;
+                    margin-top: 0.5em;
+                    width: 100%;
                     cursor: pointer;
-                    transform: rotate(-35deg);
+                    max-width: 300px;
                 }
             }
             & > li:nth-child(2) {
-                flex: 0 1 70%;
+                flex: 0 1 52%;
             }
             & > li:nth-child(3) {
                 box-shadow: ${({ isUserLoggedIn }) => isUserLoggedIn && 'box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;'}
@@ -126,16 +127,27 @@ const Nav = styled.nav`
                 align-self: flex-start;
                 flex-flow: row wrap;
                 justify-content: space-evenly;
-                flex: 0 1 10%;
+                flex: 0 1 15%;
 
-                > div#profile-card {
+                & > #auth-container {
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-evenly;
+                    flex: 0 1 100%;
+                    & > * {
+                        flex: 0 1 35%;
+                    }
+                }
+                & > div#profile-card {
                     display: flex;
                     flex-flow: row wrap;
                     align-items: self-start;
-                    justify-content: center;
-                    & img{
-                        margin-top: 1em;
+                    justify-content: space-evenly;
+                    & img {
+                        flex: 0 1 45%;
                         width: 2.5em;
+                        min-width: 100px;
+                        max-width: 100px;
                         border-radius: 10px;
                         cursor: pointer;
                         transition: transform .3s;
@@ -146,20 +158,39 @@ const Nav = styled.nav`
                             transform: scale(1.1);
                         }
                     }
-                    & p {
-                        text-align: center;
+                    & > #logout-container {
                         flex: 0 1 100%;
-                        margin: 2em auto;
-                        font-size: 0.8em;
-                        color: red;
-                        cursor: pointer;
+                        display: flex;
+                        flex-flow: row wrap;
+                        justify-content: center;
+                        align-items: center;
+                        & >  button {
+                            min-width: 80px;
+                            max-width: 80px;
+                            margin: 1em auto;
+                            padding: 0.3em 2.8em;
+                            max-width: 200px;
+                            text-align: center;
+                            font-size: 0.6em;
+                            color: white;
+                            cursor: pointer;
+                        }
                     }
                 }
             }
         }
         @media (min-width: 1024px) {
             & > li:nth-child(3) {
-                flex: 0 1 10%;
+                & > * {
+                    flex: 0 1 20%;
+                }
+
+                & > div#profile-card {
+                    flex: 0 1 100%;
+                    & > * {
+                        flex: 0 1 35%;
+                    }
+                }
             }
         }
     }
