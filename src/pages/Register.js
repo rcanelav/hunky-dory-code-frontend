@@ -210,7 +210,6 @@ const StyledFieldWrapper = styled.div`
 `;
 
 const StyledWrapper = styled.div`
-    background-color: rgba(255,255,255,1);
     border-radius: 10px;
     box-shadow: 4px -4px 13px 1px rgba(0,0,0, 0.2),
                 -2px 3px 19px 1px rgba(0,0,0, 0.2);

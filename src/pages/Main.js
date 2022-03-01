@@ -79,7 +79,11 @@ const AsideWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    height: 80vh;
+    height: 30vh;
+
+    & > *:not(:first-child) {
+      margin-top: -0.85em;
+    }
   }
 `;
 
@@ -87,12 +91,14 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  min-width: 100%;
-  max-width: 100%;
+  max-width: 1620px;
   margin: 0 auto;
   position: relative;
-  background-color: rgba(0,163,152, 1);
-`;
+  background-image: url("../assets/background/bg3.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  `;
 const GridWrapper = styled.div`
   margin-top: 1.15em;
   flex: 0 1 100%;

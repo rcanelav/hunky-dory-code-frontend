@@ -66,11 +66,9 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  min-width: 100%;
-  max-width: 100%;
+  max-width: 1620px;
   margin: 0 auto;
   position: relative;
-  background-color: rgba(0,163,152, 1);
 `;
 const GridWrapper = styled.div`
   margin-top: 1.15em;

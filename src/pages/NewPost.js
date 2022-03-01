@@ -153,8 +153,7 @@ const ContentWrapper = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   flex-flow: wrap;
-  min-width: 100%;
-  max-width: 100%;
+  max-width: 1620px;
   margin: 0 auto;
 `;
 

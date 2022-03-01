@@ -105,7 +105,11 @@ const AsideWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    height: 80vh;
+    height: 30vh;
+
+    & > *:not(:first-child) {
+      margin-top: -0.85em;
+    }
   }
 `;
 
@@ -114,8 +118,7 @@ const ContentWrapper = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   flex-flow: wrap;
-  min-width: 100%;
-  max-width: 100%;
+  max-width: 1620px;
   margin: 0 auto;
 `;
 const GridWrapper = styled.div`
@@ -137,10 +140,10 @@ const GridWrapper = styled.div`
     justify-content: center;
     border: 2px solid black;
     padding: 0.5em;
+    margin-bottom: 0.5em;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 1);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    margin-bottom: 1em;
     p {
       font-style: italic;
       font-size: 1em;

@@ -327,7 +327,11 @@ const AsideWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    height: 80vh;
+    height: 30vh;
+
+    & > *:not(:first-child) {
+      margin-top: -0.85em;
+    }
   }
 `;
 
@@ -336,8 +340,7 @@ const ContentWrapper = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   flex-flow: wrap;
-  min-width: 100%;
-  max-width: 100%;
+  max-width: 1620px;
   margin: 0 auto;
   > form {
     width: 92%;
@@ -360,6 +363,7 @@ const ProfileWrapper = styled.div`
   justify-content: center;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   & > * {
     flex: 0 1 100%;
