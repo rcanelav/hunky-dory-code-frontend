@@ -399,6 +399,7 @@ const ProfileWrapper = styled.div`
       font-weight: bold;
       background-color: rgba(255, 204, 3, 1);
       text-align: center;
+      color: rgba(21, 101, 192, 1);
 
       &:hover {
           background-color: rgba(255, 204, 3, 0.8);
