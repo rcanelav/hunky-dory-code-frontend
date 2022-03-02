@@ -472,7 +472,7 @@ const ProfileWrapper = styled.div`
 
   @media (min-width: 768px) {
     flex: 0 1 56%;
-    margin: 1.5em;
+    margin: 1.5em 1em;
     & > * {
       flex: 0 1 88%;
     }
@@ -497,6 +497,8 @@ const ProfileWrapper = styled.div`
   }
 
   @media (min-width: 1024px) {
+    flex: 0 1 57%;
+    margin: 1.5em 2em;
     & div#name-container {
         margin-top: 1em;
     }
