@@ -10,6 +10,8 @@ import { useAuthorization } from '../hooks/useAuthorization';
 import { AsidePostsInfo } from '../components/AsidePostsInfo/AsidePostsInfo';
 import UseAnimations from 'react-useanimations';
 import alertOctagon from 'react-useanimations/lib/alertOctagon';
+import { getPostById } from '../services/posts/getPostById';
+import { setPostView } from '../services/posts/setPostView';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostDetails = () => {
@@ -23,10 +25,12 @@ export const PostDetails = () => {
   useEffect(() => {
     async function getPostData() {
         try{
-            const post = await axios.get(`${REACT_APP_API_URL}/api/v1/posts/${id}`);
-            setPostInfo(post?.data);
+            const [ postData ] = await Promise.all([
+              getPostById(id),
+              setPostView(id),
+            ]);
+            setPostInfo(postData);
             setIsLoading(false);
-            await axios.put(`${REACT_APP_API_URL}/api/v1/posts/${id}/view`);
         }catch( error ){
             console.log(error);
         }
@@ -52,6 +56,7 @@ export const PostDetails = () => {
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
   if( isLoading ) return <div>Loading</div>;
+
   return (
     <>
       <ContentWrapper className='animate__animated animate__fadeIn'>
@@ -65,7 +70,7 @@ export const PostDetails = () => {
           </AsidePostsInfo>
         </AsideWrapper>
         <GridWrapper>
-          <PostInfo post={postInfo} />
+          <PostInfo key={ postInfo?.postData?.id } post={postInfo} />
           {
             postInfo?.technology.id === userProfile?.userData?.technologies
             ?
@@ -79,7 +84,7 @@ export const PostDetails = () => {
                 <p>Debes ser experto en esta tecnología para responder a esa pregunta.</p>
             </div>
           }
-          <PostAnswers key={postedAnswer} post={postInfo} />
+          <PostAnswers key={postedAnswer + new Date()} post={postInfo} />
         </GridWrapper>
         <AsideWrapper>
           <AsidePostsInfo url={mostAnsweredPosts}>
@@ -173,6 +178,9 @@ const GridWrapper = styled.div`
     }
     & > div#disallowed-reply {
       flex: 0 1 90%;
+    }
+    & >:last-child {
+      flex: 0 1 92%;
     }
   }
 `;
