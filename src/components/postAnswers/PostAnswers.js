@@ -55,10 +55,16 @@ const StyledAnswerCard = styled.div`
     flex: 0 1 100%;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     margin: 0 auto 0.5em auto;
     border-radius: 10px;
     border: 1px solid #e6e6e6;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     background-color: rgba(255, 255, 255, 1);
     padding: 1.5em;
+
+    & >:nth-child(2) {
+        justify-self: center;
+        flex: 0 1 94%;
+    }
 `;
