@@ -143,12 +143,13 @@ const GridWrapper = styled.div`
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
+    border: 3px solid rgba(0, 0, 0, 0.5);
     padding: 0.5em;
     margin-bottom: 0.5em;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 1);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    text-align: center;
     p {
       font-style: italic;
       font-size: 1em;
@@ -177,7 +178,7 @@ const GridWrapper = styled.div`
       flex: 0 1 88%;
     }
     & > div#disallowed-reply {
-      flex: 0 1 90%;
+      flex: 0 1 89.85%;
     }
     & >:last-child {
       flex: 0 1 92%;

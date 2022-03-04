@@ -4,12 +4,14 @@ import { getUserRating } from '../../services/users/getUserRating';
 import hunky from '../../assets/hdc-hunky.png';
 import moment from 'moment';
 import { PostInfoInteractionBar } from './PostInfoInteractionBar';
+import { useNavigate } from 'react-router-dom';
 export const PostInfo = ({ post }) => {
   const { postData, technology, author, likes } = post;
   const userName = author?.name + ' ' + author?.lastname.charAt(0) + '.';
   const [ userRating, setUserRating] = useState();
   const postDate = moment(postData?.createdAt).format('LL');
   const [ views, setViews ] = useState(postData.views);
+  const navigate = useNavigate();
   useEffect(() => {
     async function getData() {
       try {
@@ -28,7 +30,7 @@ export const PostInfo = ({ post }) => {
     <StyledWrapper>
       <StyledPostHeader>
         <div>
-          <img src={author.image} alt={author.name} />
+          <img src={author.image} alt={author.name} onClick={ () => navigate(`/users/${author.id}/profile`)} />
             <p>{userName}</p>
           <div>
             <p>{userRating} </p> {<img id='hunky' src={hunky} alt='HUNKY'/>}
@@ -109,6 +111,13 @@ const StyledPostHeader = styled.div`
       max-width: 5em;
       border-radius: 10px;
       margin: 1em auto 0.2em auto;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
+      &:hover {
+        transform: scale(1.03);
+      }
     }
 
     & > p  {
@@ -128,7 +137,7 @@ const StyledPostHeader = styled.div`
 
     & > div > p {
       margin-top: 0.2em;
-      font-size: 1.5em;
+      font-size: 1.3em;
     }
 
     & > div > img {
