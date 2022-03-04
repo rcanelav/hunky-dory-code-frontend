@@ -60,6 +60,9 @@ const StyledLikeButton = styled.div`
     & > button > img {
         margin-left: 1em;
     }
+    & > button {
+        font-size: 0.65em;
+    }
 `;
 const StyledLikes = styled.div`
   flex: 0 1 100%;
@@ -72,7 +75,7 @@ const StyledLikes = styled.div`
   padding: 0 1em;
   &  img {
     margin-left: 0.3em;
-    width: 20px;
+    width: 15px;
   }
   & > * {
       flex: 0 1 45%;
@@ -84,7 +87,7 @@ const StyledLikes = styled.div`
     & > img {
         position: absolute;
         top: -0.3em;
-        width: 20px;
+        width: 15px;
     }
 }
 `;
