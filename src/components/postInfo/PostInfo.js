@@ -55,7 +55,7 @@ export const PostInfo = ({ post }) => {
 
 const StyledContentWrapper = styled.div`
   margin: 1.5em auto;
-  flex: 0 1 100%;
+  flex: 0 1 94%;
   min-width: 0px;
   display: flex;
   flex-flow: row wrap;
