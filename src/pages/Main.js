@@ -12,7 +12,7 @@ export const Main = () => {
   const search = query.get('q');
   const searchBy = query.get('searchBy') || 'title';
   const technology = query.get('technology') || '';
-  const orderBy = query.get('orderBy') || '';
+  const orderBy = query.get('order') || '';
   const from = query.get('from') || '';
   const to = query.get('to') || '';
   const numAnswers = query.get('numAnswers') || '';
@@ -29,10 +29,11 @@ export const Main = () => {
     numAnswers,
     direction,
   }
+
   const mostRecentPosts = 'search?searchBy=date&direction=desc&order=date&limit=5';
   const mostLikedPosts = 'search?searchBy=titles&direction=desc&order=likes&limit=5';
-  const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
-  const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
+  const mostAnsweredPosts = 'search?searchBy=numAnswers&numAnswers=0&order=numAnswers';
+  const mostViewedPosts = 'search?searchBy=content&order=views';
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
 
    return (

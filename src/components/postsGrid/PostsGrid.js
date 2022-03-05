@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 import { PostTitle } from '../postslist/PostTitle';
+import { Loading } from '../loading/Loading';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostsGrid = ({searchData}) => {
@@ -15,7 +16,7 @@ export const PostsGrid = ({searchData}) => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`${REACT_APP_API_URL}/api/v1/search?q=${search || ''}&page=${page}&searchBy=${searchBy || 'title'}${technology ? '&technology='+technology : ''}${ orderBy ? '&orderBy='+orderBy : ''}${from ? '&from='+from : ''}${to ? '&to='+to : ''}${numAnswers ? '&numAnswers='+numAnswers : ''}${ direction ? '&direction='+direction : ''}&limit=${limit}`);
+      const response = await axios.get(`${REACT_APP_API_URL}/api/v1/search?q=${search || ''}&page=${page}&searchBy=${searchBy || 'title'}${technology ? '&technology='+technology : ''}${ orderBy ? '&order='+orderBy : ''}${from ? '&from='+from : ''}${to ? '&to='+to : ''}${numAnswers ? '&numAnswers='+numAnswers : ''}${ direction ? '&direction='+direction : ''}&limit=${limit}`);
 
       setData( response.data );
       setPosts( prev => (
@@ -27,7 +28,7 @@ export const PostsGrid = ({searchData}) => {
     fetchData();
      
   }, [ search, page, searchBy, technology, orderBy, from, to, numAnswers, direction ]);
-  if( isLoading ) return <div> is loading </div>
+  if( isLoading ) return <Loading />
 
   return (
     <StyledInfiniteScroll
@@ -70,4 +71,5 @@ const StyledPostsWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  padding-bottom: 100px;
 `;

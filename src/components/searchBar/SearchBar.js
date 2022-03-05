@@ -39,7 +39,7 @@ export const SearchBar = () => {
                             ? '&searchBy='+searchBy+'&technology='+technology:''}`+
                         `${ searchBy === 'date' && initialDate.length > 0 && finalDate.length > 0  && initialDate < finalDate ? '&searchBy='+searchBy+'&from='+initialDate+'&to='+finalDate:''}`+
                         `${ searchBy === 'numAnswers' && numAnswers && typeof parseInt(numAnswers) === 'number' ? '&searchBy='+searchBy+'&numAnswers='+numAnswers:''}`+
-                        `${ orderBy && orderBy !== 'init' ? '&orderBy='+orderBy : ''}`+
+                        `${ orderBy && orderBy !== 'init' ? '&order='+orderBy : ''}`+
                         `${ direction && direction !== 'init' ? '&direction='+direction : ''}`
         );
     }
@@ -84,6 +84,7 @@ export const SearchBar = () => {
                         value={technology}
                         label="Technology"
                         onChange={ (e) =>  setTechnology( e.target.value ) }
+                        size='small'
                     >
                         <MenuItem disabled value="">
                             <em>Technologies</em>
@@ -135,7 +136,7 @@ export const SearchBar = () => {
                     searchBy === 'numAnswers' &&
                     <NumAnswersContainer>
                         <p>Insert a number between 0 and: </p>
-                        <TextField id="outlined-basic" label="Max answers quantity"
+                        <TextField id="outlined-basic" label="Max answers quantity" size='small'
                         value={ numAnswers }variant="outlined" onChange={ (e) => setNumAnswers(e.target.value) } />
                     </NumAnswersContainer>
                 }
