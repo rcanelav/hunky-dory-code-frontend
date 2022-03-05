@@ -23,7 +23,7 @@ export const AppRouter = () => {
             <Route path="/" element={ <LandingPage />} />
             <Route path="/search" element={<Main />} />
             <Route path="/contact" element={<LandingPage />} />
-            <Route path="/newPost" element={ isUserLoggedIn ? <NewPost /> : <Login />} />
+            <Route path="/newPost" element={ isUserLoggedIn ? <NewPost /> : <Navigate to='/login' />} />
             <Route path="/profile" element={ isUserLoggedIn ? <SelfProfile /> : <Navigate to='/login' />} />
             <Route path="/login" element={  isUserLoggedIn ? <Navigate to='/' /> :  <Login /> } />
             <Route path="/register" element={ <Register /> } />
@@ -31,6 +31,7 @@ export const AppRouter = () => {
             <Route path="/users/:id/posts" element={ <UserPosts /> } />
             <Route path="/users/:id/answers" element={ <UserAnswers /> } />
             <Route path="/users/:id/profile" element={ <UserProfile /> } />
+            <Route path="*" element={ <Main /> } />
         </Routes>
     )
 };
