@@ -12,6 +12,7 @@ import UseAnimations from 'react-useanimations';
 import alertOctagon from 'react-useanimations/lib/alertOctagon';
 import { getPostById } from '../services/posts/getPostById';
 import { setPostView } from '../services/posts/setPostView';
+import { Loading } from '../components/loading/Loading';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostDetails = () => {
@@ -55,7 +56,7 @@ export const PostDetails = () => {
   const mostLikedPosts = 'search?searchBy=titles&direction=desc&order=likes&limit=5';
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
-  if( isLoading ) return <div>Loading</div>;
+  if( isLoading ) return <Loading />;
 
   return (
     <>

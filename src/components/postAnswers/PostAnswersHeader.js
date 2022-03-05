@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import hunky from '../../assets/hdc-hunky.png';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from '../loading/Loading';
 const { REACT_APP_API_URL } = process.env;
 export const PostAnswersHeader = ({ date, author }) => {
     const [ authorData, setAuthorData ] = useState('');
@@ -19,7 +20,7 @@ export const PostAnswersHeader = ({ date, author }) => {
         getData();
         setIsLoading(false);
     }, [author, authorData.id ]);
-    if(isLoading) return <div>IsLoading</div>
+    if(isLoading) return <Loading />
     return (
         <StyledHeaderWrapper>
             <StyledProfileCard>

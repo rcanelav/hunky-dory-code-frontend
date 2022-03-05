@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 import { PostInfoInteractionBar } from '../postInfo/PostInfoInteractionBar';
 import { PostAnswersHeader } from './PostAnswersHeader';
+import {Loading} from '../loading/Loading';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostAnswers = ({post}) => {
@@ -23,7 +24,7 @@ export const PostAnswers = ({post}) => {
         }
         getData();
     }, [post.postData.id, page]);
-    if( isLoading ) return <div> is loading </div>
+    if( isLoading ) return <Loading />
 
     return (
         <StyledInfiniteScroll
