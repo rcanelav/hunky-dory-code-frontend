@@ -18,7 +18,7 @@ export const AsidePostsInfo = ({children, url }) => {
 
   return (
       <Wrapper>
-            <h1>{children}</h1>
+            <h1 onClick={ () => navigate(`/${url}`)}>{children}</h1>
             {
                 posts.map(post => (
                     <div key={post.id} onClick={ () => navigate(`/posts/${post.id}`)}>
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
     flex: 0 1 100%;
     display: flex;
     flex-flow: row wrap;
-    max-height: 16.1em;
+    max-height: 22.35em;
     word-break: break-all;
     overflow-y: hidden;
     & > * {
@@ -56,8 +56,27 @@ const Wrapper = styled.div`
     }
 
     & > h1 {
-        margin: 0.5em 0 0 1em;
+        position: relative;
+        margin: 0.5em 0 0.3em 1em;
         font-size: 0.8em;
+        cursor: pointer;
+        max-width: max-content;
+
+        &:after {
+            content: '';
+            position: absolute;
+            border-top: 2.5px solid rgba( 0, 0 ,0 , 0.1);
+            height: 0px;
+            width: 0;
+            left: 0;
+            bottom: -2px;
+            transition: 0.3s;
+            animation: 2s infinite alternate ease-in-out breathing-colour;
+        }
+
+        &:hover:after {
+            width: 100%;
+        }
     }
 
     & > div {
@@ -66,8 +85,8 @@ const Wrapper = styled.div`
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         border-radius: 10px;
         margin: 0.3em auto;
-        max-height: 2.62em;
-        min-height: 2.62em;
+        max-height: 4.1em;
+        min-height: 4.1em;
         cursor: pointer;
         position: relative;
 
@@ -154,5 +173,16 @@ const Wrapper = styled.div`
         bottom: 0.30em;
         right: 1em;
         font-size: 0.55em;
+    }
+
+    @media (min-width: 1024px) {
+        max-height: 16.72em;
+        & > div {
+            min-height: 2.62em;
+            max-height: 2.62em;
+        }
+        & > h1 {
+            font-size: 0.9em;
+        }
     }
 `;
