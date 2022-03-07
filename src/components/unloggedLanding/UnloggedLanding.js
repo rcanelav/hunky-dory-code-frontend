@@ -1,18 +1,18 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react'
-import { FiLogOut } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { BurgerIcon } from '../burgerIcon/BurgerIcon';
 import { Menu } from '../menu/Menu';
 import { Search } from './Search';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo-wb.png';
+import knock from '../../assets/knock2.png';
 export const UnloggedLanding = () => {
     const navigate = useNavigate();
     const [ open, setOpen ] = useState( false );
     const [ search, setSearch ] = useState( '' );
-    const { logout, isUserLoggedIn } = useAuthorization();
+    const { isUserLoggedIn, userProfile, logout } = useAuthorization();
     
     return (
         <>
@@ -24,7 +24,7 @@ export const UnloggedLanding = () => {
                 </div>
                 <div id='burger'>
                     {
-                        !isUserLoggedIn &&
+                        !isUserLoggedIn ?
                         <>
                             <StyledLogin variant="contained" 
                                 onClick={ () => navigate('/register')}>
@@ -35,22 +35,24 @@ export const UnloggedLanding = () => {
                                 Sign In
                             </StyledRegister>
                         </>
+                        :
+                        <div id='profile-logout'>
+                            <img src={userProfile?.userData?.image} onClick={ () => navigate('/profile')} alt='hunky dory user'  />
+                            <div id='logout-container'>
+                                <Button color='error' variant='contained' onClick={ () => logout() }>Salir</Button>
+                            </div>
+                        </div>
+
                     }
                     <BurgerIcon open={ open } setOpen={ setOpen } />
                 </div>
-                {
-                        isUserLoggedIn && <StyledLogout onClick={ logout }/>
-                }
-                
-
             </StyledHeader>
                 <BodyWrapper className="animate__animated animate__fadeIn">
                     <Search search={search} setSearch={setSearch} />
                 </BodyWrapper>
-            <StyledText className="animate__animated animate__fadeIn">
-                <p> Don't let the code </p>
-                <p> knock you out </p>
-            </StyledText>
+            <Slogan className="animate__animated animate__fadeIn">
+                <img src={ knock } alt="Hunky Dory Slogan" />
+            </Slogan>
 
             {
                 !isUserLoggedIn && (
@@ -67,32 +69,31 @@ export const UnloggedLanding = () => {
         </>
     )
 }
-const StyledText = styled.div`
-    max-width: 80%;
+const Slogan = styled.div`
     margin: 0 auto;
+    width: 90%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    & > p {
-        width: max-content;
-        font-size: 1.5rem;
-        font-weight: bold;
-        background: rgba(255, 204, 3, 1);
-        font-size: 2.2em;
+    & > img {
+        width: 95%;
+        max-width: 700px;
     }
-    & > p:first-child {
-        margin-left: -1em;
+
+    @media (min-width: 600px) {
+        width: 80%;
+        & > img {
+            width: 50%;
+        }
     }
-    & > p:not(:first-child) {
-        margin: 0.4em 0 0 2em;
+
+    @media (min-width: 768px) {
+        width: 70%;
+        & > img {
+            width: 70%;
+
+        }
     }
-`;
-const StyledLogout = styled(FiLogOut)`
-    font-size: 2em;
-    padding: 0;
-    cursor: pointer;
-    color: red;
 `;
 
 const BodyWrapper = styled.div`
@@ -106,7 +107,6 @@ const BodyWrapper = styled.div`
 const StyledHeader = styled.div`
     min-width: 100%;
     max-width: 100%;
-    background-color: rgba(255, 204, 3, 1);
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -115,10 +115,11 @@ const StyledHeader = styled.div`
         flex: 0 1 33%;
     }
     & > .logo {
-        margin: 0 auto 0 1.5em;
-        flex: 0 1 30%;
+        margin: 2em auto 0 1em;
+        flex: 0 1 40%;
         & > img {
             width: 80%;
+            max-width: 170px;
         }
     }
     & > #burger {
@@ -128,6 +129,48 @@ const StyledHeader = styled.div`
         & > button {
             display: none;
         }
+
+        & > #profile-logout {
+            display: none;
+            margin-top: 5em;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: center;
+            & img {
+                flex: 0 1 100%;
+                width: 2.5em;
+                min-width: 50px;
+                max-width: 50px;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: transform .3s;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+            & > #logout-container {
+                margin-top: 0.5em;
+                flex: 0 1 100%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                align-items: center;
+                &  button {
+                    padding: 0.3em 0.5em;
+                    font-size: 1.8em;
+                }
+            }
+        }                
+
+    }
+
+    @media (min-width: 648px) {
+        & > .logo {
+            margin: 1em 2.5em 0 2em;
+        }
     }
 
     @media (min-width: 768px) {
@@ -136,9 +179,9 @@ const StyledHeader = styled.div`
             flex: 0 1 33%;
         }
         & > .logo {
-            margin: 0 -6em 0 0;
+            margin: 1em -8em 0 0;
             & > img {
-                width: 30%;
+                width: 40%;
             }
         }
         & > #burger {
@@ -155,9 +198,15 @@ const StyledHeader = styled.div`
             & > * {
                 flex: 0 1 35%;
             }
+            & > #profile-logout {
+                display: flex;
+            }
         }
     }
     @media (min-width: 1024px) {
+        & > .logo {
+            margin: 1em -10em 0 0;
+        }
         & > #burger {
             font-size: 0.4em;
             & > button {
@@ -168,7 +217,7 @@ const StyledHeader = styled.div`
 `;
 
 const StyledAuthContainer = styled.div`
-    margin: 0 auto 10em auto;
+    margin: 10em auto 5em auto;
     min-width: 100%;
     position: absolute;
     bottom: 0;
@@ -187,11 +236,10 @@ const StyledAuthContainer = styled.div`
         text-decoration: none;
     }
 
-    @media (min-width: 678px) {
+    @media (min-width: 768px) {
         font-size: 0.5em;
         display: none;
-       
-
+    }
 `;
 const StyledLogin = styled(Button)`
     && {
