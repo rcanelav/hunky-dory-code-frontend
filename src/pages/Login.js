@@ -113,6 +113,7 @@ export const Login = () => {
 
 const StyledWrapper = styled.div`
     border-radius: 10px;
+    background-color: rgba(255,255,255,0.85);
     box-shadow: 4px -4px 13px 1px rgba(0,0,0, 0.2),
                 -2px 3px 19px 1px rgba(0,0,0, 0.2);
     border: 1px solid rgba(0,0,0, 0.2);
@@ -136,7 +137,6 @@ const StyledWrapper = styled.div`
     @media (min-width: 768px) {
         min-width: 30%;
         max-width: 30%;
-        background-color: rgba(255,255,255,0.85);
         padding: 3em 3em;
         margin: 5% auto 0 auto;
         & form {
