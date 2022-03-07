@@ -8,9 +8,10 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import moment from 'moment';
 import UseAnimations from 'react-useanimations';
 import  maximizeMinimize2  from 'react-useanimations/lib/maximizeMinimize2';
+import { BurgerIcon } from '../burgerIcon/BurgerIcon';
 const { REACT_APP_API_URL } = process.env;
 
-export const SearchBar = () => {
+export const SearchBar = ({openMenu, setOpenMenu}) => {
     const [ technologyData, setTechnologyData ] = useState();
     const [ searchData, setSearchData ] = useState('');
     const [ technology, setTechnology ] = useState('');
@@ -58,6 +59,7 @@ export const SearchBar = () => {
             <form onSubmit={ handleSubmit } onKeyDown={ e => e.key === 'Enter' && handleSubmit()} >
                 <SearchContainer>
                     <p>Quick Search</p>
+                    <BurgerIcon open={ openMenu } setOpen={ setOpenMenu } />
                     <TextField id="outlined-basic" size='small' label="Search" variant="outlined"
                     onKeyDown={ e => e.key === 'Enter' && handleSubmit() }
                     value={ searchData }
@@ -322,6 +324,7 @@ const SearchByContainer = styled.div`
 
 `;
 const SearchContainer = styled.div`
+    position: relative;
     flex: 0 1 100%;
     display: flex;
     flex-flow: row wrap;
@@ -332,12 +335,17 @@ const SearchContainer = styled.div`
         margin-bottom: 0.5em;
         text-align: left;
     }
+    & > :nth-child(2) {
+        top: -15px;
+        right: 0;
+    }
     & > .MuiFormControl-root {
         flex: 0 1 100%;
     }
 
     @media (min-width: 768px) {
-        & p {
+        & > :nth-child(2) {
+            display: none;
         }
         & > div.MuiFormControl-root {
             flex: 0 1 100%;

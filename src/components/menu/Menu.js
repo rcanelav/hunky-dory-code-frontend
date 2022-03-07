@@ -7,7 +7,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { TextField } from '@mui/material';
 
 export const Menu = ({ open, setOpen, search, setSearch }) => {
-    const { isUserLoggedIn, logout } = useAuthorization();
+    const { isUserLoggedIn, logout, userProfile } = useAuthorization();
     const navigate = useNavigate();
     const handleLogout = () => {
         setOpen(!open); 
@@ -15,6 +15,7 @@ export const Menu = ({ open, setOpen, search, setSearch }) => {
     }
     const handleSubmit = async(e) => {
         e.preventDefault();
+        setOpen(!open);
         navigate('/search?q=' + search);
     }
 
@@ -30,22 +31,41 @@ export const Menu = ({ open, setOpen, search, setSearch }) => {
         onKeyDown={ e => e.key === 'Enter' && handleSubmit(e) }
         />
         <Link to="/" onClick={ () => setOpen(!open) } >
-            
+
         </Link>
-        {   isUserLoggedIn &&
-            <Link to="/profile" onClick={ () => { setOpen(!open) } } >
-                Profile
-            </Link>
-        }
+
         <Link to="/newPost" onClick={ () => setOpen(!open) } >
-            New Post
+            🚀New Post
         </Link>
+
+        {   isUserLoggedIn ?
+            <Link to="/profile" onClick={ () => { setOpen(!open) } } >
+                ⚡Profile
+            </Link>
+            :
+            <>
+                <Link to="/login" onClick={ () => { setOpen(!open) } } >
+                    Login
+                </Link>
+                <Link to="/register" onClick={ () => { setOpen(!open) } } >
+                    Register
+                </Link>
+            </>
+        }
 
         {
             isUserLoggedIn && 
-            <Link to="/" onClick={ handleLogout } >
-              salir  <StyledLogout />
-            </Link>
+            <>
+                <Link to={`/users/${userProfile?.userData?.id}/posts`} onClick={ () => { setOpen(!open) } } >
+                    📢My Posts
+                </Link>
+                <Link to={`/users/${userProfile?.userData?.id}/posts`} onClick={ () => { setOpen(!open) } } >
+                    📣My Answers
+                </Link>
+                <Link to="/" onClick={ handleLogout } >
+                    salir  <StyledLogout />
+                </Link>
+            </>
         }
     </StyledMenu>
     )
@@ -57,12 +77,11 @@ Menu.propTypes = {
 };
 
 const StyledTextfied = styled(TextField)`
-    width: 60%;
-    align-self: center;
-
+    width: 40%;
+    align-self: left;
     &&  {
         & .MuiInput-input {
-            max-width: 92%;
+            max-width: 42%;
             font-size: 1.25em;
         }
         & #standard-basic-label {
@@ -71,7 +90,6 @@ const StyledTextfied = styled(TextField)`
         }
         & .MuiInput-underline {
             color: black;
-            
         }
     }
     `;
@@ -86,13 +104,12 @@ const StyledLogout = styled(FiLogOut)`
 const StyledMenu = styled.nav`
   display: flex;
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.95);
-  height: 100%;
+  height: 300%;
   text-align: left;
-  position: absolute;
   top: 0px;
   left: 0;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
@@ -102,6 +119,11 @@ const StyledMenu = styled.nav`
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
   transition: all 0.3s ease-in-out;
   border: 2px solid rgba(0,0,0,0.2);
+
+  & >:first-child {
+      margin-left: 20%;
+  }
+
   a {
     width: max-content;
     font-size: 1.5em;
@@ -123,5 +145,9 @@ const StyledMenu = styled.nav`
     width: 30%;
     height: auto;
     font-size: 0.5em;
+  }
+
+    @media (min-width: 780px) {
+        display: none;
     }
 `;

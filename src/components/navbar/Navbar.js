@@ -1,13 +1,16 @@
 import { Button } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { SearchBar } from '../searchBar/SearchBar';
 import hunky from '../../assets/logo-wb.png';
+import { Menu } from '../menu/Menu';
 
 export const Navbar = ({ search, setSearch }) => {
     const { isUserLoggedIn, userProfile, logout } = useAuthorization();
+    const [ open, setOpen ] = useState( false );
+    const [ textSearch, setTextSearch ] = useState( '' );
     const navigate = useNavigate();
 
     return (
@@ -18,7 +21,7 @@ export const Navbar = ({ search, setSearch }) => {
                         <img src={hunky} alt="hunky"  onClick={ () => navigate('/search?q=') } />
                     </li>
                     <li>
-                        <SearchBar />
+                        <SearchBar openMenu={open} setOpenMenu={setOpen} />
                     </li>
                     <li>
                         {
@@ -44,6 +47,7 @@ export const Navbar = ({ search, setSearch }) => {
                     </li>
                 </ul>
             </Nav>
+            <Menu open={open} setOpen={setOpen} search={textSearch} setSearch={setTextSearch} />
         </>
     )
 }
