@@ -32,11 +32,13 @@ export const Menu = ({ open, setOpen, search, setSearch }) => {
         <Link to="/" onClick={ () => setOpen(!open) } >
             
         </Link>
-        <Link to="/" onClick={ () => setOpen(!open) } >
-            INFO
-        </Link>
-        <Link to="/" onClick={ () => setOpen(!open) } >
-            INFO
+        {   isUserLoggedIn &&
+            <Link to="/profile" onClick={ () => { setOpen(!open) } } >
+                Profile
+            </Link>
+        }
+        <Link to="/newPost" onClick={ () => setOpen(!open) } >
+            New Post
         </Link>
 
         {
@@ -88,7 +90,7 @@ const StyledMenu = styled.nav`
   width: 100%;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.95);
-  height: 80%;
+  height: 100%;
   text-align: left;
   position: absolute;
   top: 0px;
@@ -96,7 +98,10 @@ const StyledMenu = styled.nav`
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
   transition: transform 0.4s ease-in-out;
   padding-top: 10em;
-
+  border-radius: 0 45% 0 0;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  transition: all 0.3s ease-in-out;
+  border: 2px solid rgba(0,0,0,0.2);
   a {
     width: max-content;
     font-size: 1.5em;
@@ -108,8 +113,6 @@ const StyledMenu = styled.nav`
     color: black;
     text-decoration: none;
     transition: color 0.3s linear;
-
-    
 
     &:hover {
       color: rgba(255, 204, 3, 1);
