@@ -1,5 +1,4 @@
 import React from 'react'
-import { LandingPage } from '../pages/LandingPage';
 import {
     Routes,
     Route,
@@ -15,14 +14,14 @@ import { SelfProfile } from '../pages/SelfProfile';
 import { UserPosts } from '../pages/UserPosts';
 import { UserAnswers } from '../pages/UserAnswers';
 import { UserProfile } from '../pages/UserProfile';
+import { UnloggedLanding } from '../components/unloggedLanding/UnloggedLanding';
 
 export const AppRouter = () => {
     const { isUserLoggedIn } = useAuthorization();
     return (
         <Routes>
-            <Route path="/" element={ <LandingPage />} />
+            <Route path="/" element={ <UnloggedLanding />} />
             <Route path="/search" element={<Main />} />
-            <Route path="/contact" element={<LandingPage />} />
             <Route path="/newPost" element={ isUserLoggedIn ? <NewPost /> : <Navigate to='/login' />} />
             <Route path="/profile" element={ isUserLoggedIn ? <SelfProfile /> : <Navigate to='/login' />} />
             <Route path="/login" element={  isUserLoggedIn ? <Navigate to='/' /> :  <Login /> } />
