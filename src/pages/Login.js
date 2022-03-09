@@ -117,48 +117,46 @@ const StyledWrapper = styled.div`
     box-shadow: 4px -4px 13px 1px rgba(0,0,0, 0.2),
                 -2px 3px 19px 1px rgba(0,0,0, 0.2);
     border: 1px solid rgba(0,0,0, 0.2);
-    padding: 1em;
+    padding: 2.5em 1em 1em 1em;
     display: flex;
-    min-width: 81%;
+    min-width: 70%;
     max-width: 81%;
     margin: 10vh auto;
     flex-flow: column wrap;
     & form {
-        margin-top: 15vh;
+        margin-top: 5vh;
         text-align: center;
         & >span {
             display: block;
-            font-size: 1.5em;
+            font-size: 2em;
             margin: 2vh auto;
         }
     }
     transition: all 0.3s ease-in-out;
 
-    @media (min-width: 768px) {
-        min-width: 30%;
-        max-width: 30%;
-        padding: 3em 3em;
+    @media (min-width: 648px) {
+        min-width: 50%;
+        max-width: 50%;
+        padding: 1em;
         margin: 5% auto 0 auto;
         & form {
-            margin-top: 0vh;
+            padding: 1em;
             & span {
                 font-size: 1.1em;
             }
         }
-        &:before {
-            background-image: url(${logo});
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            content: "";
-            display: block;
-            height: 80%;
-            left: 27%;
-            position: absolute;
-            top: 1%;
-            width: 50%;
-            z-index: -1;
-            overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+        min-width: 30%;
+        max-width: 30%;
+        padding: 1em;
+        margin: 5% auto 0 auto;
+        & form {
+            padding: 1em;
+            & span {
+                font-size: 1.1em;
+            }
         }
     }
 `;
