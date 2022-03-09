@@ -50,9 +50,6 @@ export const UnloggedLanding = () => {
                 <BodyWrapper className="animate__animated animate__fadeIn">
                     <Search search={search} setSearch={setSearch} />
                 </BodyWrapper>
-            <Slogan className="animate__animated animate__fadeIn">
-                <img src={ knock } alt="Hunky Dory Slogan" />
-            </Slogan>
 
             {
                 !isUserLoggedIn && (
@@ -69,32 +66,6 @@ export const UnloggedLanding = () => {
         </>
     )
 }
-const Slogan = styled.div`
-    margin: 0 auto;
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    & > img {
-        width: 95%;
-        max-width: 700px;
-    }
-
-    @media (min-width: 600px) {
-        width: 80%;
-        & > img {
-            width: 50%;
-        }
-    }
-
-    @media (min-width: 768px) {
-        width: 70%;
-        & > img {
-            width: 70%;
-
-        }
-    }
-`;
 
 const BodyWrapper = styled.div`
     margin: 19vh auto;
@@ -148,7 +119,7 @@ const StyledHeader = styled.div`
                 border: 1px solid rgba(0, 0, 0, 0.1);
 
                 &:hover {
-                    transform: scale(1.1);
+                    transform: scale(1.05);
                 }
             }
             & > #logout-container {
