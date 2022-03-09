@@ -368,7 +368,7 @@ const StyledSearchBarWrapper = styled.div`
     padding: 1em 1.5em;
     border-radius: 10px;
     border: 1px solid rgba(0,0,0, 0.2);
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.97);
  
     & > form {
         flex: 0 1 100%;

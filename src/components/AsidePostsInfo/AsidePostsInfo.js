@@ -41,7 +41,7 @@ export const AsidePostsInfo = ({children, url }) => {
 }
 
 const Wrapper = styled.div`
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.95);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 10px;
     margin: 1.5em 0.5em;
@@ -81,7 +81,7 @@ const Wrapper = styled.div`
 
     & > div {
         padding: 0.2em;
-        background-color: rgba(206, 206, 206, 0.4);
+        background-color: rgba(215, 215, 215, 0.6);
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         border-radius: 10px;
         margin: 0.3em auto;
@@ -99,7 +99,7 @@ const Wrapper = styled.div`
         }
 
         &:hover {
-            background-color: rgba(206, 206, 206, 0.8);
+            background-color: rgba(199, 199, 199, 0.65);
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.8) 0px 1px 3px -1px;
         }
         & > div#img-container {

@@ -61,7 +61,7 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
 };
 
 const StyledWrapper = styled.div`
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.95);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 2% 1% 1.5% 1%;
