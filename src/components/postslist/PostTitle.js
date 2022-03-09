@@ -22,6 +22,8 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
             }
         }
         getUserRating();
+
+        return () => setUserRating([]);
     }, [userId]);
     return (
         <StyledWrapper>
