@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import { useAuthorization } from '../hooks/useAuthorization';
-import logo from '../assets/logo2.png';
 
 export const Login = () => {
     const { login, signInWithFirebaseAuth } = useAuthorization();

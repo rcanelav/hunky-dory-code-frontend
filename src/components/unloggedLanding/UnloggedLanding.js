@@ -7,7 +7,6 @@ import { BurgerIcon } from '../burgerIcon/BurgerIcon';
 import { Menu } from '../menu/Menu';
 import { Search } from './Search';
 import logo from '../../assets/logo-wb.png';
-import knock from '../../assets/knock2.png';
 export const UnloggedLanding = () => {
     const navigate = useNavigate();
     const [ open, setOpen ] = useState( false );
