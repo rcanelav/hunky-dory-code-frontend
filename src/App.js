@@ -15,11 +15,17 @@ const Normalize = createGlobalStyle`
     padding: 0px;
   }
   body {
-    background-image: url("https://res.cloudinary.com/rayci/image/upload/v1646156854/bg1_syd8wt.jpg");
+    
+    background-image: url("https://res.cloudinary.com/rayci/image/upload/v1646775194/back-hdc-mobile_y6fh2l.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    transition: background-image 0.3s ease-in-out;
+
+    @media (min-width: 600px) {
+      background-image: url("https://res.cloudinary.com/rayci/image/upload/v1646774722/back-hdc_fh0dm2.png");
+    }
   }
 `;
 export default App;
