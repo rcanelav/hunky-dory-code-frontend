@@ -56,6 +56,7 @@ export const PostDetails = () => {
   const mostLikedPosts = 'search?searchBy=titles&direction=desc&order=likes&limit=5';
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
+  const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
   if( isLoading ) return <Loading />;
 
   return (
@@ -94,6 +95,12 @@ export const PostDetails = () => {
           <AsidePostsInfo url={mostViewedPosts}>
             Most viewed posts
           </AsidePostsInfo>
+          {
+            userProfile?.userData &&
+            <AsidePostsInfo url={myPosts}>
+              My Posts
+            </AsidePostsInfo>
+          }
         </AsideWrapper>
       </ContentWrapper>
     </>
@@ -104,6 +111,7 @@ const AsideWrapper = styled.div`
   display: none;
   position: sticky;
   top: 0;
+  max-height: 698px;
 
   @media (min-width: 768px) {
     flex: 0 1 20%;
@@ -111,11 +119,16 @@ const AsideWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    height: 30vh;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
 
     & > *:not(:first-child) {
       margin-top: -0.85em;
     }
+  }
+  @media (min-height: 900px) {
+    max-height: 874px;
   }
 `;
 

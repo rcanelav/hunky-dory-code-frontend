@@ -5,17 +5,18 @@ import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import axios from 'axios';
 import { useAuthorization } from '../hooks/useAuthorization';
-import logo from '../assets/logo2.png';
+import { useNavigate } from 'react-router-dom';
 const { REACT_APP_API_URL } = process.env;
 
 export const Register = () => {
     const { signInWithFirebaseAuth } = useAuthorization();
     const [ error, setError ] = useState('');
+    const navigate = useNavigate();
     const handleRegister = async( userData ) => {
         console.log( userData );
         try{
-            const response = await axios.post( `${REACT_APP_API_URL}/api/v1/users`, userData )
-            console.log(response.data)
+            await axios.post( `${REACT_APP_API_URL}/api/v1/users`, userData );
+            navigate('/login');
         } catch ( err ){
             const { errors } = err.response.data;
             setError(errors[0].msg);
@@ -29,23 +30,23 @@ export const Register = () => {
         return signInWithFirebaseAuth('facebook');
     }
     return (
-        <StyledWrapper>
+        <StyledWrapper className='animate__animated animate__fadeIn'>
             <Typography
                 textAlign={"center"}
                 variant="h4"
                 gutterBottom
                 component="h2"
                 >
-                Login
+                Register
             </Typography>
                 <Formik
                     initialValues = { {
-                        name: "asd",
-                        lastname: "asd",
-                        email: "asd@asd.com",
-                        password: "Rasdasd1",
-                        repeatPassword: "Rasdasd1",
-                        role: ""
+                        name: "newUser",
+                        lastname: "The new",
+                        email: "newuser@yopmail.com",
+                        password: "Newuser123",
+                        repeatPassword: "Newuser123",
+                        role: "STUDENT"
                     } }
                     validate={ ( values ) => {
                         const errors = {};
@@ -115,6 +116,7 @@ export const Register = () => {
                                 value={values.name}
                                 error={errors.name && touched.name}
                                 helperText={touched.name && errors.name}
+                                size="small"
                                 fullWidth
                             />
                             <StyledField
@@ -127,6 +129,7 @@ export const Register = () => {
                                 value={values.lastname}
                                 error={errors.lastname && touched.lastname}
                                 helperText={touched.lastname && errors.lastname}
+                                size="small"
                                 fullWidth
                             />
                             <StyledField
@@ -210,6 +213,7 @@ const StyledFieldWrapper = styled.div`
 `;
 
 const StyledWrapper = styled.div`
+    background-color: rgba(255,255,255,0.9);
     border-radius: 10px;
     box-shadow: 4px -4px 13px 1px rgba(0,0,0, 0.2),
                 -2px 3px 19px 1px rgba(0,0,0, 0.2);
@@ -221,7 +225,7 @@ const StyledWrapper = styled.div`
     margin: 10vh auto;
     flex-flow: column wrap;
     & form {
-        margin-top: 2vh;
+        margin-top: 0.8em;
 
         text-align: center;
         & >span {
@@ -234,24 +238,7 @@ const StyledWrapper = styled.div`
     @media (min-width: 768px) {
         min-width: 30%;
         max-width: 30%;
-        background-color: rgba(255,255,255,0.85);
-        padding: 4em;
-        &:before {
-            background-image: url(${logo});
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            content: "";
-            display: block;
-            height: 90%;
-            left: 27%;
-            position: absolute;
-            top: 0;
-            width: 50%;
-            z-index: -1;
-            overflow: hidden;
-
-        }
+        padding: 2.5em 4em;
     }
 `;
 const StyledSocialWrapper = styled.div`

@@ -15,7 +15,7 @@ export const NewPost = () => {
   const [postTitle, setPostTitle] = useState("");
   const [technology, setTechnology] = useState("0");
   const [technologyData, setTechnologyData] = useState([]);
-  const { userSession } = useAuthorization();
+  const { userSession, userProfile } = useAuthorization();
   const navigate = useNavigate();
 
   const mostRecentPosts =
@@ -25,6 +25,7 @@ export const NewPost = () => {
   const mostAnsweredPosts =
     "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
   const mostViewedPosts = "search?&searchBy=content&orderBy=views";
+  const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
   useEffect(() => {
     async function getTechnologies() {
       const response = await axios.get(
@@ -85,6 +86,12 @@ export const NewPost = () => {
         <AsideWrapper>
           <AsidePostsInfo url={mostRecentPosts}>Recent posts</AsidePostsInfo>
           <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
+          {
+            userProfile?.userData &&
+            <AsidePostsInfo url={myPosts}>
+              My Posts
+            </AsidePostsInfo>
+          }
         </AsideWrapper>
         <PostGridWrapper>
           <div id="postDataContainer">
@@ -127,6 +134,12 @@ export const NewPost = () => {
           <AsidePostsInfo url={mostViewedPosts}>
             Most viewed posts
           </AsidePostsInfo>
+          {
+            userProfile?.userData &&
+            <AsidePostsInfo url={myPosts}>
+              My Posts
+            </AsidePostsInfo>
+          }
         </AsideWrapper>
       </ContentWrapper>
     </>
@@ -137,6 +150,7 @@ const AsideWrapper = styled.div`
   display: none;
   position: sticky;
   top: 0;
+  max-height: 698px;
 
   @media (min-width: 768px) {
     flex: 0 1 20%;
@@ -144,7 +158,17 @@ const AsideWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    height: 80vh;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
+
+    & > *:not(:first-child) {
+      margin-top: -0.85em;
+    }
+  }
+
+  @media (min-height: 900px) {
+    max-height: 874px;
   }
 `;
 
@@ -154,17 +178,17 @@ const ContentWrapper = styled.div`
   justify-content: center;
   flex-flow: wrap;
   max-width: 1620px;
-  margin: 0 auto;
+  margin: 1em auto;
 `;
 
 const PostGridWrapper = styled.div`
   margin-top: 1.5em;
-  flex: 0 1 92%;
+  flex: 0 1 100%;
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
   justify-content: center;
-  height: 70vh;
+  height: 100vh;
 
   & > * {
     flex: 0 1 100%;
@@ -181,7 +205,7 @@ const PostGridWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    flex: 0 1 60%;
+    flex: 0 1 56%;
     & > * {
       flex: 0 1 88%;
     }

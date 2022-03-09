@@ -320,6 +320,7 @@ const AsideWrapper = styled.div`
   display: none;
   position: sticky;
   top: 0;
+  max-height: 698px;
 
   @media (min-width: 768px) {
     flex: 0 1 20%;
@@ -327,11 +328,16 @@ const AsideWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    height: 30vh;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
 
     & > *:not(:first-child) {
       margin-top: -0.85em;
     }
+  }
+  @media (min-height: 900px) {
+    max-height: 874px;
   }
 `;
 
@@ -361,7 +367,7 @@ const ProfileWrapper = styled.div`
   flex-flow: row wrap;
   align-items: flex-start;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.93);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 

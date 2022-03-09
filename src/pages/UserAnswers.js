@@ -51,6 +51,7 @@ const AsideWrapper = styled.div`
   display: none;
   position: sticky;
   top: 0;
+  max-height: 698px;
 
   @media (min-width: 768px) {
     flex: 0 1 20%;
@@ -58,7 +59,16 @@ const AsideWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    height: 80vh;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
+
+    & > *:not(:first-child) {
+      margin-top: -0.85em;
+    }
+  }
+  @media (min-height: 900px) {
+    max-height: 874px;
   }
 `;
 
