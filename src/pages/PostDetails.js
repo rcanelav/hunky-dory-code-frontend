@@ -13,6 +13,7 @@ import alertOctagon from 'react-useanimations/lib/alertOctagon';
 import { getPostById } from '../services/posts/getPostById';
 import { setPostView } from '../services/posts/setPostView';
 import { Loading } from '../components/loading/Loading';
+import { AsideAnswersInfo } from '../components/AsideAnswersInfo/AsideAnswersInfo';
 const { REACT_APP_API_URL } = process.env;
 
 export const PostDetails = () => {
@@ -57,6 +58,7 @@ export const PostDetails = () => {
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
+  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
   if( isLoading ) return <Loading />;
 
   return (
@@ -70,6 +72,12 @@ export const PostDetails = () => {
           <AsidePostsInfo url={mostLikedPosts}>
             Top rated posts
           </AsidePostsInfo>
+          {
+            userProfile?.userData &&
+            <AsideAnswersInfo url={myAnswers}>
+              My Answers
+            </AsideAnswersInfo>
+          }
         </AsideWrapper>
         <GridWrapper>
           <PostInfo key={ postInfo?.postData?.id } post={postInfo} />

@@ -8,6 +8,7 @@ import { TextEditor } from "../components/textEditor/TextEditor";
 import Swal from "sweetalert2";
 import { useAuthorization } from "../hooks/useAuthorization";
 import { useNavigate } from "react-router-dom";
+import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInfo";
 const { REACT_APP_API_URL } = process.env;
 
 export const NewPost = () => {
@@ -26,6 +27,7 @@ export const NewPost = () => {
     "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
   const mostViewedPosts = "search?&searchBy=content&orderBy=views";
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
+  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
   useEffect(() => {
     async function getTechnologies() {
       const response = await axios.get(
@@ -88,9 +90,9 @@ export const NewPost = () => {
           <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
           {
             userProfile?.userData &&
-            <AsidePostsInfo url={myPosts}>
-              My Posts
-            </AsidePostsInfo>
+            <AsideAnswersInfo url={myAnswers}>
+              My Answers
+            </AsideAnswersInfo>
           }
         </AsideWrapper>
         <PostGridWrapper>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AsideAnswersInfo } from '../components/AsideAnswersInfo/AsideAnswersInfo';
 import { AsidePostsInfo } from '../components/AsidePostsInfo/AsidePostsInfo';
 import { Navbar } from '../components/navbar/Navbar';
 import { UserPostsGrid } from '../components/userPosts/UserPostsGrid';
@@ -14,6 +15,7 @@ export const UserPosts = () => {
   const mostAnsweredPosts = 'search?searchBy=numAnswers&order=numAnswers&numAnswers=0';
   const mostViewedPosts = 'search?&searchBy=content&orderBy=views';
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
+  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
 
   return (
     <ContentWrapper className="animate__animated animate__fadeIn">
@@ -25,6 +27,12 @@ export const UserPosts = () => {
           <AsidePostsInfo url={mostLikedPosts}>
             Top rated posts
           </AsidePostsInfo>
+          {
+            userProfile?.userData &&
+            <AsideAnswersInfo url={myAnswers}>
+              My Answers
+            </AsideAnswersInfo>
+          }
         </AsideWrapper>
         <GridWrapper className="animate__animated animate__fadeIn">
           <UserPostsGrid userId={userId} />

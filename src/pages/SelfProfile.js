@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInfo";
 import { AsidePostsInfo } from "../components/AsidePostsInfo/AsidePostsInfo";
 import { Navbar } from "../components/navbar/Navbar";
 import { useAuthorization } from "../hooks/useAuthorization";
@@ -102,6 +103,7 @@ export const SelfProfile = () => {
     "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
   const mostViewedPosts = "search?&searchBy=content&orderBy=views";
   const myPosts = `users/${userData.id}/posts?page=1&limit=5`;
+  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
 
   return (
     <>
@@ -110,7 +112,8 @@ export const SelfProfile = () => {
         <AsideWrapper>
           <AsidePostsInfo url={mostRecentPosts}>Recent posts</AsidePostsInfo>
           <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
-        </AsideWrapper>
+          <AsideAnswersInfo url={myAnswers}>My Answers</AsideAnswersInfo>
+          </AsideWrapper>
         <Formik
           initialValues={{
             email: userData.email,

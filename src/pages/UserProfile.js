@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInfo";
 import { AsidePostsInfo } from "../components/AsidePostsInfo/AsidePostsInfo";
 import { Navbar } from "../components/navbar/Navbar";
 import { Profile } from "../components/userProfile/Profile";
@@ -10,8 +11,6 @@ export const UserProfile = () => {
   const userId = useLocation().pathname.split("/")[2];
   const { userProfile } = useAuthorization();
 
-  console.log(userId);
-
   const mostRecentPosts =
     "search?searchBy=date&direction=desc&order=date&limit=5";
   const mostLikedPosts =
@@ -20,6 +19,7 @@ export const UserProfile = () => {
     "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
   const mostViewedPosts = "search?&searchBy=content&orderBy=views";
   const myPosts = `users/${userProfile?.userData?.id}/posts?page=1&limit=5`;
+  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
 
   return (
       <ContentWrapper className="animate__animated animate__fadeIn">
@@ -27,6 +27,12 @@ export const UserProfile = () => {
         <AsideWrapper>
           <AsidePostsInfo url={mostRecentPosts}>Recent posts</AsidePostsInfo>
           <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
+          {
+            userProfile?.userData &&
+            <AsideAnswersInfo url={myAnswers}>
+              My Answers
+            </AsideAnswersInfo>
+          }
         </AsideWrapper>
         <Profile userId={userId} />
         <AsideWrapper>

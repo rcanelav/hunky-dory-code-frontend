@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AsidePostsInfo } from '../components/AsidePostsInfo/AsidePostsInfo';
+import { AsideAnswersInfo } from '../components/AsideAnswersInfo/AsideAnswersInfo';
 import { Navbar } from '../components/navbar/Navbar';
 import { PostsGrid } from '../components/postsGrid/PostsGrid';
 import { useAuthorization } from '../hooks/useAuthorization';
@@ -35,6 +36,7 @@ export const Main = () => {
   const mostAnsweredPosts = 'search?searchBy=numAnswers&numAnswers=0&order=numAnswers';
   const mostViewedPosts = 'search?searchBy=content&order=views';
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
+  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
 
    return (
     <>
@@ -49,9 +51,9 @@ export const Main = () => {
           </AsidePostsInfo>
           {
             userProfile?.userData &&
-            <AsidePostsInfo url={myPosts}>
-              My Posts
-            </AsidePostsInfo>
+            <AsideAnswersInfo url={myAnswers}>
+              My Answers
+            </AsideAnswersInfo>
           }
         </AsideWrapper>
         <GridWrapper className="animate__animated animate__fadeIn">
