@@ -9,7 +9,6 @@ export const updateUserInfo = async( userData, token ) => {
             headers: { Authorization: `Bearer ${token}` },
             data: userData
           });
-        console.log(updatedUser.data)
     }catch( error ){
         return error.response;
     }
@@ -23,7 +22,6 @@ export const updateUserRole = async( userData, token ) => {
             headers: { Authorization: `Bearer ${token}` },
             data: userData
           });
-        console.log(updatedUser.data)
     }catch( error ){
         return error.response;
     }

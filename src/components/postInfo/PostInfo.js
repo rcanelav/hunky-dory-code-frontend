@@ -19,7 +19,7 @@ export const PostInfo = ({ post }) => {
         setUserRating(response);
         setViews( prev => prev + 1 );
       } catch (error) {
-        console.log(error);
+        return error.response;
       }
     }
     getData();

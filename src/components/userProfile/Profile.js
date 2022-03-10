@@ -28,7 +28,6 @@ export const Profile = ({userId}) => {
     }
     getData();
   }, [userId])
-  console.log(userData)
   
   return (
     <ProfileWrapper>

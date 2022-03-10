@@ -45,7 +45,6 @@ function AuthProvider( props ){
 
     async function login( email, password ) {
         try{
-            console.log(email,password)
             const response = await axios.post( `${REACT_APP_API_URL}/api/v1/auth/login`, {
                 email,
                 password
