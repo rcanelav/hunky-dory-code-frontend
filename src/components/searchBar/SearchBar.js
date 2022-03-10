@@ -337,7 +337,7 @@ const SearchContainer = styled.div`
     }
     & > :nth-child(2) {
         top: -15px;
-        right: 0;
+        right: -10px;
     }
     & > .MuiFormControl-root {
         flex: 0 1 100%;
