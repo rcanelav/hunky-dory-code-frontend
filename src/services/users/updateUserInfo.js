@@ -3,7 +3,7 @@ const { REACT_APP_API_URL } = process.env;
 
 export const updateUserInfo = async( userData, token ) => {
     try{
-        const updatedUser = await axios({
+        await axios({
             method: "PUT",
             url: `${REACT_APP_API_URL}/api/v1/users/${userData.userId}`,
             headers: { Authorization: `Bearer ${token}` },
@@ -16,7 +16,7 @@ export const updateUserInfo = async( userData, token ) => {
 
 export const updateUserRole = async( userData, token ) => {
     try{
-        const updatedUser = await axios({
+        await axios({
             method: "PUT",
             url: `${REACT_APP_API_URL}/api/v1/users/${userData.userId}/role`,
             headers: { Authorization: `Bearer ${token}` },
