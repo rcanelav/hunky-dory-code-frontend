@@ -30,9 +30,6 @@ export const Menu = ({ open, setOpen, search, setSearch }) => {
         onChange={ e => setSearch(e.target.value) }
         onKeyDown={ e => e.key === 'Enter' && handleSubmit(e) }
         />
-        <Link to="/" onClick={ () => setOpen(!open) } >
-
-        </Link>
 
         <Link to="/newPost" onClick={ () => setOpen(!open) } >
             🚀New Post
@@ -82,10 +79,10 @@ const StyledTextfied = styled(TextField)`
     &&  {
         & .MuiInput-input {
             max-width: 42%;
-            font-size: 1.25em;
+            font-size: 1em;
         }
         & #standard-basic-label {
-            font-size: 1.4em;
+            font-size: 1.2em;
             color: black;
         }
         & .MuiInput-underline {
@@ -103,33 +100,35 @@ const StyledLogout = styled(FiLogOut)`
 
 const StyledMenu = styled.nav`
   display: flex;
-  position: absolute;
+  position: fixed;
   z-index: 5;
   width: 100%;
+  overflow: hidden;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.95);
-  height: 300%;
+  height: 81vh;
+  overflow: hidden;
   text-align: left;
-  top: 0px;
+  top: 0;
   left: 0;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
   transition: transform 0.4s ease-in-out;
   padding-top: 10em;
-  border-radius: 0 45% 0 0;
+  border-radius: 0 80% 0 0;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
   transition: all 0.3s ease-in-out;
   border: 2px solid rgba(0,0,0,0.2);
 
   & >:first-child {
-      margin-left: 20%;
+      margin: 0 auto 15% 10%;
   }
 
   a {
     width: max-content;
-    font-size: 1.5em;
+    font-size: 1.2em;
     text-transform: uppercase;
     padding: 1em 0;
-    margin-left: 20%;
+    margin-left: 10%;
     font-weight: bold;
     letter-spacing: 0.5rem;
     color: black;
@@ -138,6 +137,10 @@ const StyledMenu = styled.nav`
 
     &:hover {
       color: rgba(255, 204, 3, 1);
+    }
+
+    &:last-child {
+        margin-top: 7em;
     }
 
   }
