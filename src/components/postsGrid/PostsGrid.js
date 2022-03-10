@@ -26,12 +26,6 @@ export const PostsGrid = ({searchData}) => {
       
     }
     fetchData();
-
-    return () => {
-      setData([]);
-      setPosts([]);
-      setIsLoading(true);
-    }
      
   }, [ search, page, searchBy, technology, orderBy, from, to, numAnswers, direction ]);
   if( isLoading ) return <Loading />
