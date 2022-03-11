@@ -82,7 +82,7 @@ export const PostDetails = () => {
         <GridWrapper>
           <PostInfo key={ postInfo?.postData?.id } post={postInfo} />
           {
-            postInfo?.technology.id === userProfile?.userData?.technologies
+            (postInfo?.technology.id === userProfile?.userData?.technologies || userProfile?.userData?.role === 'ADMIN')
             ?
             <TextEditor value={newAnswer} setValue={setNewAnswer} submit={ handleSubmit } />
             : <div id='disallowed-reply'>
@@ -198,6 +198,9 @@ const GridWrapper = styled.div`
     flex: 0 1 56%;
     & > * {
       flex: 0 1 88%;
+    }
+    & >:nth-child(2) {
+      flex: 0 1 91.5%;
     }
     & > div#disallowed-reply {
       flex: 0 1 89.85%;
