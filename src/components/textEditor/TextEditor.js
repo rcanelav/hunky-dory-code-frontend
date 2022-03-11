@@ -36,7 +36,7 @@ export function TextEditor({ limit, value, setValue, submit}) {
         value={value}
         init={{
           height: 200,
-          menubar: false,
+          menubar: true,
           plugins: [
             "advlist autolink lists link image charmap print preview anchor",
             "searchreplace visualblocks code fullscreen",
@@ -63,12 +63,12 @@ const StyledWrapper = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.5em;
+  margin: 0.2em auto 0.5em auto;
    & > div {
     flex: 0 1 100%;
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     }
    & > p {
     flex: 1 1 50%;
