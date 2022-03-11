@@ -86,9 +86,9 @@ const StyledHeader = styled.div`
     }
     & > .logo {
         margin: 2em auto 0 1em;
-        flex: 0 1 40%;
+        flex: 0 1 33%;
         & > img {
-            width: 80%;
+            width: 100%;
             max-width: 170px;
         }
     }
@@ -102,7 +102,7 @@ const StyledHeader = styled.div`
 
         & > #profile-logout {
             display: none;
-            margin-top: 5em;
+            margin: 5em 10% 0 0;
             flex-flow: row wrap;
             align-items: center;
             justify-content: center;
@@ -134,7 +134,6 @@ const StyledHeader = styled.div`
                 }
             }
         }                
-
     }
 
     @media (min-width: 648px) {
@@ -149,24 +148,24 @@ const StyledHeader = styled.div`
             flex: 0 1 33%;
         }
         & > .logo {
-            margin: 1em -8em 0 0;
+            margin: 1em 0em 0 0;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: center;
             & > img {
                 width: 40%;
             }
         }
         & > #burger {
-            margin-right: 5em;
-            flex: 0 1 20%;
+            flex: 0 1 33%;
             font-size: 0.3em;
             display: flex;
             flex-direction: row wrap;
-            justify-content: space-evenly;
+            justify-content: right;
             & > button {
                 display: block;
-                flex: 0 1 45%;
-            }
-            & > * {
-                flex: 0 1 35%;
+                flex: 0 1 25%;
             }
             & > #profile-logout {
                 display: flex;
@@ -175,12 +174,12 @@ const StyledHeader = styled.div`
     }
     @media (min-width: 1024px) {
         & > .logo {
-            margin: 1em -10em 0 0;
+            margin: 1em 0em 0 0;
         }
         & > #burger {
             font-size: 0.4em;
             & > button {
-                flex: 0 1 35%;
+                flex: 0 1 25%;
             }
         }
     }
@@ -219,6 +218,7 @@ const StyledLogin = styled(Button)`
         min-height: 10%;
         font-size: 1.7em;
         text-transfor: uppercase;
+        margin-right: 3em;
 
         &&:hover{
             background-color: rgba(255, 230, 0, 1);
@@ -234,6 +234,7 @@ const StyledRegister = styled(Button)`
         min-height: 10%;
         font-size: 1.7em;
         text-transfor: uppercase;
+        margin-right: 5em;
         &&:hover {
             background-color: rgba(0, 163, 152, 1);
         }

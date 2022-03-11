@@ -185,7 +185,7 @@ const ContentWrapper = styled.div`
 
 const PostGridWrapper = styled.div`
   margin-top: 1.5em;
-  flex: 0 1 93%;
+  flex: 0 1 92%;
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
