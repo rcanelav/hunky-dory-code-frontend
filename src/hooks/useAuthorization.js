@@ -1,9 +1,9 @@
-import axios  from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { facebookAuthProvider, googleAuthProvider, startSignIn } from '../firebase/firebaseConfig';
-
-const { REACT_APP_API_URL } = process.env;
+import { authentication } from '../services/auth/authentication';
+import { getCurrentProfile } from '../services/auth/getCurrentProfile';
+import { login } from '../services/auth/login';
 const authContext = createContext();
 
 function useAuthorization( params ){
@@ -24,13 +24,8 @@ function AuthProvider( props ){
         if (userSession) {
             async function getUserProfile() {
                 try {
-                const response = await axios({
-                    method: "GET",
-                    url: `${REACT_APP_API_URL}/api/v1/auth/current`,
-                    headers: { Authorization: `Bearer ${userSession}` },
-                  });
-
-                setUserProfile(response?.data);
+                const currentProfile = await getCurrentProfile( userSession );
+                setUserProfile(currentProfile);
                 setIsUserLoggedIn(true);
                 } catch (error) {
                     console.log("ERROR: ", error);
@@ -43,13 +38,10 @@ function AuthProvider( props ){
         }
     }, [userSession]);
 
-    async function login( email, password ) {
+    async function startLogin( email, password ) {
         try{
-            const response = await axios.post( `${REACT_APP_API_URL}/api/v1/auth/login`, {
-                email,
-                password
-            } );
-            const { accessToken } = response.data.response;
+            const response = (await login( email, password )).response;
+            const { accessToken } = response;
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
             setIsUserLoggedIn( true );
@@ -66,7 +58,6 @@ function AuthProvider( props ){
         setUserSession(null);
         setUserProfile(null);
         setIsUserLoggedIn(false);
-        console.log('Logged out');
     }
 
     async function signInWithFirebaseAuth( type ){
@@ -78,11 +69,8 @@ function AuthProvider( props ){
                 credentials = await startSignIn(facebookAuthProvider);
             }
             const { idToken: id_token, email } = credentials;
-            const response = await axios.post( `${REACT_APP_API_URL}/api/v1/auth`, {
-                id_token,
-                email,
-            });
-            const { accessToken } = response.data;
+            const response = await authentication( id_token, email );
+            const { accessToken } = response;
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
             setIsUserLoggedIn( true );
@@ -94,7 +82,7 @@ function AuthProvider( props ){
 
     const value = {
         userSession,
-        login,
+        startLogin,
         logout,
         userProfile,
         setUserProfile,

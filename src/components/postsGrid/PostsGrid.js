@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 import { PostTitle } from '../postslist/PostTitle';
 import { Loading } from '../loading/Loading';
-const { REACT_APP_API_URL } = process.env;
+import { searchPublication } from '../../services/posts/searchPublication';
 
 export const PostsGrid = ({searchData}) => {
   const { search, searchBy, technology, orderBy, from, to, numAnswers, direction } = searchData;
@@ -15,17 +14,23 @@ export const PostsGrid = ({searchData}) => {
   const limit = 10;
 
   useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get(`${REACT_APP_API_URL}/api/v1/search?q=${search || ''}&page=${page}&searchBy=${searchBy || 'title'}${technology ? '&technology='+technology : ''}${ orderBy ? '&order='+orderBy : ''}${from ? '&from='+from : ''}${to ? '&to='+to : ''}${numAnswers ? '&numAnswers='+numAnswers : ''}${ direction ? '&direction='+direction : ''}&limit=${limit}`);
+    async function getData() {
+      const url = `search?q=${search || ''}&page=${page}&searchBy=${searchBy || 'title'}${technology ? '&technology='+technology : ''}${ orderBy ? '&order='+orderBy : ''}${from ? '&from='+from : ''}${to ? '&to='+to : ''}${numAnswers ? '&numAnswers='+numAnswers : ''}${ direction ? '&direction='+direction : ''}&limit=${limit}`;
 
-      setData( response.data );
+      const publications = (await searchPublication( url ) );
+      setData( publications );
       setPosts( prev => (
-        [ ...prev, ...response.data.results]
+        [ ...prev, ...publications.results]
       ))
       setIsLoading(false);
       
     }
-    fetchData();
+    getData();
+
+    return () => {
+      setData(prev => prev);
+      setPosts(prev => prev)
+    };
      
   }, [ search, page, searchBy, technology, orderBy, from, to, numAnswers, direction ]);
   if( isLoading ) return <Loading />

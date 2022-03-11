@@ -1,21 +1,21 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import hunky from '../../assets/hdc-hunky.png';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../loading/Loading';
-const { REACT_APP_API_URL } = process.env;
+import { getUserById } from '../../services/users/getUserById';
+import { getUserRating } from '../../services/users/getUserRating';
 export const PostAnswersHeader = ({ date, author }) => {
     const [ authorData, setAuthorData ] = useState('');
     const [ isLoading, setIsLoading ] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
         async function getData(){
-            const authorInfo = await axios.get(`${REACT_APP_API_URL}/api/v1/users/${author}`);
-            setAuthorData(authorInfo?.data.userData);
-            const rating = await axios.get(`${REACT_APP_API_URL}/api/v1/users/${author}/rating`);
-            setAuthorData(prev => ({ ...prev, rating: rating.data.rating}));
+            const authorInfo = (await getUserById(author)).userData;
+            setAuthorData(authorInfo);
+            const rating = await getUserRating(author);
+            setAuthorData(prev => ({ ...prev, rating: rating}));
         }
         getData();
         setIsLoading(false);

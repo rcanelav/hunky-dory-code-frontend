@@ -1,11 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 import { PostInfoInteractionBar } from '../postInfo/PostInfoInteractionBar';
 import { PostAnswersHeader } from './PostAnswersHeader';
 import {Loading} from '../loading/Loading';
-const { REACT_APP_API_URL } = process.env;
+import { getAnswers } from '../../services/answers/getAnswers';
 
 export const PostAnswers = ({post}) => {
     const [ answers, setAnswers ] = useState([]);
@@ -15,14 +14,16 @@ export const PostAnswers = ({post}) => {
     const limit = 10;
     useEffect(() => {
         async function getData(){
-            const response = await axios.get(`${REACT_APP_API_URL}/api/v1/posts/${post.postData.id}/answers?page=${page}&limit=${limit}`);
-            setData(response.data.data);
+            const answersData = (await getAnswers(post.postData.id, page, limit)).data;
+            setData(answersData);
             setAnswers( prev => [
-                ...prev, ...response.data.data.results
+                ...prev, ...answersData.results
             ]);
             setIsLoading(false);
         }
         getData();
+
+        return () => setAnswers(prev => prev);
     }, [post.postData.id, page]);
     if( isLoading ) return <Loading />
 

@@ -1,16 +1,15 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-const { REACT_APP_API_URL } = process.env;
+import { searchPublication } from '../../services/posts/searchPublication';
 export const AsidePostsInfo = ({children, url }) => {
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
   
     useEffect(() => {
       async function getData () {
-        const response = await axios.get(`${REACT_APP_API_URL}/api/v1/${url}`);
-        setPosts(response?.data.results);
+        const results = (await searchPublication( url )).results
+        setPosts(results);
       }
       getData();
 

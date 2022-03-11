@@ -7,7 +7,7 @@ import { useAuthorization } from '../hooks/useAuthorization';
 import { Navbar } from '../components/navbar/Navbar';
 
 export const Login = () => {
-    const { login, signInWithFirebaseAuth } = useAuthorization();
+    const { startLogin, signInWithFirebaseAuth } = useAuthorization();
     const [ error, setError ] = useState('');
     const handleAuth = async (e) => {
         e.preventDefault();
@@ -47,7 +47,7 @@ export const Login = () => {
                             return errors;
                         } }
                         onSubmit={ async ( values ) => {
-                            const respData = await login( values.email, values.password );
+                            const respData = await startLogin( values.email, values.password );
                             if( respData ){
                                 const err = respData.data.errors;
                                 setError( err[0].msg );

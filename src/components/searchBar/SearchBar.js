@@ -2,14 +2,13 @@ import { Alert, Button, FormControlLabel, MenuItem, Radio, RadioGroup, Select, T
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import moment from 'moment';
 import UseAnimations from 'react-useanimations';
 import  maximizeMinimize2  from 'react-useanimations/lib/maximizeMinimize2';
 import { BurgerIcon } from '../burgerIcon/BurgerIcon';
-const { REACT_APP_API_URL } = process.env;
+import { getTechnologies } from '../../services/technologies/getTechnologies';
 
 export const SearchBar = ({openMenu, setOpenMenu}) => {
     const [ technologyData, setTechnologyData ] = useState();
@@ -25,12 +24,11 @@ export const SearchBar = ({openMenu, setOpenMenu}) => {
     const navigate = useNavigate();
 
     useEffect( () => {
-        async function getTechnologies () {
-            const response = await axios.get(`${REACT_APP_API_URL}/api/v1/technologies`);
-            setTechnologyData( response.data.technologies );
+        async function getData () {
+            const technologies = await getTechnologies();
+            setTechnologyData( technologies );
         }
-        getTechnologies();
-
+        getData();
     }, []);
     const handleSubmit = () => {
         navigate(`/search?q=${ searchData || ''}`+

@@ -7,7 +7,6 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import axios from "axios";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,8 +16,8 @@ import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInf
 import { AsidePostsInfo } from "../components/AsidePostsInfo/AsidePostsInfo";
 import { Navbar } from "../components/navbar/Navbar";
 import { useAuthorization } from "../hooks/useAuthorization";
+import { getTechnologies } from "../services/technologies/getTechnologies";
 import { updateProfilePicture, updateUserInfo, updateUserRole } from "../services/users/updateUserInfo";
-const { REACT_APP_API_URL } = process.env;
 
 export const SelfProfile = () => {
   const { userProfile, userSession, logout } = useAuthorization();
@@ -86,13 +85,11 @@ export const SelfProfile = () => {
   };
 
   useEffect(() => {
-    async function getTechnologies() {
-      const response = await axios.get(
-        `${REACT_APP_API_URL}/api/v1/technologies`
-      );
-      setTechnologyData(response.data.technologies);
+    async function getData() {
+      const technologies = await getTechnologies();
+      setTechnologyData(technologies);
     }
-    getTechnologies();
+    getData();
   }, [userData.image]);
 
   const mostRecentPosts =
