@@ -1,5 +1,4 @@
 import { MenuItem, Select, TextField } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AsidePostsInfo } from "../components/AsidePostsInfo/AsidePostsInfo";
@@ -9,7 +8,7 @@ import Swal from "sweetalert2";
 import { useAuthorization } from "../hooks/useAuthorization";
 import { useNavigate } from "react-router-dom";
 import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInfo";
-const { REACT_APP_API_URL } = process.env;
+import { createPost } from "../services/posts/createPost";
 
 export const NewPost = () => {
   const [postBody, setPostBody] = useState("");
@@ -30,10 +29,8 @@ export const NewPost = () => {
   const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
   useEffect(() => {
     async function getTechnologies() {
-      const response = await axios.get(
-        `${REACT_APP_API_URL}/api/v1/technologies`
-      );
-      setTechnologyData(response.data.technologies);
+      const technologies = await getTechnologies();
+      setTechnologyData(technologies);
     }
     getTechnologies();
   }, []);
@@ -52,16 +49,8 @@ export const NewPost = () => {
         text: "Post body must be at least 10 characters long",
       });
     }
-    const newPost = await axios({
-      method: "POST",
-      url: `${REACT_APP_API_URL}/api/v1/posts`,
-      headers: { Authorization: `Bearer ${userSession}` },
-      data: {
-        title: postTitle,
-        content: postBody,
-        technology: technology,
-      },
-    });
+    // Create new Post
+    const newPost = createPost(postTitle, postBody, technology, userSession);
     const Toast = Swal.mixin({
       toast: true,
       position: "center",
