@@ -112,7 +112,6 @@ const StyledMenu = styled.nav`
   top: 0;
   left: 0;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
-  transition: transform 0.4s ease-in-out;
   padding-top: 10em;
   border-radius: 0 80% 0 0;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);

@@ -24,7 +24,7 @@ export const UnloggedLanding = () => {
                 <div id='burger'>
                     {
                         !isUserLoggedIn ?
-                        <>
+                        <div id='auth-buttons'>
                             <StyledLogin variant="contained" 
                                 onClick={ () => navigate('/register')}>
                                     Sign Up
@@ -33,7 +33,7 @@ export const UnloggedLanding = () => {
                                 onClick={ () => navigate('/login')}>
                                 Sign In
                             </StyledRegister>
-                        </>
+                        </div>
                         :
                         <div id='profile-logout'>
                             <img src={userProfile?.userData?.image} onClick={ () => navigate('/profile')} alt='hunky dory user'  />
@@ -99,7 +99,9 @@ const StyledHeader = styled.div`
         & > button {
             display: none;
         }
-
+        & > #auth-buttons {
+            display: none;
+        }
         & > #profile-logout {
             display: none;
             margin: 5em 10% 0 0;
@@ -170,6 +172,19 @@ const StyledHeader = styled.div`
             & > #profile-logout {
                 display: flex;
             }
+            & > #auth-buttons {
+                display: flex;
+                flex: 0 1 100%;
+                flex-flow: row wrap;
+                justify-content: right;
+                align-items: center;
+                & > * {
+                    margin-right: 2em;
+                    &:last-child {
+                        margin-right: 20%;
+                    }
+                }
+            }
         }
     }
     @media (min-width: 1024px) {
@@ -178,9 +193,6 @@ const StyledHeader = styled.div`
         }
         & > #burger {
             font-size: 0.4em;
-            & > button {
-                flex: 0 1 25%;
-            }
         }
     }
 `;
@@ -196,17 +208,17 @@ const StyledAuthContainer = styled.div`
     align-items: center;
 
     & > * {
-        flex: 0 1 50%;
+        flex: 0 1 40%;
         display: flex;
         flex-flow: row wrap;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         max-width: max-content;
         text-decoration: none;
+        font-size: 0.8em;
     }
 
     @media (min-width: 768px) {
-        font-size: 0.5em;
         display: none;
     }
 `;
@@ -218,7 +230,6 @@ const StyledLogin = styled(Button)`
         min-height: 10%;
         font-size: 1.7em;
         text-transfor: uppercase;
-        margin-right: 3em;
 
         &&:hover{
             background-color: rgba(255, 230, 0, 1);
@@ -234,7 +245,6 @@ const StyledRegister = styled(Button)`
         min-height: 10%;
         font-size: 1.7em;
         text-transfor: uppercase;
-        margin-right: 5em;
         &&:hover {
             background-color: rgba(0, 163, 152, 1);
         }
