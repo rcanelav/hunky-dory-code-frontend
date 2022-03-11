@@ -12,6 +12,6 @@ export const createAnswer = async (postId, content, token) => {
       },
     });
   } catch (err) {
-    console.log(err);
+    return err.response;
   }
 };
