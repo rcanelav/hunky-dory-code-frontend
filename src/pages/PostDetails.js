@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -14,7 +13,7 @@ import { getPostById } from '../services/posts/getPostById';
 import { setPostView } from '../services/posts/setPostView';
 import { Loading } from '../components/loading/Loading';
 import { AsideAnswersInfo } from '../components/AsideAnswersInfo/AsideAnswersInfo';
-const { REACT_APP_API_URL } = process.env;
+import { createAnswer } from '../services/posts/createAnswer';
 
 export const PostDetails = () => {
   const { userSession, userProfile } = useAuthorization();
@@ -41,15 +40,7 @@ export const PostDetails = () => {
   }, [id]);
 
   const handleSubmit = async () => {
-    await axios(
-    {
-      method: 'POST',
-      url: `${REACT_APP_API_URL}/api/v1/posts/${id}/answers`,
-      headers: {'Authorization': `Bearer ${userSession}`},
-      data: {
-        content: newAnswer,
-      },
-    });
+    await createAnswer(id, newAnswer, userSession);
     setPostedAnswer( new Date().toLocaleString() );
   }
 
