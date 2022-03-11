@@ -49,7 +49,7 @@ export const SelfProfile = () => {
     setUserName(data.name);
     updateUserRole(handleRole(), userSession);
     updateUserInfo(userInfo, userSession);
-    if(!userInfo.password){
+    if(!userInfo.password && userInfo.email === userData.email) {
       return navigate("/search?q=");
     }
 
