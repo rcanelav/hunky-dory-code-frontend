@@ -3,11 +3,11 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
-import axios from 'axios';
 import { useAuthorization } from '../hooks/useAuthorization';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/navbar/Navbar';
-const { REACT_APP_API_URL } = process.env;
+import Swal from 'sweetalert2';
+import { registerUser } from '../services/users/registerUser';
 
 export const Register = () => {
     const { signInWithFirebaseAuth } = useAuthorization();
@@ -15,8 +15,14 @@ export const Register = () => {
     const navigate = useNavigate();
     const handleRegister = async( userData ) => {
         try{
-            await axios.post( `${REACT_APP_API_URL}/api/v1/users`, userData );
-            navigate('/login');
+            await registerUser( userData );
+            Swal.fire({
+                icon: 'success',
+                title: 'Your account has been created',
+                text: 'We have sent you an email to activate your account',
+                showConfirmButton: true,
+            })
+            .then( result => navigate('/') );
         } catch ( err ){
             const { errors } = err.response.data;
             setError(errors[0].msg);
@@ -43,11 +49,11 @@ export const Register = () => {
                 </Typography>
                     <Formik
                         initialValues = { {
-                            name: "newUser",
-                            lastname: "The new",
-                            email: "newuser@yopmail.com",
-                            password: "Newuser123",
-                            repeatPassword: "Newuser123",
+                            name: "",
+                            lastname: "",
+                            email: "",
+                            password: "",
+                            repeatPassword: "",
                             role: "STUDENT"
                         } }
                         validate={ ( values ) => {
