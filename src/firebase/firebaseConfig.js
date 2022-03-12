@@ -1,10 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import {
-  FacebookAuthProvider,
-  GoogleAuthProvider,
-  getAuth,
-  signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { initializeApp} from 'firebase/app';
+import {getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup} from 'firebase/auth';
 
 initializeApp({
     apiKey: "AIzaSyDRt1qJLMjP9b-JhvqZtad5kLHHgy_56aM",
@@ -21,7 +16,7 @@ export const googleAuthProvider = new GoogleAuthProvider().addScope("email");
 export const facebookAuthProvider = new FacebookAuthProvider().addScope("email");
 export const startSignIn = async (provider) => {
   try {
-    const { _tokenResponse: credentials } = await signInWithPopup(
+      const { _tokenResponse: credentials } = await signInWithPopup(
       auth,
       provider
     );
