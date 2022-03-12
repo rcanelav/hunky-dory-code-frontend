@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/Hunky-Dory-Code-Frontend/static/js/main.25f9e939.js",
+    "main.js": "/Hunky-Dory-Code-Frontend/static/js/main.d6d8aec8.js",
     "static/media/background-desktop.png": "/Hunky-Dory-Code-Frontend/static/media/background-desktop.f50ceb6e5c07e3367d2e.png",
     "static/media/background-mobile.png": "/Hunky-Dory-Code-Frontend/static/media/background-mobile.0d33bd3b45a77f21681b.png",
     "static/media/logo-wb.png": "/Hunky-Dory-Code-Frontend/static/media/logo-wb.401aacd557f7bd90ab8a.png",
     "static/media/hdc-hunky.png": "/Hunky-Dory-Code-Frontend/static/media/hdc-hunky.293923fd2f392d9e203d.png",
     "index.html": "/Hunky-Dory-Code-Frontend/index.html",
-    "main.25f9e939.js.map": "/Hunky-Dory-Code-Frontend/static/js/main.25f9e939.js.map"
+    "main.d6d8aec8.js.map": "/Hunky-Dory-Code-Frontend/static/js/main.d6d8aec8.js.map"
   },
   "entrypoints": [
-    "static/js/main.25f9e939.js"
+    "static/js/main.d6d8aec8.js"
   ]
 }
