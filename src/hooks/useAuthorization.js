@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { facebookAuthProvider, googleAuthProvider, startSignIn } from '../firebase/firebaseConfig';
 import { authentication } from '../services/auth/authentication';
 import { getCurrentProfile } from '../services/auth/getCurrentProfile';
@@ -40,7 +41,14 @@ function AuthProvider( props ){
 
     async function startLogin( email, password ) {
         try{
-            const response = (await login( email, password )).response;
+            const response = (await login( email, password )).data;
+            if( response.errors ){
+                return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: response.errors[0].msg
+                })
+            }
             const { accessToken } = response;
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
