@@ -62,4 +62,7 @@ const StyledPostsWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  & >:last-child {
+    margin-bottom: 20px;
+  }
 `;

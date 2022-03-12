@@ -34,21 +34,21 @@ export const Profile = ({userId}) => {
         <Row>
             <NameContainer>
                 <div>
-                    <span>Username</span>
+                    <span>💥Username</span>
                     <p>{`${userData?.name + userData?.lastname?.slice(0,1) + "."} `}</p>
                 </div>
                 <div>
-                    <span>Name</span>
+                    <span>📑Name</span>
                     <p>{`${userData?.name} ${userData?.lastname}`}</p>
                 </div>
                 <div>
-                    <span>Role</span>
+                    <span>🤓Role</span>
                     <p>{`${userData?.role}`}</p>
                 </div>
                 {
                     userData?.role !== 'STUDENT' &&
                     <div>
-                        <span>Technology</span>
+                        <span>📚Technology</span>
                         <p>{`${userData?.technologyName}`}</p>
                     </div>
                 }
@@ -113,7 +113,7 @@ const ProfileWrapper = styled.div`
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.96);
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   
@@ -147,7 +147,8 @@ const NameContainer = styled.div`
     align-items: center;
     justify-content: left;
     margin-top: 1em;
-    font-size: 1.55em;
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
 
     & > div {
         flex: 0 1 100%;
@@ -167,8 +168,14 @@ const NameContainer = styled.div`
         padding-left: 0.5em;
     }
 
+    @media (min-width: 648px) {
+        font-size: 1.3em;
+    }
     @media (min-width: 768px) {
-        font-size: 1.8em;
+        font-size: 1.3em;
+    }
+    @media (min-width: 1024px) {
+        font-size: 1.5em;
     }
 `;
 
@@ -192,7 +199,7 @@ const Status = styled.div`
     flex: 0 1 89%;
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
     animation: 2s infinite alternate ease-in-out breathing-colour;
     border: 3px solid rgba(0, 0, 0, 0.1);
@@ -203,10 +210,11 @@ const Status = styled.div`
     font-size: 1em;
 
     & > #rating {
+        flex: 0 1 26%;
         padding: 0.5em;
         & > span {
             display: inline-block;
-            font-size: 1.1em;
+            font-size: 1em;
             text-decoration: underline;
             margin: 0.2em auto 0.6em auto;
         }

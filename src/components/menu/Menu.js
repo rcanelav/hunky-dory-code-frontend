@@ -56,7 +56,7 @@ export const Menu = ({ open, setOpen, search, setSearch }) => {
                 <Link to={`/users/${userProfile?.userData?.id}/posts`} onClick={ () => { setOpen(!open) } } >
                     📢My Posts
                 </Link>
-                <Link to={`/users/${userProfile?.userData?.id}/posts`} onClick={ () => { setOpen(!open) } } >
+                <Link to={`/users/${userProfile?.userData?.id}/answers`} onClick={ () => { setOpen(!open) } } >
                     📣My Answers
                 </Link>
                 <Link to="/" onClick={ handleLogout } >
@@ -106,14 +106,14 @@ const StyledMenu = styled.nav`
   overflow: hidden;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.95);
-  height: 81vh;
+  height: 84vh;
   overflow: hidden;
   text-align: left;
   top: 0;
   left: 0;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
   padding-top: 10em;
-  border-radius: 0 80% 0 0;
+  border-radius: 0 70% 0 0;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
   transition: all 0.3s ease-in-out;
   border: 2px solid rgba(0,0,0,0.2);

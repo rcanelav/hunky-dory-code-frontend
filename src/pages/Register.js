@@ -240,8 +240,9 @@ const StyledWrapper = styled.div`
     display: flex;
     min-width: 80%;
     max-width: 80%;
-    margin: 10vh auto;
+    margin: 2vh auto;
     flex-flow: column wrap;
+    transition: all 0.3s ease-in-out;
     & form {
         margin-top: 0.8em;
 
@@ -257,6 +258,7 @@ const StyledWrapper = styled.div`
         min-width: 30%;
         max-width: 30%;
         padding: 2.5em 4em;
+        margin: 10vh auto;
     }
 `;
 const StyledSocialWrapper = styled.div`
