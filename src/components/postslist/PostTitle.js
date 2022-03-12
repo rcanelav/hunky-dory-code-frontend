@@ -21,7 +21,6 @@ export const PostTitle = ({ title, date, author, userImage, userId, content, pos
             }
         }
         getData();
-
     }, [userId]);
     return (
         <StyledWrapper>
