@@ -16,7 +16,7 @@ export const AsidePostsInfo = ({children, url }) => {
     }, [url]);
 
   return (
-      <Wrapper posts={!!posts.length}>
+      <Wrapper posts={!!posts?.length}>
             <h1 onClick={ () => navigate(`/${url}`)}>{children}</h1>
             {
                 posts.map(post => (
