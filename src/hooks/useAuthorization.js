@@ -49,21 +49,19 @@ function AuthProvider( props ){
 
     async function startLogin( email, password ) {
         try{
-            const response = (await login( email, password )).data;
-            if( response.errors ){
-                return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: response.errors[0].msg
-                })
-            }
-            const { accessToken } = response;
+            const response = await login( email, password );
+            const { accessToken } = response.response;
             setUserSession( accessToken );
             localStorage.setItem( 'userSession', accessToken );
             setIsUserLoggedIn( true );
-            navigate('/search?q=');
-        } catch ( error ){
-            return error.response;
+
+            return navigate('/search?q=');
+        }catch(error){
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.response.data.errors[0].msg
+            })
         }
     }
 
