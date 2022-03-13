@@ -1,10 +1,9 @@
 import { Button } from '@mui/material';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import hunky from '../../assets/hdc-hunky.png';
 import { useAuthorization } from '../../hooks/useAuthorization';
-const { REACT_APP_API_URL } = process.env;
+import { setLikeToPublication } from '../../services/posts/setLikeToPublication';
 
 export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
     const { userProfile } = useAuthorization();
@@ -13,14 +12,8 @@ export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
     const [ isLiked, setIsLiked ] = useState(false);
 
     const handleLike = async() => {
-        const response = await axios(
-            {
-                method: 'POST',
-                url: `${REACT_APP_API_URL}/api/v1/${type}/${postData.id}/likes`,
-                headers: {'Authorization': `Bearer ${userSession}`}
-            }
-        );
-        if( response.data.msg.includes('removed')){
+        const like = await setLikeToPublication(type, postData.id, userSession);
+        if( like.msg.includes('removed')){
             setPostLikes(postLikes - 1);
         }else{
             setPostLikes(postLikes + 1);
@@ -41,7 +34,7 @@ export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
     return (
     <>
         <StyledLikes>
-            <p>{postLikes} {postLikes === 1 ? '' : 'hunkies'}{ postLikes === 0 ? '😔' : <img src={hunky} alt='HUNKY'/>}</p>
+            <p>{postLikes} { postLikes === 0 ? 'Hunkies 😔' : <img src={hunky} alt='HUNKY'/>}</p>
             <StyledLikeButton >
                 <Button variant='contained' color={isLiked ? "warning" : "primary"} disabled={ !isUserLoggedIn } onClick={  handleLike }>
                     Dar un <img src={hunky} alt='HUNKY'/>
