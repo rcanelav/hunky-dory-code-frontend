@@ -9,6 +9,7 @@ import { useAuthorization } from "../hooks/useAuthorization";
 import { useNavigate } from "react-router-dom";
 import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInfo";
 import { createPost } from "../services/posts/createPost";
+import { getTechnologies } from "../services/technologies/getTechnologies";
 
 export const NewPost = () => {
   const [postBody, setPostBody] = useState("");
@@ -28,11 +29,11 @@ export const NewPost = () => {
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
   const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
   useEffect(() => {
-    async function getTechnologies() {
+    async function getData() {
       const technologies = await getTechnologies();
       setTechnologyData(technologies);
     }
-    getTechnologies();
+    getData();
   }, []);
   const handleSubmit = async () => {
     if (!postBody || !postTitle || technology === "0") {
