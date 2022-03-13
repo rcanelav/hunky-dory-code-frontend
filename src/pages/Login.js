@@ -1,6 +1,6 @@
 import { TextField, Typography, Button } from '@mui/material';
 import { Formik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import { useAuthorization } from '../hooks/useAuthorization';
@@ -8,7 +8,6 @@ import { Navbar } from '../components/navbar/Navbar';
 
 export const Login = () => {
     const { startLogin, signInWithFirebaseAuth } = useAuthorization();
-    const [ error, setError ] = useState('');
     const handleAuth = async (e) => {
         e.preventDefault();
         if(e.target.textContent.includes('Google')){
@@ -39,6 +38,10 @@ export const Login = () => {
 
                             if ( !values.email ) {
                                 errors.email = "email required!";
+                            }
+
+                            if( values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email) ){
+                                errors.email = "invalid email!";
                             }
 
                             if ( !values.password ) {
@@ -87,10 +90,6 @@ export const Login = () => {
                                     helperText={touched.password && errors.password}
                                     fullWidth
                                 />
-
-                                {
-                                    error && <StyledErrorMessage severity='error'> {error} </StyledErrorMessage>
-                                }
 
                                 <StyledButton type="submit" variant="contained">
                                     Login
@@ -177,18 +176,6 @@ const StyledSocialWrapper = styled.div`
 }
 `;
 
-const StyledErrorMessage = styled.div`
-    && {
-        max-width: 100%;
-        min-width: 100%;
-        background-color: rgba(255, 30, 0, 0.59);
-        margin: 1vh auto;
-        font-size: 1.3em;
-        border: 1px solid red;
-        border-radius: 5px;
-        flex: 1 1 auto;
-    }
-`;
 const styledButton = ( button ) => {
     return styled(button)`
         && {

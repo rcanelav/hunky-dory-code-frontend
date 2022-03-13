@@ -1,31 +1,24 @@
 import { TextField, Typography, Button, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { Formik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 import { useAuthorization } from '../hooks/useAuthorization';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/navbar/Navbar';
-import Swal from 'sweetalert2';
 import { registerUser } from '../services/users/registerUser';
+import { displayModal } from '../utils/helpers/displayModal';
 
 export const Register = () => {
     const { signInWithFirebaseAuth } = useAuthorization();
-    const [ error, setError ] = useState('');
     const navigate = useNavigate();
     const handleRegister = async( userData ) => {
         try{
-            await registerUser( userData );
-            Swal.fire({
-                icon: 'success',
-                title: 'Your account has been created',
-                text: 'We have sent you an email to activate your account',
-                showConfirmButton: true,
-            })
+            const {msg} = await registerUser( userData );
+            displayModal('success', msg, 'We have sent you an email to activate your account', undefined)
             .then( result => navigate('/') );
-        } catch ( err ){
-            const { errors } = err.response.data;
-            setError(errors[0].msg);
+        } catch ( error ){
+            displayModal(undefined, undefined, error.response.data.errors[0].msg , undefined);
         }
     };
     const handleAuth = async (e) => {
@@ -98,7 +91,6 @@ export const Register = () => {
                             }
                             if( !values.role ){
                                 errors.role = "Role is required";
-                                setError( "Role is required" );
                             }
                             return errors;
                         } }
@@ -181,23 +173,17 @@ export const Register = () => {
                                     fullWidth
                                 />
                                 <StyledFieldWrapper>
-                                        <RadioGroup
-                                            defaultValue="STUDENT"
-                                            name="role"
-                                            onChange={handleChange}
-                                            value={values.role}
-                                            row
-                                            onClick={() => setError('')}
-
-                                        >
-                                            <FormControlLabel value="STUDENT" control={<Radio />} label="Student" />
-                                            <FormControlLabel value="EXPERT" control={<Radio />} label="Expert" />
-
-                                        </RadioGroup>
+                                    <RadioGroup
+                                        defaultValue="STUDENT"
+                                        name="role"
+                                        onChange={handleChange}
+                                        value={values.role}
+                                        row
+                                    >
+                                        <FormControlLabel value="STUDENT" control={<Radio />} label="Student" />
+                                        <FormControlLabel value="EXPERT" control={<Radio />} label="Expert" />
+                                    </RadioGroup>
                                 </StyledFieldWrapper>
-                                {
-                                    error && <StyledErrorMessage severity='error'> {error} </StyledErrorMessage>
-                                }
                                 <StyledButton type="submit" variant="contained" >
                                     Register
                                 </StyledButton>
@@ -267,18 +253,6 @@ const StyledSocialWrapper = styled.div`
 }
 `;
 
-const StyledErrorMessage = styled.div`
-    && {
-        max-width: 100%;
-        min-width: 100%;
-        background-color: rgba(255, 30, 0, 0.79);
-        margin: 1vh auto;
-        font-size: 1.15em;
-        border: 1px solid red;
-        border-radius: 5px;
-        flex: 1 1 auto;
-    }
-`;
 const styledButton = ( button ) => {
     return styled(button)`
         && {
