@@ -11,13 +11,13 @@ import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Swal from "sweetalert2";
 import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInfo";
 import { AsidePostsInfo } from "../components/AsidePostsInfo/AsidePostsInfo";
 import { Navbar } from "../components/navbar/Navbar";
 import { useAuthorization } from "../hooks/useAuthorization";
 import { getTechnologies } from "../services/technologies/getTechnologies";
 import { updateProfilePicture, updateUserInfo, updateUserRole } from "../services/users/updateUserInfo";
+import { displayModalWithTimer } from "../utils/helpers/displayModal";
 
 export const SelfProfile = () => {
   const { userProfile, userSession, logout } = useAuthorization();
@@ -65,11 +65,8 @@ export const SelfProfile = () => {
     const newProfileImage = URL.createObjectURL(file);
     setProfilePicture(newProfileImage);
 
-    Swal.fire({
-      icon: "success",
-      title: "Profile picture updated",
-    });
     userData.image = await updateProfilePicture(userInfo, userSession);
+    displayModalWithTimer("success", "Profile picture updated", '', undefined, undefined, 2000);
   }
 
   const handleRole = () => {
