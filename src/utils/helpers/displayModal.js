@@ -6,7 +6,7 @@ export const displayModal = async (
   text,
   showConfirmButton = "true"
 ) => {
-  Swal.fire({
+  return Swal.fire({
     icon,
     title,
     text,
