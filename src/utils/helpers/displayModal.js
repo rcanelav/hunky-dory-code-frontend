@@ -13,3 +13,21 @@ export const displayModal = async (
     showConfirmButton,
   });
 };
+
+export const displayModalWithTimer = async (
+  icon = "success",
+  title = "Action successful",
+  text,
+  showConfirmButton = "false",
+  position = 'center',
+  timer = 2000
+) => {
+  return Swal.fire({
+    icon,
+    title,
+    text,
+    showConfirmButton,
+    position,
+    timer,
+  });
+};
