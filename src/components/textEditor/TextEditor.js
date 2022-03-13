@@ -38,6 +38,7 @@ export function TextEditor({ limit, value, setValue, submit}) {
           height: 200,
           menubar: true,
           plugins: [
+            "autoresize",
             "advlist autolink lists link image charmap print preview anchor",
             "searchreplace visualblocks code fullscreen",
             "insertdatetime media table paste code help wordcount",
