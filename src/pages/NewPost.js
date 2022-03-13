@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInfo";
 import { createPost } from "../services/posts/createPost";
 import { getTechnologies } from "../services/technologies/getTechnologies";
+import { displayModal } from "../utils/helpers/displayModal";
 
 export const NewPost = () => {
   const [postBody, setPostBody] = useState("");
@@ -28,6 +29,7 @@ export const NewPost = () => {
   const mostViewedPosts = "search?&searchBy=content&orderBy=views";
   const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
   const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
+
   useEffect(() => {
     async function getData() {
       const technologies = await getTechnologies();
@@ -35,23 +37,16 @@ export const NewPost = () => {
     }
     getData();
   }, []);
+
   const handleSubmit = async () => {
     if (!postBody || !postTitle || technology === "0") {
-      return Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill all fields",
-      });
+      return displayModal(undefined, undefined, "Please fill all fields", undefined);
     }
-    if (postBody.length < 10) {
-      return Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Post body must be at least 10 characters long",
-      });
+    if (postBody.length < 17) {
+      return displayModal(undefined, undefined, "Post body must be at least 10 characters long", undefined);
     }
     // Create new Post
-    const newPost = createPost(postTitle, postBody, technology, userSession);
+    const newPost = await createPost(postTitle, postBody, technology, userSession);
     const Toast = Swal.mixin({
       toast: true,
       position: "center",
