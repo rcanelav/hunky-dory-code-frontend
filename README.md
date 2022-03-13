@@ -17,7 +17,7 @@ _It is a web platform where people can share their doubts and knowledge about te
 <br />
 
 <div align="center">
-  <a href="https://github.com/rcanelav/Hunky-Dory-Code-Frontend/">
+  <a href="https://rcanelav.github.io/hunky-dory-code-frontend/">
     <img src="https://res.cloudinary.com/rayci/image/upload/v1646335388/logo_rmhaes.png" alt="HDC logo" width="235" height="130">
   </a>
 
@@ -28,7 +28,7 @@ _It is a web platform where people can share their doubts and knowledge about te
     <a href="https://github.com/rcanelav/Hunky-Dory-Code-Docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://rcanelav.github.io/Hunky-Dory-Code-Frontend/">View Demo</a>
+    <a href="https://rcanelav.github.io/hunky-dory-code-frontend/">View Demo</a>
     ·
     <a href="https://github.com/rcanelav/Hunky-Dory-Code-Frontend/issues">Report a Bug</a>
     ·
@@ -90,9 +90,9 @@ $ npm start
 
 7. ***(OPTIONAL) Integrate with HDC RESTful API @***
 
-```
-https://github.com/rcanelav/Hunky-Dory-Code-Backend
-```
+* [Backend repository](https://github.com/rcanelav/Hunky-Dory-Code-Backend)
+* [Deployed @](http://hunky-dory-code.herokuapp.com/)
+
 <p align="right">(<a href="#top">back to top ⬆</a>)</p>
 </br>
 
