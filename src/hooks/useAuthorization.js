@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { facebookAuthProvider, googleAuthProvider, startSignIn } from '../firebase/firebaseConfig';
 import { authentication } from '../services/auth/authentication';
 import { getCurrentProfile } from '../services/auth/getCurrentProfile';
 import { login } from '../services/auth/login';
+import { displayModal } from '../utils/helpers/displayModal';
 const authContext = createContext();
 
 function useAuthorization( params ){
@@ -26,21 +26,15 @@ function AuthProvider( props ){
             async function getUserProfile() {
                 try {
                 const currentProfile = await getCurrentProfile( userSession );
-                if( !currentProfile?.data?.errors){
-                    setUserProfile(currentProfile);
-                    setIsUserLoggedIn(true);
-                }else{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...!',
-                        text: 'Seems like something went wrong, or your account is not verified yet. (Please check your email for verification link)',
-                        showConfirmButton: true,
-                    })
-                }
+                    if( !currentProfile?.data?.errors){
+                        setUserProfile(currentProfile);
+                        setIsUserLoggedIn(true);
+                    }
                 } catch (error) {
                     localStorage.removeItem( 'userSession' );
                     setUserSession(null);
                     setIsUserLoggedIn(false);
+                    displayModal('error', undefined, error.response.data.errors[0].msg, undefined);
                 }
             }
             getUserProfile();
@@ -57,11 +51,7 @@ function AuthProvider( props ){
 
             return navigate('/search?q=');
         }catch(error){
-            Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: error.response.data.errors[0].msg
-            })
+            displayModal('error', undefined, error.response.data.errors[0].msg, undefined);
         }
     }
 
@@ -91,14 +81,8 @@ function AuthProvider( props ){
                 setIsUserLoggedIn( true );
                 return navigate('/search?q=');
             }
-            throw new Error();
         }catch( error ){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...!',
-                text: 'Seems like something went wrong, or your account is not verified yet. (Please check your email for verification link)',
-                showConfirmButton: true,
-            })
+            displayModal('error', undefined, error.response.data.errors[0].msg, undefined);
         }
     }
 
