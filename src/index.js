@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './hooks/useAuthorization';
 
 ReactDOM.render(
   <React.StrictMode>
-   <BrowserRouter>
+   <HashRouter>
     <AuthProvider>
         <App />
       </AuthProvider>
-   </BrowserRouter>
+   </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
