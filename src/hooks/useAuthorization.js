@@ -26,10 +26,18 @@ function AuthProvider( props ){
             async function getUserProfile() {
                 try {
                 const currentProfile = await getCurrentProfile( userSession );
-                setUserProfile(currentProfile);
-                setIsUserLoggedIn(true);
+                if( !currentProfile?.data?.errors){
+                    setUserProfile(currentProfile);
+                    setIsUserLoggedIn(true);
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...!',
+                        text: 'Seems like something went wrong, or your account is not verified yet. (Please check your email for verification link)',
+                        showConfirmButton: true,
+                    })
+                }
                 } catch (error) {
-                    console.log("ERROR: ", error);
                     localStorage.removeItem( 'userSession' );
                     setUserSession(null);
                     setIsUserLoggedIn(false);
@@ -79,12 +87,20 @@ function AuthProvider( props ){
             const { idToken: id_token, email } = credentials;
             const response = await authentication( id_token, email );
             const { accessToken } = response;
-            setUserSession( accessToken );
-            localStorage.setItem( 'userSession', accessToken );
-            setIsUserLoggedIn( true );
-            navigate('/search?q=');
+            if( accessToken ){
+                setUserSession( accessToken );
+                localStorage.setItem( 'userSession', accessToken );
+                setIsUserLoggedIn( true );
+                return navigate('/search?q=');
+            }
+            throw new Error();
         }catch( error ){
-            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...!',
+                text: 'Seems like something went wrong, or your account is not verified yet. (Please check your email for verification link)',
+                showConfirmButton: true,
+            })
         }
     }
 
