@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
 import { activateUserAccount } from "../services/users/activateUserAccount";
+import { displayModalWithTimer } from "../utils/helpers/displayModal";
 
 export const AccountActivation = () => {
   const { code } = useParams();
@@ -14,26 +14,15 @@ export const AccountActivation = () => {
   }, [navigate]);
 
   const handleVerifiedRegister = useCallback((response) => {
+    try{
+      displayModalWithTimer(undefined, undefined, response.data.msg, undefined, undefined, 2000);
 
-    if (response.status !== 200) {
-       Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Error Activating Account",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      return returnToLogin();
+    }catch(error){
+      displayModalWithTimer('error', 'Error Activating Account', error.response.errors[0].msg, undefined, undefined, 2000);
+
       return returnToLogin();
     }
-
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Your account has been activated",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    return returnToLogin();
   }, [returnToLogin]);
 
   useEffect(() => {
