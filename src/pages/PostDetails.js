@@ -112,6 +112,15 @@ const AsideWrapper = styled.div`
   top: 0;
   max-height: 698px;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  overflow: scroll;
+  scrollbar-width: none;
+
   @media (min-width: 768px) {
     flex: 0 1 20%;
     display: flex;
@@ -119,8 +128,6 @@ const AsideWrapper = styled.div`
     align-items: flex-start;
     justify-content: center;
     height: 100vh;
-    overflow: scroll;
-    scrollbar-width: none;
 
     & > *:not(:first-child) {
       margin-top: -0.85em;

@@ -103,7 +103,7 @@ export const SelfProfile = () => {
     <>
       <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
-        <AsideWrapper>
+        <AsideWrapper id="aside">
           <AsidePostsInfo url={mostRecentPosts}>Recent posts</AsidePostsInfo>
           <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
           <AsideAnswersInfo url={myAnswers}>My Answers</AsideAnswersInfo>
@@ -318,6 +318,14 @@ const AsideWrapper = styled.div`
   position: sticky;
   top: 0;
   max-height: 698px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  overflow: scroll;
+  scrollbar-width: none;
 
   @media (min-width: 768px) {
     flex: 0 1 20%;
@@ -326,9 +334,8 @@ const AsideWrapper = styled.div`
     align-items: flex-start;
     justify-content: center;
     height: 100vh;
-    overflow: scroll;
-    scrollbar-width: none;
-
+    
+    
     & > *:not(:first-child) {
       margin-top: -0.85em;
     }
