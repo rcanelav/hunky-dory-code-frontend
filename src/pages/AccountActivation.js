@@ -7,7 +7,25 @@ export const AccountActivation = () => {
   const { code } = useParams();
   const navigate = useNavigate();
 
-  const handleVerifiedRegister = useCallback(() => {
+  const returnToLogin = useCallback(() => {
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  }, [navigate]);
+
+  const handleVerifiedRegister = useCallback((response) => {
+
+    if (response.status !== 200) {
+       Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Error Activating Account",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return returnToLogin();
+    }
+
     Swal.fire({
       position: "center",
       icon: "success",
@@ -15,19 +33,11 @@ export const AccountActivation = () => {
       showConfirmButton: false,
       timer: 2000,
     });
-
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
-  }, [navigate]);
+    return returnToLogin();
+  }, [returnToLogin]);
 
   useEffect(() => {
-    const activateAccount = async () => {
-      const status = await activateUserAccount(code).status;
-      if (status === 200) {
-        handleVerifiedRegister();
-      }
-    };
+    const activateAccount = async () => handleVerifiedRegister(await activateUserAccount(code));
     activateAccount();
   }, [code, handleVerifiedRegister]);
 
