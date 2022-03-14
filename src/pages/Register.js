@@ -163,7 +163,7 @@ export const Register = () => {
                                     id="repeatPassword"
                                     name="repeatPassword"
                                     type="password"
-                                    label="Repeat assword"
+                                    label="Repeat password"
                                     variant="standard"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
