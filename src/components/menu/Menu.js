@@ -42,10 +42,10 @@ export const Menu = ({ open, setOpen, search, setSearch }) => {
             :
             <>
                 <Link to="/login" onClick={ () => { setOpen(!open) } } >
-                   🐱‍🚀Login
+                    🤓Login
                 </Link>
                 <Link to="/register" onClick={ () => { setOpen(!open) } } >
-                    🐱‍🏍Register
+                    😎Register
                 </Link>
             </>
         }
