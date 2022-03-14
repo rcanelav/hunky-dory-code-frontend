@@ -37,6 +37,12 @@ export function TextEditor({ limit, value, setValue, submit}) {
         init={{
           height: 200,
           menubar: true,
+          selector: 'textarea',
+          mobile: {
+            theme: 'mobile',
+          },
+          max_width: '100%',
+          mode: 'exact',
           plugins: [
             "autoresize",
             "advlist autolink lists link image charmap print preview anchor",
@@ -67,6 +73,12 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0.2em auto 0.5em auto;
+
+  & .mce-tinymce {
+    width: 96% !important;
+    margin: 0 auto !important;
+  }
+
   & >:not(:last-child) {
     flex: 0 1 100%;
     border-radius: 10px;
