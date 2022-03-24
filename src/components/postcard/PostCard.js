@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import hunky from '../../assets/hdc-hunky.png';
 import { getUserRating } from '../../services/users/getUserRating';
 
-export const PostTitle = ({ title, date, author, userImage, userId, content, postId, data }) => {
+export const PostCard = ({ title, date, author, userImage, userId, content, postId, data }) => {
     const userName = author.split(' ')[0] + ' ' + author.split(' ')[1].slice(0, 1) + '.';
     const postContent = content.slice(0, 52);
     const postTitle = title.slice(0, 30) + '[...]';

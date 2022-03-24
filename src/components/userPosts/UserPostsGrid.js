@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 import { getUserPosts } from '../../services/users/getUserPosts';
-import { PostTitle } from '../postslist/PostTitle';
+import { PostCard } from '../postcard/PostCard';
 
 export const UserPostsGrid = ({userId}) => {
     const [postsData, setPostsData] = useState([]);
@@ -31,7 +31,7 @@ export const UserPostsGrid = ({userId}) => {
       <StyledPostsWrapper>
         {
           posts?.map(item => (
-            <PostTitle
+            <PostCard
               key={item.id}
               title={item.title}
               date={item.postedAt}

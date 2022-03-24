@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
 import { getUserAnswers } from '../../services/users/getUserAnswers';
-import { PostTitle } from '../postslist/PostTitle';
+import { PostCard } from '../postcard/PostCard';
 
 export const UserAnswersGrid = ({userId}) => {
     const [answersData, setAnswersData] = useState([]);
@@ -32,7 +32,7 @@ export const UserAnswersGrid = ({userId}) => {
       <StyledPostsWrapper>
         {
           answers?.map(item => (
-            <PostTitle
+            <PostCard
               key={item.answerId}
               title={item.title}
               date={item.answerCreatedAt}

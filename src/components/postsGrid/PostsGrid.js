@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styled from 'styled-components';
-import { PostTitle } from '../postslist/PostTitle';
+import { PostCard } from '../postcard/PostCard';
 import { Loading } from '../loading/Loading';
 import { searchPublication } from '../../services/posts/searchPublication';
 
@@ -45,7 +45,7 @@ export const PostsGrid = ({searchData}) => {
       <StyledPostsWrapper>
         {
           posts?.map(item => (
-            <PostTitle
+            <PostCard
               key={item.id}
               title={item.title}
               date={item.postedAt}
