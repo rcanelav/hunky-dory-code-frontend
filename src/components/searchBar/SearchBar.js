@@ -210,8 +210,11 @@ const BottomContainer = styled.div`
     flex: 0 1 100%;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
     margin-top: 0.5em;
+
+    & >:last-child{
+        cursor: pointer;
+    }
 `;
 
 const ResetButton = styled(Button)`

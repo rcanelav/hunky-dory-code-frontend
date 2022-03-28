@@ -159,8 +159,8 @@ const StyledWrapper = styled.div`
     }
 
     @media (min-width: 768px) {
-        min-width: 48.5%;
-        max-width: 48.5%;
+        min-width: 38%;
+        max-width: 38%;
         padding: 1em;
         margin: 5% auto 0 auto;
         & form {
