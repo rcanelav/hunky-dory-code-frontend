@@ -59,7 +59,7 @@ const StyledLikeButton = styled.div`
 `;
 const StyledLikes = styled.div`
   flex: 0 1 100%;
-  font-size: 1.2em;
+  font-size: 1.13em;
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;

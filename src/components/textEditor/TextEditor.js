@@ -110,7 +110,7 @@ const StyledWrapper = styled.div`
     & > button {
     max-width: 7em;
     padding: 0.5em;
-    font-size: 1em;
+    font-size: 0.85em;
       &:disabled {
         background-color: #ccc;
       }

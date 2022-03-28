@@ -62,7 +62,6 @@ const StyledContentWrapper = styled.div`
   word-break: break-all;
 
   & > p:first-child {
-    text-indent: 1em;
     font-size: 1.2em;
     text-align: justify;
     flex: 0 1 100%;
@@ -108,7 +107,7 @@ const StyledPostHeader = styled.div`
       flex: 0 1 100%;
       width: 50%;
       min-width: 3em;
-      max-width: 5em;
+      max-width: 3em;
       border-radius: 10px;
       margin: 1em auto 0.2em auto;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -137,7 +136,7 @@ const StyledPostHeader = styled.div`
 
     & > div > p {
       margin-top: 0.2em;
-      font-size: 1.3em;
+      font-size: 1.2em;
     }
 
     & > div > img {

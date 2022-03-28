@@ -64,7 +64,7 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 2% 1% 1.5% 1%;
-    flex: 0 1 90%;
+    flex: 0 1 92%;
     display: flex;
     flex-flow: row wrap;
     margin: 0.3em 0;
