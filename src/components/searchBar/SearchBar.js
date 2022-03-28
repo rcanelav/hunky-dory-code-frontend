@@ -56,7 +56,7 @@ export const SearchBar = ({openMenu, setOpenMenu}) => {
         <StyledSearchBarWrapper>
             <form onSubmit={ handleSubmit } onKeyDown={ e => e.key === 'Enter' && handleSubmit()} >
                 <SearchContainer>
-                    <p>Quick Search</p>
+                    <p>{!open ? 'Quick Search' : 'Advanced Search'} </p>
                     <BurgerIcon open={ openMenu } setOpen={ setOpenMenu } />
                     <TextField id="outlined-basic" size='small' label="Search" variant="outlined"
                     onKeyDown={ e => e.key === 'Enter' && handleSubmit() }

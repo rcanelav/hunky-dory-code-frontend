@@ -23,7 +23,7 @@ export const AsideAnswersInfo = ({children, url }) => {
                     <div key={post.answerId} onClick={ () => navigate(`/posts/${post.id}`)}>
                         <div id='img-container'>
                             <img src={post.image} alt="author" />
-                            <p> {post.name} {post.lastname.slice(0,1)}.</p>
+                            <p> {post.name} {post.lastname.slice(0,1)}</p>
                         </div>
                         <div id='content-container'>
                             <h2>{post.title.slice(0, 24)} <span>...</span></h2>
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
     flex: 0 1 100%;
     flex-flow: row wrap;
     max-height: 22.35em;
-    word-break: break-all;
+    word-break: break-word;
     overflow-y: hidden;
     & > * {
         flex: 0 1 90%;

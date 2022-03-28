@@ -44,10 +44,10 @@ export const Main = () => {
         <StyledNavbar />
         <AsideWrapper className="animate__animated animate__fadeIn">
           <AsidePostsInfo url={mostRecentPosts}>
-            Recent posts
+            ⏰ Recent posts
           </AsidePostsInfo>
           <AsidePostsInfo url={mostLikedPosts}>
-            Top rated posts
+            ⚡ Top rated posts
           </AsidePostsInfo>
           {
             userProfile?.userData &&
@@ -61,10 +61,10 @@ export const Main = () => {
         </GridWrapper>
         <AsideWrapper className="animate__animated animate__fadeIn">
           <AsidePostsInfo url={mostAnsweredPosts}>
-            Most answered posts
+            📢 Most answered posts
           </AsidePostsInfo>
           <AsidePostsInfo url={mostViewedPosts}>
-            Most viewed posts
+            👀 Most viewed posts
           </AsidePostsInfo>
           {
             userProfile?.userData &&

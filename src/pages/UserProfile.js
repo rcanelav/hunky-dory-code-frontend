@@ -25,8 +25,8 @@ export const UserProfile = () => {
       <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
         <AsideWrapper>
-          <AsidePostsInfo url={mostRecentPosts}>Recent posts</AsidePostsInfo>
-          <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
+          <AsidePostsInfo url={mostRecentPosts}>⏰ Recent posts</AsidePostsInfo>
+          <AsidePostsInfo url={mostLikedPosts}>⚡ Top rated posts</AsidePostsInfo>
           {
             userProfile?.userData &&
             <AsideAnswersInfo url={myAnswers}>
@@ -37,10 +37,10 @@ export const UserProfile = () => {
         <Profile userId={userId} />
         <AsideWrapper>
           <AsidePostsInfo url={mostAnsweredPosts}>
-            Most answered posts
+            📢 Most answered posts
           </AsidePostsInfo>
           <AsidePostsInfo url={mostViewedPosts}>
-            Most viewed posts
+            👀 Most viewed posts
           </AsidePostsInfo>
           { userProfile?.userData?.id && 
             <AsidePostsInfo url={myPosts}>My posts</AsidePostsInfo>

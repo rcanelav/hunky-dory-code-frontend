@@ -35,7 +35,7 @@ export const Profile = ({userId}) => {
             <NameContainer>
                 <div>
                     <span>💥Username</span>
-                    <p>{`${userData?.name + userData?.lastname?.slice(0,1) + "."} `}</p>
+                    <p>{`${userData?.name + ' ' + userData?.lastname?.slice(0,1)} `}</p>
                 </div>
                 <div>
                     <span>📑Name</span>
@@ -63,8 +63,8 @@ export const Profile = ({userId}) => {
                 <div id='rating'>
                     <span>Rating</span>
                     <div>
-                        <p>{userData?.rating}</p>
                         <img src={hunky} alt='hunky' />
+                        <p>: {userData?.rating}</p>
                     </div>
                 </div>
                 <div id='rating'>

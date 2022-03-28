@@ -71,8 +71,8 @@ export const NewPost = () => {
       <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
         <AsideWrapper>
-          <AsidePostsInfo url={mostRecentPosts}>Recent posts</AsidePostsInfo>
-          <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
+          <AsidePostsInfo url={mostRecentPosts}>⏰ Recent posts</AsidePostsInfo>
+          <AsidePostsInfo url={mostLikedPosts}>⚡ Top rated posts</AsidePostsInfo>
           {
             userProfile?.userData &&
             <AsideAnswersInfo url={myAnswers}>
@@ -93,13 +93,13 @@ export const NewPost = () => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={technology}
-              label="Category"
+              label="Technology"
               onChange={(e) => setTechnology(e.target.value)}
               size="small"
               fullWidth
             >
               <MenuItem disabled value="0">
-                <em>Select a category</em>
+                <em>Select a technology</em>
               </MenuItem>
               {technologyData?.map((item) => (
                 <MenuItem key={item.id} value={item.id}>
@@ -116,10 +116,10 @@ export const NewPost = () => {
         </PostGridWrapper>
         <AsideWrapper>
           <AsidePostsInfo url={mostAnsweredPosts}>
-            Most answered posts
+            📢 Most answered posts
           </AsidePostsInfo>
           <AsidePostsInfo url={mostViewedPosts}>
-            Most viewed posts
+            👀 Most viewed posts
           </AsidePostsInfo>
           {
             userProfile?.userData &&

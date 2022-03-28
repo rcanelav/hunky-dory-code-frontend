@@ -7,7 +7,7 @@ import { PostInfoInteractionBar } from './PostInfoInteractionBar';
 import { useNavigate } from 'react-router-dom';
 export const PostInfo = ({ post }) => {
   const { postData, technology, author, likes } = post;
-  const userName = author?.name + ' ' + author?.lastname.charAt(0) + '.';
+  const userName = author?.name + ' ' + author?.lastname.charAt(0);
   const [ userRating, setUserRating] = useState();
   const postDate = moment(postData?.createdAt).format('LL');
   const [ views, setViews ] = useState(postData.views);
@@ -33,16 +33,16 @@ export const PostInfo = ({ post }) => {
           <img src={author.image} alt={author.name} onClick={ () => navigate(`/users/${author.id}/profile`)} />
             <p>{userName}</p>
           <div>
-            <p>{userRating} </p> {<img id='hunky' src={hunky} alt='HUNKY'/>}
+             {<img id='hunky' src={hunky} alt='HUNKY'/>} <p>: { userRating} </p>
           </div>
         </div>
         <div>
           <h1>{postData.title}</h1>
           <div>
-            <p>Category: {technology.name}</p>
-            <p>📅{postDate}</p>
+            <p>📚 Technology: {technology.name}</p>
+            <i>{postDate}</i>
           </div>
-          <p>Views: {views} 👀</p>
+          <p>👀 Views: {views} </p>
         </div>
       </StyledPostHeader>
       <StyledContentWrapper>
@@ -59,7 +59,7 @@ const StyledContentWrapper = styled.div`
   min-width: 0px;
   display: flex;
   flex-flow: row wrap;
-  word-break: break-all;
+  word-break: break-word;
 
   & > p:first-child {
     font-size: 1.2em;
@@ -136,12 +136,12 @@ const StyledPostHeader = styled.div`
 
     & > div > p {
       margin-top: 0.2em;
-      font-size: 1.2em;
+      font-size: 1em;
     }
 
     & > div > img {
       right: 2em;
-      width: 0.8em;
+      width: 0.75em;
       margin-top: 0.2em;
     }
   }

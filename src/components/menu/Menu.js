@@ -60,7 +60,7 @@ export const Menu = ({ open, setOpen, search, setSearch }) => {
                     📣My Answers
                 </Link>
                 <Link to="/" onClick={ handleLogout } >
-                    salir  <StyledLogout />
+                    logout  <StyledLogout />
                 </Link>
             </>
         }

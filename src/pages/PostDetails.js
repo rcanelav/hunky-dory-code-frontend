@@ -58,10 +58,10 @@ export const PostDetails = () => {
         <StyledNavbar />
         <AsideWrapper>
           <AsidePostsInfo url={mostRecentPosts}>
-            Recent posts
+            ⏰ Recent posts
           </AsidePostsInfo>
           <AsidePostsInfo url={mostLikedPosts}>
-            Top rated posts
+            ⚡ Top rated posts
           </AsidePostsInfo>
           {
             userProfile?.userData &&
@@ -89,10 +89,10 @@ export const PostDetails = () => {
         </GridWrapper>
         <AsideWrapper>
           <AsidePostsInfo url={mostAnsweredPosts}>
-            Most answered posts
+            📢 Most answered posts
           </AsidePostsInfo>
           <AsidePostsInfo url={mostViewedPosts}>
-            Most viewed posts
+            👀 Most viewed posts
           </AsidePostsInfo>
           {
             userProfile?.userData &&

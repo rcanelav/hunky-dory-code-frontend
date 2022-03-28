@@ -60,7 +60,7 @@ export function TextEditor({ limit, value, setValue, submit}) {
       />
       <div id="button-container">
         <p><em>Remaining: {sizeLimit - length}</em></p>
-        <Button variant="contained" color="primary" onClick={ submit } disabled={!value}>Enviar</Button>
+        <Button variant="contained" color="primary" onClick={ submit } disabled={!value}>Send</Button>
       </div>
     </StyledWrapper>
   );

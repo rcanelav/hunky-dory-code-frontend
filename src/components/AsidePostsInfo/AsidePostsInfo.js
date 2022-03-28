@@ -23,11 +23,11 @@ export const AsidePostsInfo = ({children, url }) => {
                     <div key={post.id} onClick={ () => navigate(`/posts/${post.id}`)}>
                         <div id='img-container'>
                             <img src={post.userImage} alt="author" />
-                            <p> {post.userName} {post.userLastname.slice(0,1)}.</p>
+                            <p> {post.userName} {post.userLastname.slice(0,1)}</p>
                         </div>
                         <div id='content-container'>
-                            <h2>{post.title.slice(0, 24)} <span>...</span></h2>
-                            <p dangerouslySetInnerHTML={{__html: post.content.slice(0, 30)+ '...'}} />
+                            <h2>{post.title.slice(0, 70)}</h2>
+                            {/* <p dangerouslySetInnerHTML={{__html: post.content.slice(0, 30)+ '...'}} /> */}
                         </div>
                         <div id='info'>
                             <p>⚡:{post.likes} 👀:{post.views} 📢:{post.numAnswers}</p>
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
     flex: 0 1 100%;
     flex-flow: row wrap;
     max-height: 22.35em;
-    word-break: break-all;
+    word-break: break-word;
     overflow-y: hidden;
     & > * {
         flex: 0 1 90%;

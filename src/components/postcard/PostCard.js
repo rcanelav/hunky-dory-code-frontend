@@ -6,9 +6,9 @@ import hunky from '../../assets/hdc-hunky.png';
 import { getUserRating } from '../../services/users/getUserRating';
 
 export const PostCard = ({ title, date, author, userImage, userId, content, postId, data }) => {
-    const userName = author.split(' ')[0] + ' ' + author.split(' ')[1].slice(0, 1) + '.';
-    const postContent = content.slice(0, 52);
-    const postTitle = title.slice(0, 30) + '[...]';
+    const userName = author.split(' ')[0] + ' ' + author.split(' ')[1].slice(0, 1);
+    const postContent = content.slice(0, 73) + (content.length > 73 ? '...' : '');
+    const postTitle = title;
     const [ userRating, setUserRating ] = useState();
 
     useEffect(() => {
@@ -31,10 +31,8 @@ export const PostCard = ({ title, date, author, userImage, userId, content, post
                         {userName}
                     </StyledUsername>
                     <StyledUserRating>
-                        (
-                            {userRating}
                             <img src={hunky} alt="hunky" />
-                        )
+                            {': ' + userRating }
                     </StyledUserRating>
                 </StyledProfileCard>
                 
@@ -42,7 +40,7 @@ export const PostCard = ({ title, date, author, userImage, userId, content, post
             
                 <StyledPostContent>
                     <StyledTitle>{postTitle}</StyledTitle>
-                    <StyledPostText dangerouslySetInnerHTML={{__html: `${postContent} [...]`}} />
+                    <StyledPostText dangerouslySetInnerHTML={{__html: `${postContent}`}} />
                     <Divider variant='middle' />
                     <StyledRelatedData>
                         <div>
@@ -152,7 +150,7 @@ const StyledPostText = styled.p`
     flex: 0 1 100%;
     font-size: 4vw;
     height: max-content;
-    word-break: break-all;
+    word-break: break-word;
     @media (min-width: 768px) {
         font-size: 0.9em;
     }

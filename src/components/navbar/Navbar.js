@@ -39,7 +39,7 @@ export const Navbar = ({ search, setSearch }) => {
                             <div id='profile-card'>
                                 <img src={userProfile?.userData.image} onClick={ () => navigate('/profile')} alt='hunky dory user'  />
                                 <div id='logout-container'>
-                                    <Button color='error' variant='contained' onClick={ () => logout() }>Salir</Button>
+                                    <Button color='error' variant='contained' onClick={ () => logout() }>Logout</Button>
                                 </div>
                             </div>
                         }
@@ -172,7 +172,7 @@ const Nav = styled.nav`
                             min-width: 80px;
                             max-width: 80px;
                             margin: 1em auto;
-                            padding: 0.3em 2.8em;
+                            padding: 0.3em 2.3em;
                             max-width: 200px;
                             text-align: center;
                             font-size: 0.6em;

@@ -104,8 +104,8 @@ export const SelfProfile = () => {
       <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
         <AsideWrapper id="aside">
-          <AsidePostsInfo url={mostRecentPosts}>Recent posts</AsidePostsInfo>
-          <AsidePostsInfo url={mostLikedPosts}>Top rated posts</AsidePostsInfo>
+          <AsidePostsInfo url={mostRecentPosts}>⏰ Recent posts</AsidePostsInfo>
+          <AsidePostsInfo url={mostLikedPosts}>⚡ Top rated posts</AsidePostsInfo>
           <AsideAnswersInfo url={myAnswers}>My Answers</AsideAnswersInfo>
           </AsideWrapper>
         <Formik
@@ -299,10 +299,10 @@ export const SelfProfile = () => {
         </Formik>
         <AsideWrapper>
           <AsidePostsInfo url={mostAnsweredPosts}>
-            Most answered posts
+            📢 Most answered posts
           </AsidePostsInfo>
           <AsidePostsInfo url={mostViewedPosts}>
-            Most viewed posts
+            👀 Most viewed posts
           </AsidePostsInfo>
           <AsidePostsInfo url={myPosts}>
             My posts

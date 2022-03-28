@@ -38,7 +38,7 @@ export const UnloggedLanding = () => {
                         <div id='profile-logout'>
                             <img src={userProfile?.userData?.image} onClick={ () => navigate('/profile')} alt='hunky dory user'  />
                             <div id='logout-container'>
-                                <Button color='error' variant='contained' onClick={ () => logout() }>Salir</Button>
+                                <Button color='error' variant='contained' onClick={ () => logout() }>Logout</Button>
                             </div>
                         </div>
 

@@ -30,13 +30,12 @@ export const PostAnswersHeader = ({ date, author }) => {
                 </div>
                 <p>{authorData?.name} { authorData?.lastname?.charAt(0) }</p>
                 <div id='rating'>
-                    (<p>{authorData?.rating}</p>
                     <img src={ hunky } alt='hunky'/>
-                    )
+                    <p>: {authorData?.rating}</p>
                 </div>
             </StyledProfileCard>
             <StyledHeaderText>
-                📅 {moment(date).format('LL')}
+                <i>{moment(date).format('LL')}</i>
             </StyledHeaderText>
         </StyledHeaderWrapper>
     )
@@ -82,7 +81,7 @@ const StyledProfileCard = styled.div`
     &  > p {
         margin-top: 0.5em;
         width: max-content;
-        font-size: 1.2em;
+        font-size: 1em;
     }
     & > div#rating {
         img {
