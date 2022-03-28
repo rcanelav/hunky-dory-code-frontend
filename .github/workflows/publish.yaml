@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: "12.x"
 
-      - run: yarn
+      - run: npm install
 
-      - run: yarn run build
+      - run: npm run build
 
       - name: Deploy
 
