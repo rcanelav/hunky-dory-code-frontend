@@ -6,7 +6,7 @@ import { useAuthorization } from '../../hooks/useAuthorization';
 import { BurgerIcon } from '../burgerIcon/BurgerIcon';
 import { Menu } from '../menu/Menu';
 import { Search } from './Search';
-import logo from '../../assets/logo-wb.png';
+import logo from '../../assets/hunky.png';
 export const UnloggedLanding = () => {
     const navigate = useNavigate();
     const [ open, setOpen ] = useState( false );
@@ -89,7 +89,7 @@ const StyledHeader = styled.div`
         flex: 0 1 33%;
         & > img {
             width: 100%;
-            max-width: 170px;
+            max-width: 140px;
         }
     }
     & > #burger {

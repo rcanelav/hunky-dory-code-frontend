@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { SearchBar } from '../searchBar/SearchBar';
-import hunky from '../../assets/logo-wb.png';
+import hunky from '../../assets/hunky.png';
 import { Menu } from '../menu/Menu';
 
 export const Navbar = ({ search, setSearch }) => {
@@ -118,7 +118,7 @@ const Nav = styled.nav`
                     margin-top: 0.5em;
                     width: 100%;
                     cursor: pointer;
-                    max-width: 300px;
+                    max-width: 160px;
                 }
             }
             & > li:nth-child(2) {
