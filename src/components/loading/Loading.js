@@ -9,7 +9,6 @@ export const Loading = () => {
         <UseAnimations
             size={100}
             animation={loading2}
-            strokeColor='rgb(239, 255, 253)'
             fillColor='rgba(255, 204, 3, 1)'
         />
     </LoadingWrapper>
