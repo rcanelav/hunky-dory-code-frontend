@@ -34,7 +34,7 @@ export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
     <>
         <StyledLikes>
             <p>⚡: {postLikes} {postLikes !== 1 ? 'hunkies' : 'hunky'} { postLikes === 0 && '😔'} </p>
-            <StyledLikeButton isLiked={isLiked}>
+            <StyledLikeButton isLiked={isLiked} isDisabled={!isUserLoggedIn}>
                 <Button variant='contained'  disabled={ !isUserLoggedIn } onClick={  handleLike }>
                     Give a ⚡
                 </Button>
@@ -54,6 +54,7 @@ const StyledLikeButton = styled.div`
     }
     & > button {
         border: 2px solid rgb(255, 2, 90);
+        border: 2px solid ${({ isDisabled }) => isDisabled ? 'transparent' : 'rgb(255, 2, 90)'};
         color: ${({ isLiked }) => !isLiked ? 'black' :'white' };
         background-color: ${({ isLiked }) => !isLiked ? 'rgb(255, 255, 255)' :'rgb(255, 2, 90)' };
     }
