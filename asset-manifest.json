@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.js": "/hunky-dory-code-frontend/static/js/main.aef79356.js",
-    "static/media/background-mobile.png": "/hunky-dory-code-frontend/static/media/background-mobile.0d33bd3b45a77f21681b.png",
-    "static/media/hunky.png": "/hunky-dory-code-frontend/static/media/hunky.79e11659c9baaea385b1.png",
-    "static/media/background-desktop.png": "/hunky-dory-code-frontend/static/media/background-desktop.b63949691f2f41644cf8.png",
-    "static/media/hdc-hunky.png": "/hunky-dory-code-frontend/static/media/hdc-hunky.293923fd2f392d9e203d.png",
+    "main.js": "/hunky-dory-code-frontend/static/js/main.70f2dfbe.js",
+    "static/media/background.jpg": "/hunky-dory-code-frontend/static/media/background.5fc3cfa332218fec4535.jpg",
+    "static/media/hunky.png": "/hunky-dory-code-frontend/static/media/hunky.3fd24f468fb9f940170b.png",
+    "static/media/Helvetica.otf": "/hunky-dory-code-frontend/static/media/Helvetica.65117ef0693e338e7620.otf",
     "index.html": "/hunky-dory-code-frontend/index.html",
-    "main.aef79356.js.map": "/hunky-dory-code-frontend/static/js/main.aef79356.js.map"
+    "main.70f2dfbe.js.map": "/hunky-dory-code-frontend/static/js/main.70f2dfbe.js.map"
   },
   "entrypoints": [
-    "static/js/main.aef79356.js"
+    "static/js/main.70f2dfbe.js"
   ]
 }
