@@ -18,7 +18,7 @@ _It is a web platform where people can share their doubts and knowledge about te
 
 <div align="center">
   <a href="https://rcanelav.github.io/hunky-dory-code-frontend/">
-    <img src="https://res.cloudinary.com/rayci/image/upload/v1646335388/logo_rmhaes.png" alt="HDC logo" width="235" height="130">
+    <img src="https://res.cloudinary.com/rayci/image/upload/v1648672506/hunky_kcnm2c.png" alt="HDC logo" width="255" height="150">
   </a>
 
   <h3 align="center">¡Don't let the code knock you out!</h3>
@@ -126,8 +126,7 @@ $ npm start
 ## Authors ✒️
 ---
 
-* **Ramón Canela** - *Design and implementation* - [rcanelav](https://github.com/rcanelav)
-* **Cristina Ruiz** - *Logo, Hunky icon and slogan* - [cristinaruisim](https://github.com/cristinaruisim)
+* **Ramón Canela** - *Design and implementation* - [rcanelav](https://www.linkedin.com/in/rcanelav/)
 
 Access to [contributors](https://github.com/rcanelav/Hunky-Dory-Code-Frontend/graphs/contributors) list who has participating in this project.
 <p align="right">(<a href="#top">back to top ⬆</a>)</p>
@@ -143,7 +142,7 @@ Distributed under the MIT License. See [LICENSE.md](LICENSE.md) for more informa
 ## Acknowledgements
 ---
 * Hat tip to anyone who inspired us to keep ahead with this project.
-* Special thanks to [RicardoMejiaV](https://github.com/RicardoMejiaV) for his UI considerations.
+* Special thanks to [RicardoMejiaV](https://www.linkedin.com/in/ricardo-mejia-ventura/) for his UI considerations.
 <p align="right">(<a href="#top">back to top ⬆</a>)</p>
 </br>
 
