@@ -45,7 +45,9 @@ export const PostCard = ({ title, date, author, userImage, userId, content, post
                             {new Date(date).toDateString("ES-es")}
                         </div>
                         <div id='info'>
-                            <p>⚡:{data.likes} 👀:{data.views} 📢:{data.numAnswers}</p>
+                            <p>⚡:{data.likes}</p>
+                            <p> 👀:{data.views}</p>
+                            <p>📢:{data.numAnswers}</p>
                         </div>
 
                     </StyledRelatedData>
@@ -172,5 +174,11 @@ const StyledRelatedData = styled.div`
 
     & > div#info {
         text-align: right;
+        & > p {
+            display: inline-block;
+            &:not(:last-child) {
+                margin-right: 0.5em;
+            }
+        }
     }
 `;

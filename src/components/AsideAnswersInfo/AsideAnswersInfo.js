@@ -14,6 +14,7 @@ export const AsideAnswersInfo = ({children, url }) => {
       getData();
 
     }, [url]);
+    console.log(posts)
 
   return (
       <Wrapper posts={!!posts?.length}>
@@ -27,10 +28,11 @@ export const AsideAnswersInfo = ({children, url }) => {
                         </div>
                         <div id='content-container'>
                             <h2>{post.title.slice(0,70)}</h2>
-                            {/* <p dangerouslySetInnerHTML={{__html: post.answerContent.slice(0, 30)+ '...'}} /> */}
                         </div>
                         <div id='info'>
-                            <p>⚡:{post.likes} 👀:{post.views} 📢:{post.numAnswers}</p>
+                            <p>⚡:{post.answerLikes}  </p>
+                            <p>👀:{post.views}</p>
+                            <p>📢:{post.numAnswers}</p>
                         </div>
                     </div>
                 ))
@@ -121,16 +123,20 @@ const Wrapper = styled.div`
         }
 
         & > div#content-container {
-            flex: 0 1 74.5%;
-        
+            flex: 0 1 78%;
+            display: flex;
+            margin-bottom: 0.5em;
+            align-items: center;
+
             & > h2 {
-                font-size: 0.62em;
+                flex: 0 1 85%;
+                font-size: 0.68em;
                 font-weight: 400;
                 margin: 0.3em 0 0 1em;
             }
     
             & > p {
-                font-size: 0.65em;
+                font-size: 0.7em;
                 margin: 0.1em auto 0.3em 0.8em;
             }
         }
@@ -171,14 +177,20 @@ const Wrapper = styled.div`
         position: absolute;
         bottom: 0.30em;
         right: 1em;
-        font-size: 0.55em;
+        font-size: 0.57em;
+        & > p {
+            display: inline-block;
+            &:not(:last-child) {
+                margin-right: 0.5em;
+            }
+        }
     }
 
     @media (min-width: 1024px) {
         max-height: 16.72em;
         & > div {
-            min-height: 2.62em;
-            max-height: 2.62em;
+            min-height: 3.4em;
+            max-height: 3.4em;
         }
         & > h1 {
             font-size: 0.9em;

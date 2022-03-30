@@ -60,7 +60,7 @@ export function TextEditor({ limit, value, setValue, submit}) {
       />
       <div id="button-container">
         <p><em>Remaining: {sizeLimit - length}</em></p>
-        <Button variant="contained" color="primary" onClick={ submit } disabled={!value}>Send</Button>
+        <Button variant="contained" onClick={ submit } disabled={!value}>Send</Button>
       </div>
     </StyledWrapper>
   );
@@ -106,11 +106,13 @@ const StyledWrapper = styled.div`
       border-radius: 10px;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
       border: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 0.85em;
     }
     & > button {
     max-width: 7em;
     padding: 0.5em;
     font-size: 0.85em;
+    background-color: rgb(255, 2, 90);
       &:disabled {
         background-color: #ccc;
       }
