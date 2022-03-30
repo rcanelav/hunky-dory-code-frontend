@@ -4,13 +4,14 @@ import { bool, func } from 'prop-types';
 import UseAnimations from 'react-useanimations';
 import menu4  from 'react-useanimations/lib/menu4';
 
-export const BurgerIcon = ({open, setOpen}) => {
+export const BurgerIcon = ({open, setOpen, color = ''}) => {
 
   return (
     <>
       <StyledBurger 
         animation={menu4} 
         reverse={open}
+        strokeColor={color}
         onClick={() => {
           setOpen(!open);
         }}

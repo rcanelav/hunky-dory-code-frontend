@@ -58,7 +58,7 @@ export const SearchBar = ({openMenu, setOpenMenu}) => {
                 <SearchContainer>
                     <p>{!open ? 'Quick Search' : 'Advanced Search'} </p>
                     <BurgerIcon open={ openMenu } setOpen={ setOpenMenu } />
-                    <TextField id="outlined-basic" size='small' label="Search" variant="outlined"
+                    <StyledTextfield id="outlined-basic" size='small' label="Search" variant="outlined"
                     onKeyDown={ e => e.key === 'Enter' && handleSubmit() }
                     value={ searchData }
                     onChange={ (e) => setSearchData(e.target.value)}
@@ -77,7 +77,7 @@ export const SearchBar = ({openMenu, setOpenMenu}) => {
                 {
                     searchBy === 'technology' &&
                     <TechnologiesContainer>
-                        <p>Select your technology</p>
+                        <p>Choose a technology</p>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -136,7 +136,7 @@ export const SearchBar = ({openMenu, setOpenMenu}) => {
                     searchBy === 'numAnswers' &&
                     <NumAnswersContainer>
                         <p>Insert a number between 0 and: </p>
-                        <TextField id="outlined-basic" label="Max answers quantity" size='small'
+                        <StyledTextfield id="outlined-basic" label="Max answers quantity" size='small'
                         value={ numAnswers }variant="outlined" onChange={ (e) => setNumAnswers(e.target.value) } />
                     </NumAnswersContainer>
                 }
@@ -194,15 +194,39 @@ export const SearchBar = ({openMenu, setOpenMenu}) => {
                     animation={maximizeMinimize2}
                 />
             </BottomContainer>
-
         </StyledSearchBarWrapper>
     )
 }
+
+const StyledTextfield = styled(TextField)`
+    && {
+        & #outlined-basic-label {
+        color: black;
+        }
+        & .MuiOutlinedInput-root{
+            &.MuiInputLabel-root{
+                color: black;
+            }
+
+            &.Mui-focused fieldset{
+                border-color: black;
+            }
+            &:hover fieldset {
+                border-color: black;
+            }
+        }
+    }
+`;
 
 const NewQuestion = styled(Button)`
     &&{
         font-size: 0.6em;
         font-weight: medium;
+        background-color: rgb(255, 2, 90);
+        transition: all 0.3s ease-in-out;
+        &:hover{
+            background-color: rgb(255, 2, 90);
+        }
     }
 `;
 const BottomContainer = styled.div`
@@ -223,11 +247,14 @@ const ResetButton = styled(Button)`
         display: ${({ open }) => open ? 'flex' : ' none'};
         margin-top: 0.5em;
         color: black;
-        font-weight: medium;
-        background-color: #f5f5f5;
-
+        font-weight: bold;
+        background-color: #e6e6e6;
+        transition: all 0.2s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 2px, rgba(0, 0, 0, 0.23) 0px 3px 2px;
+        letter-spacing: 0.3em;
         &:hover{
-            background-color: #e6e6e6;
+            background-color: rgb(213, 213, 214);
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
         }
     }
 `;
@@ -250,6 +277,15 @@ const SortContainer = styled.div`
             text-align: left;
             margin-bottom: 0.5em;
         }
+
+        & .MuiOutlinedInput-root{
+            &.MuiInputLabel-root{
+                color: black;
+            }
+            &.Mui-focused fieldset{
+                border-color: black;
+            }
+        }
     }
 `;
 const NumAnswersContainer = styled.div`
@@ -264,7 +300,7 @@ const NumAnswersContainer = styled.div`
         flex: 0 1 100%;
         font-weight: bold;
         text-align: left;
-        margin-bottom: 0.2em;
+        margin-bottom: 0.5em;
     }
 `;
 
@@ -280,6 +316,14 @@ const DateContainer = styled.div`
     & > :nth-child(3) {
         flex: 0 1 100%;
         margin-top: 0.5em;
+    }
+    & .MuiOutlinedInput-root{
+        &.MuiInputLabel-root{
+            color: black;
+        }
+        &.Mui-focused fieldset{
+            border-color: black;
+        }
     }
     
 `;
@@ -298,6 +342,15 @@ const TechnologiesContainer = styled.div`
         font-weight: bold;
         text-align: left;
         margin-bottom: 0.2em;
+    }
+
+    & .MuiOutlinedInput-root{
+        &.MuiInputLabel-root{
+            color: black;
+        }
+        &.Mui-focused fieldset{
+            border-color: black;
+        }
     }
 `;
 
@@ -321,6 +374,12 @@ const SearchByContainer = styled.div`
     }
     & span {
         font-size: 0.8em;
+    }
+
+    & :nth-child(2) {
+        & .MuiRadio-root {
+          color: rgb(255, 2, 90);
+        }
     }
 
 `;
@@ -353,9 +412,7 @@ const SearchContainer = styled.div`
         }
         & #outlined-basic-label {
         }
-        
     }
-
 `;
 
 const StyledSearchBarWrapper = styled.div`

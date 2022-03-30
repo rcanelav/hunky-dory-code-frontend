@@ -198,6 +198,25 @@ const StyledField = styled(TextField)`
         &:first-child {
             margin-bottom: 5vh;
         }
+
+        & .MuiInput-input {
+            max-width: 92%;
+            font-size: 1.25em;
+            color: black;
+        }
+        & #standard-basic-label {
+            font-size: 1.4em;
+            color: black;
+        }
+        & .MuiInput-underline:before,
+        .MuiInput-underline:after,
+        .MuiInput-underline:hover:before{
+            border-bottom: 1px solid black;
+        }
+
+        & .MuiInputLabel-root {
+            color: black;
+        }
     }
 `;
 
@@ -206,7 +225,18 @@ const StyledButton = styled(Button)`
         margin-top: 2vh;
         min-width: 100%;
         margin-bottom: 1vh;
-        font-size: 1.1em;
+        font-size: 1em;
+        background-color: rgb(255, 2, 90);
+        border: 3px solid rgb(255, 2, 90);
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        color: white;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            background-color: rgb(255, 2, 90);
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        }
     }
 `;
 

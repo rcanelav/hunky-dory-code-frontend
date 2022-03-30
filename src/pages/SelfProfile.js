@@ -18,6 +18,7 @@ import { useAuthorization } from "../hooks/useAuthorization";
 import { getTechnologies } from "../services/technologies/getTechnologies";
 import { updateProfilePicture, updateUserInfo, updateUserRole } from "../services/users/updateUserInfo";
 import { displayModalWithTimer } from "../utils/helpers/displayModal";
+import { getUrlTypes } from "../utils/helpers/urlTypes";
 
 export const SelfProfile = () => {
   const { userProfile, userSession, logout } = useAuthorization();
@@ -89,24 +90,16 @@ export const SelfProfile = () => {
     getData();
   }, [userData.image]);
 
-  const mostRecentPosts =
-    "search?searchBy=date&direction=desc&order=date&limit=5";
-  const mostLikedPosts =
-    "search?searchBy=titles&direction=desc&order=likes&limit=5";
-  const mostAnsweredPosts =
-    "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
-  const mostViewedPosts = "search?&searchBy=content&orderBy=views";
-  const myPosts = `users/${userData.id}/posts?page=1&limit=5`;
-  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
+  const asideUrl = getUrlTypes(userProfile?.userData?.id);
 
   return (
     <>
       <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
         <AsideWrapper id="aside">
-          <AsidePostsInfo url={mostRecentPosts}>⏰ Recent posts</AsidePostsInfo>
-          <AsidePostsInfo url={mostLikedPosts}>⚡ Top rated posts</AsidePostsInfo>
-          <AsideAnswersInfo url={myAnswers}>My Answers</AsideAnswersInfo>
+          <AsidePostsInfo url={asideUrl.mostRecentPosts}>Recent posts</AsidePostsInfo>
+          <AsidePostsInfo url={asideUrl.mostLikedPosts}>Top rated posts</AsidePostsInfo>
+          <AsideAnswersInfo url={asideUrl.myAnswers}>My Answers</AsideAnswersInfo>
           </AsideWrapper>
         <Formik
           initialValues={{
@@ -183,7 +176,7 @@ export const SelfProfile = () => {
                   />
                   <TextField
                     name="lastname"
-                    label="Lastname"
+                    label="Last name"
                     size="small"
                     value={values.lastname}
                     onChange={handleChange}
@@ -298,13 +291,13 @@ export const SelfProfile = () => {
           )}
         </Formik>
         <AsideWrapper>
-          <AsidePostsInfo url={mostAnsweredPosts}>
-            📢 Most answered posts
+          <AsidePostsInfo url={asideUrl.mostAnsweredPosts}>
+            Most answered posts
           </AsidePostsInfo>
-          <AsidePostsInfo url={mostViewedPosts}>
-            👀 Most viewed posts
+          <AsidePostsInfo url={asideUrl.mostViewedPosts}>
+            Most viewed posts
           </AsidePostsInfo>
-          <AsidePostsInfo url={myPosts}>
+          <AsidePostsInfo url={asideUrl.myPosts}>
             My posts
           </AsidePostsInfo>
         </AsideWrapper>
@@ -407,12 +400,15 @@ const ProfileWrapper = styled.div`
       margin: 0.5em auto;
       font-size: 0.7em;
       font-weight: bold;
-      background-color: rgba(255, 204, 3, 1);
+      background-color: rgb(255, 2, 90);
       text-align: center;
-      color: rgba(21, 101, 192, 1);
+      color: white;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+      transition: all 0.2s ease-in-out;
 
       &:hover {
-          background-color: rgba(255, 204, 3, 0.8);
+        background-color: rgb(255, 2, 90);
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
       }
     }
 
@@ -447,6 +443,12 @@ const ProfileWrapper = styled.div`
         justify-content: center;
         margin: 0.3em auto;
     }
+
+    & >:first-child {
+      & .MuiRadio-root {
+        color: rgb(255, 2, 90);
+      }
+    }
     & > p {
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 10px;
@@ -457,11 +459,18 @@ const ProfileWrapper = styled.div`
   & > button {
     margin-top: 1em;
     flex: 0 1 90%;
-    background-color: rgba(255, 204, 3, 1);
+    background-color: rgba(255, 255, 255, 0.50);
+    border: 3px solid rgb(255, 2, 90);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    color: black;
     letter-spacing: 0.5em;
     font-weight: bold;
+    transition: all 0.2s ease-in-out;
+
     &:hover {
-        background-color: rgba(255, 204, 3, 0.8);
+      color: white;
+      background-color: rgb(255, 2, 90);
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     }
   }
 
@@ -476,7 +485,14 @@ const ProfileWrapper = styled.div`
         font-weight: bold;
         margin: 0.5em auto;
         flex: 0 1 100%;
-        background-color: rgba(255, 204, 3, 1);
+        background-color: rgb(255, 2, 90);
+        color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 3px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        }
+
     }
   }
 

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getUserInfo } from '../../services/users/getUserInfo';
 import { getUserRating } from '../../services/users/getUserRating';
-import hunky from '../../assets/hdc-hunky.png';
 import moment from 'moment';
 import UseAnimations from 'react-useanimations';
 import github from 'react-useanimations/lib/github';
@@ -63,8 +62,7 @@ export const Profile = ({userId}) => {
                 <div id='rating'>
                     <span>Rating</span>
                     <div>
-                        <img src={hunky} alt='hunky' />
-                        <p>: {userData?.rating}</p>
+                        <p>⚡: {userData?.rating}</p>
                     </div>
                 </div>
                 <div id='rating'>
@@ -271,13 +269,14 @@ const Publications = styled.div`
         letter-spacing: 0.1em;
         flex: 0 1 40%;
         font-weight: bold;
-        background-color: rgba(255, 204, 3, 1);
-        transition: all 0.3s ease-in-out;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        background-color: rgb(255, 2, 90);
+        color: white;
+        transition: all 0.2s ease-in-out;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
         &:hover {
-            background-color: rgba(255, 204, 3, 0.8);
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            background-color: rgb(255, 2, 90);
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
         }
     }
 

@@ -68,5 +68,7 @@ const StyledAnswerCard = styled.div`
     & >:nth-child(2) {
         justify-self: center;
         flex: 0 1 94%;
+        font-size: 0.9em;
+        line-height: 1.3em;
     }
 `;

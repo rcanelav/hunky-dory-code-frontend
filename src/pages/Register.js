@@ -214,6 +214,12 @@ const StyledFieldWrapper = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+
+    &>:first-child {
+        & .MuiRadio-root {
+          color: rgb(255, 2, 90);
+        }
+    }
 `;
 
 const StyledWrapper = styled.div`
@@ -272,6 +278,21 @@ const StyledField = styled(TextField)`
         min-width: 80%;
         font-size: 5em;
         margin: 1vh auto;
+        & .MuiInput-input {
+            max-width: 92%;
+            font-size: 1em;
+            color: black;
+        }
+
+        & .MuiInput-underline:before,
+        .MuiInput-underline:after,
+        .MuiInput-underline:hover:before{
+            border-bottom: 1px solid black;
+        }
+
+        & .MuiInputLabel-root {
+            color: black;
+        }
     }
 `;
 
@@ -281,6 +302,17 @@ const StyledButton = styled(Button)`
         min-width: 100%;
         margin-bottom: 2vh;
         font-size: 1.1em;
+        background-color: rgb(255, 2, 90);
+        border: 3px solid rgb(255, 2, 90);
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        color: white;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+        background-color: rgb(255, 2, 90);
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        }
     }
 `;
 

@@ -102,7 +102,7 @@ const Wrapper = styled.div`
             box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.8) 0px 1px 3px -1px;
         }
         & > div#img-container {
-            flex: 0 1 20%;
+            flex: 0 1 22%;
             display: flex;
             flex-flow: row wrap;
             justify-content: center; 
@@ -121,12 +121,14 @@ const Wrapper = styled.div`
         }
 
         & > div#content-container {
-            flex: 0 1 75%;
+            flex: 0 1 78%;
+            display: flex;
         
             & > h2 {
-                flex: 0 1 100%;
-                font-size: 0.7em;
-                margin: 0.3em 0 0 1em;
+                flex: 0 1 85%;
+                font-size: 0.62em;
+                font-weight: 400;
+                margin: 0.3em 0 0.1em 1em;
             }
     
             & > p {

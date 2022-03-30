@@ -11,6 +11,7 @@ import { AsideAnswersInfo } from "../components/AsideAnswersInfo/AsideAnswersInf
 import { createPost } from "../services/posts/createPost";
 import { getTechnologies } from "../services/technologies/getTechnologies";
 import { displayModal } from "../utils/helpers/displayModal";
+import { getUrlTypes } from "../utils/helpers/urlTypes";
 
 export const NewPost = () => {
   const [postBody, setPostBody] = useState("");
@@ -19,16 +20,7 @@ export const NewPost = () => {
   const [technologyData, setTechnologyData] = useState([]);
   const { userSession, userProfile } = useAuthorization();
   const navigate = useNavigate();
-
-  const mostRecentPosts =
-    "search?searchBy=date&direction=desc&order=date&limit=5";
-  const mostLikedPosts =
-    "search?searchBy=titles&direction=desc&order=likes&limit=5";
-  const mostAnsweredPosts =
-    "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
-  const mostViewedPosts = "search?&searchBy=content&orderBy=views";
-  const myPosts = `users/${ userProfile?.userData?.id}/posts?page=1&limit=5`;
-  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
+  const asideUrl = getUrlTypes(userProfile?.userData?.id);
 
   useEffect(() => {
     async function getData() {
@@ -71,11 +63,11 @@ export const NewPost = () => {
       <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
         <AsideWrapper>
-          <AsidePostsInfo url={mostRecentPosts}>⏰ Recent posts</AsidePostsInfo>
-          <AsidePostsInfo url={mostLikedPosts}>⚡ Top rated posts</AsidePostsInfo>
+          <AsidePostsInfo url={asideUrl.mostRecentPosts}>Recent posts</AsidePostsInfo>
+          <AsidePostsInfo url={asideUrl.mostLikedPosts}>Top rated posts</AsidePostsInfo>
           {
             userProfile?.userData &&
-            <AsideAnswersInfo url={myAnswers}>
+            <AsideAnswersInfo url={asideUrl.myAnswers}>
               My Answers
             </AsideAnswersInfo>
           }
@@ -115,15 +107,15 @@ export const NewPost = () => {
           </div>
         </PostGridWrapper>
         <AsideWrapper>
-          <AsidePostsInfo url={mostAnsweredPosts}>
-            📢 Most answered posts
+          <AsidePostsInfo url={asideUrl.mostAnsweredPosts}>
+            Most answered posts
           </AsidePostsInfo>
-          <AsidePostsInfo url={mostViewedPosts}>
-            👀 Most viewed posts
+          <AsidePostsInfo url={asideUrl.mostViewedPosts}>
+            Most viewed posts
           </AsidePostsInfo>
           {
             userProfile?.userData &&
-            <AsidePostsInfo url={myPosts}>
+            <AsidePostsInfo url={asideUrl.myPosts}>
               My Posts
             </AsidePostsInfo>
           }

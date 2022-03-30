@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import hunky from '../../assets/hdc-hunky.png';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../loading/Loading';
 import { getUserById } from '../../services/users/getUserById';
@@ -30,8 +29,7 @@ export const PostAnswersHeader = ({ date, author }) => {
                 </div>
                 <p>{authorData?.name} { authorData?.lastname?.charAt(0) }</p>
                 <div id='rating'>
-                    <img src={ hunky } alt='hunky'/>
-                    <p>: {authorData?.rating}</p>
+                    <p>⚡: {authorData?.rating}</p>
                 </div>
             </StyledProfileCard>
             <StyledHeaderText>
@@ -46,6 +44,7 @@ const StyledHeaderText = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: right;
+    font-size: 0.8em;
 `;
 const StyledProfileCard = styled.div`
     flex: 0 1 25%;
@@ -84,6 +83,7 @@ const StyledProfileCard = styled.div`
         font-size: 1em;
     }
     & > div#rating {
+        font-size: 0.9em;
         img {
             position: relative;
             top: 0.2em;

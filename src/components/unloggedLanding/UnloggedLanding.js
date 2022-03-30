@@ -19,7 +19,7 @@ export const UnloggedLanding = () => {
             <StyledHeader className="animate__animated animate__fadeIn">
                 <div />
                 <div className='logo'>
-                    <img src={ logo } alt="logo" />
+                    <img src={ logo } onClick={()=> navigate('/search')} alt="hunkyDoryCode" />
                 </div>
                 <div id='burger'>
                     {
@@ -43,7 +43,7 @@ export const UnloggedLanding = () => {
                         </div>
 
                     }
-                    <BurgerIcon open={ open } setOpen={ setOpen } />
+                    <BurgerIcon open={ open } setOpen={ setOpen } color={'#fff'} />
                 </div>
             </StyledHeader>
                 <BodyWrapper className="animate__animated animate__fadeIn">
@@ -67,7 +67,7 @@ export const UnloggedLanding = () => {
 }
 
 const BodyWrapper = styled.div`
-    margin: 19vh auto;
+    height: 60vh;
     display: flex;
     flex-direction: row wrap;
     align-items: center;
@@ -90,6 +90,23 @@ const StyledHeader = styled.div`
         & > img {
             width: 100%;
             max-width: 140px;
+            cursor: pointer;
+            transform: translatey(0px);
+	        animation: float 5s ease-in-out infinite;
+            @keyframes float {
+                0% {
+                    box-shadow: 0 5px 15px 0px rgba(0,0,0,0);
+                    transform: translatey(0px);
+                }
+                50% {
+                    box-shadow: 0 25px 15px 0px rgba(0,0,0,0);
+                    transform: translatey(-20px);
+                }
+                100% {
+                    box-shadow: 0 5px 15px 0px rgba(0,0,0,0);
+                    transform: translatey(0px);
+                }
+            }
         }
     }
     & > #burger {
@@ -133,9 +150,10 @@ const StyledHeader = styled.div`
                 &  button {
                     padding: 0.3em 0.5em;
                     font-size: 1.8em;
+                    background-color: rgb(255, 2, 90);
                 }
             }
-        }                
+        }
     }
 
     @media (min-width: 648px) {
@@ -150,7 +168,7 @@ const StyledHeader = styled.div`
             flex: 0 1 33%;
         }
         & > .logo {
-            margin: 1em 0em 0 0;
+            margin: 2em 0 0 0;
             display: flex;
             flex-flow: row wrap;
             align-items: center;
@@ -188,11 +206,16 @@ const StyledHeader = styled.div`
         }
     }
     @media (min-width: 1024px) {
-        & > .logo {
-            margin: 1em 0em 0 0;
-        }
         & > #burger {
             font-size: 0.4em;
+        }
+    }
+    @media (min-width: 1500px) {
+        & > .logo {
+            margin: 4em 0 0 0;
+            & > img {
+                min-width: 170px;
+            }
         }
     }
 `;
@@ -224,29 +247,40 @@ const StyledAuthContainer = styled.div`
 `;
 const StyledLogin = styled(Button)`
     && {
-        background-color: rgba(255, 204, 3, 1);
-        border: none;
+        background-color: rgb(1, 243, 99);
+        border: 1px solid black;
         color: black;
         min-height: 10%;
         font-size: 1.7em;
         text-transfor: uppercase;
+        transition: all 0.3s ease-in-out;
 
-        &&:hover{
-            background-color: rgba(255, 230, 0, 1);
+        &:hover{
+            background-color: rgba(4, 213, 87, 1);
+        }
+
+        @media (min-width: 768px) {
+            font-weight: bold;
         }
     }
 `;
 
 const StyledRegister = styled(Button)`
     && {
-        background-color: lightgray;
-        border: none;
+        background-color: #fff;
+        border: 1px solid black;
         color: black;
         min-height: 10%;
         font-size: 1.7em;
         text-transfor: uppercase;
-        &&:hover {
-            background-color: rgba(0, 163, 152, 1);
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            background-color: rgb(254, 13, 131);
+        }
+
+        @media (min-width: 768px) {
+            font-weight: bold;
         }
     }
 `;

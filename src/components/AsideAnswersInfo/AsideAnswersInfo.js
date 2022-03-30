@@ -26,8 +26,8 @@ export const AsideAnswersInfo = ({children, url }) => {
                             <p> {post.name} {post.lastname.slice(0,1)}</p>
                         </div>
                         <div id='content-container'>
-                            <h2>{post.title.slice(0, 24)} <span>...</span></h2>
-                            <p dangerouslySetInnerHTML={{__html: post.answerContent.slice(0, 30)+ '...'}} />
+                            <h2>{post.title.slice(0,70)}</h2>
+                            {/* <p dangerouslySetInnerHTML={{__html: post.answerContent.slice(0, 30)+ '...'}} /> */}
                         </div>
                         <div id='info'>
                             <p>⚡:{post.likes} 👀:{post.views} 📢:{post.numAnswers}</p>
@@ -121,11 +121,11 @@ const Wrapper = styled.div`
         }
 
         & > div#content-container {
-            flex: 0 1 75%;
+            flex: 0 1 74.5%;
         
             & > h2 {
-                flex: 0 1 100%;
-                font-size: 0.7em;
+                font-size: 0.62em;
+                font-weight: 400;
                 margin: 0.3em 0 0 1em;
             }
     

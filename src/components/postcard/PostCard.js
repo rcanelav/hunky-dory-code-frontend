@@ -2,7 +2,6 @@ import { Divider } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import hunky from '../../assets/hdc-hunky.png';
 import { getUserRating } from '../../services/users/getUserRating';
 
 export const PostCard = ({ title, date, author, userImage, userId, content, postId, data }) => {
@@ -31,8 +30,7 @@ export const PostCard = ({ title, date, author, userImage, userId, content, post
                         {userName}
                     </StyledUsername>
                     <StyledUserRating>
-                            <img src={hunky} alt="hunky" />
-                            {': ' + userRating }
+                            {'⚡: ' + userRating }
                     </StyledUserRating>
                 </StyledProfileCard>
                 
@@ -122,7 +120,7 @@ const StyledTitle = styled.p`
     font-weight: bold;
     margin: 0;
     @media (min-width: 768px) {
-        font-size: 1.1em;
+        font-size: 1em;
     }
 `;
 
@@ -151,8 +149,9 @@ const StyledPostText = styled.p`
     font-size: 4vw;
     height: max-content;
     word-break: break-word;
+    margin-top: 0.2em;
     @media (min-width: 768px) {
-        font-size: 0.9em;
+        font-size: 0.85em;
     }
 `;
 

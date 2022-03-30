@@ -1,7 +1,6 @@
 import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import hunky from '../../assets/hdc-hunky.png';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { setLikeToPublication } from '../../services/posts/setLikeToPublication';
 
@@ -34,10 +33,10 @@ export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
     return (
     <>
         <StyledLikes>
-            <p><img src={hunky} alt='HUNKY'/>: {postLikes} {postLikes !== 1 ? 'hunkies' : 'hunky'} { postLikes === 0 && '😔'} </p>
-            <StyledLikeButton >
-                <Button variant='contained' color={isLiked ? "warning" : "primary"} disabled={ !isUserLoggedIn } onClick={  handleLike }>
-                    Give a <img src={hunky} alt='HUNKY'/>
+            <p>⚡: {postLikes} {postLikes !== 1 ? 'hunkies' : 'hunky'} { postLikes === 0 && '😔'} </p>
+            <StyledLikeButton isLiked={isLiked}>
+                <Button variant='contained'  disabled={ !isUserLoggedIn } onClick={  handleLike }>
+                    Give a ⚡
                 </Button>
             </StyledLikeButton>
         </StyledLikes>
@@ -54,12 +53,22 @@ const StyledLikeButton = styled.div`
         margin-left: 1em;
     }
     & > button {
+        border: 2px solid rgb(255, 2, 90);
+        color: ${({ isLiked }) => !isLiked ? 'black' :'white' };
+        background-color: ${({ isLiked }) => !isLiked ? 'rgb(255, 255, 255)' :'rgb(255, 2, 90)' };
+    }
+    & > button {
         font-size: 0.65em;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            background-color: ${({ isLiked }) => !isLiked ? 'rgb(255, 2, 90)' :'2px solid rgb(255, 255, 255)' };
+            color: ${({ isLiked }) => !isLiked ? 'white': 'black' };
+        }
     }
 `;
 const StyledLikes = styled.div`
   flex: 0 1 100%;
-  font-size: 1.13em;
+  font-size: 0.9em;
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
@@ -73,6 +82,7 @@ const StyledLikes = styled.div`
       flex: 0 1 45%;
   }
   & > :first-child {
+    flex: 0 1 51%;
     align-self: center;
     position: relative;
 }

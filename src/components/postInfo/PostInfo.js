@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getUserRating } from '../../services/users/getUserRating';
-import hunky from '../../assets/hdc-hunky.png';
 import moment from 'moment';
 import { PostInfoInteractionBar } from './PostInfoInteractionBar';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +8,7 @@ export const PostInfo = ({ post }) => {
   const { postData, technology, author, likes } = post;
   const userName = author?.name + ' ' + author?.lastname.charAt(0);
   const [ userRating, setUserRating] = useState();
-  const postDate = moment(postData?.createdAt).format('LL');
+  const postDate = moment(postData?.postedAt).format('LL');
   const [ views, setViews ] = useState(postData.views);
   const navigate = useNavigate();
   useEffect(() => {
@@ -33,14 +32,14 @@ export const PostInfo = ({ post }) => {
           <img src={author.image} alt={author.name} onClick={ () => navigate(`/users/${author.id}/profile`)} />
             <p>{userName}</p>
           <div>
-             {<img id='hunky' src={hunky} alt='HUNKY'/>} <p>: { userRating} </p>
+            <p>⚡: { userRating} </p>
           </div>
         </div>
         <div>
           <h1>{postData.title}</h1>
           <div>
             <p>📚 Technology: {technology.name}</p>
-            <i>{postDate}</i>
+            <p><i>{postDate}</i></p>
           </div>
           <p>👀 Views: {views} </p>
         </div>
@@ -60,18 +59,16 @@ const StyledContentWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   word-break: break-word;
+  line-height: 1.3em;
+
 
   & > p:first-child {
-    font-size: 1.2em;
+    font-size: 0.9em;
     text-align: justify;
     flex: 0 1 100%;
     align-self: center;
   }
 
-  @media (min-width: 768px) {
-    & > p:first-child {
-      font-size: 1em;
-  }
 `;
 
 const StyledWrapper = styled.div`
@@ -121,7 +118,7 @@ const StyledPostHeader = styled.div`
 
     & > p  {
       flex: 0 1 100%;
-      font-size: 1em;
+      font-size: 0.9em;
       align-self: center;
       justify-self: center;
     }
@@ -136,7 +133,7 @@ const StyledPostHeader = styled.div`
 
     & > div > p {
       margin-top: 0.2em;
-      font-size: 1em;
+      font-size: 0.9em;
     }
 
     & > div > img {
@@ -153,6 +150,7 @@ const StyledPostHeader = styled.div`
     align-items: center;
     margin-left: 0.5em;
     height: 80%;
+    font-size: 0.9em;
 
     & > * {
       flex: 0 1 100%;
@@ -169,12 +167,14 @@ const StyledPostHeader = styled.div`
       justify-content: space-between;
 
       & > * {
-        font-size: 1em;
+        font-size: 0.9em;
         max-width: max-content;
-        flex: 0 1 50%;
+        flex: 0 1 55%;
       }
-
       & > :last-child {
+        font-size: 0.9em;
+        max-width: max-content;
+        flex: 0 1 40%;
         align-self: flex-end;
       }
     }

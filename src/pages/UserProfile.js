@@ -6,44 +6,36 @@ import { AsidePostsInfo } from "../components/AsidePostsInfo/AsidePostsInfo";
 import { Navbar } from "../components/navbar/Navbar";
 import { Profile } from "../components/userProfile/Profile";
 import { useAuthorization } from "../hooks/useAuthorization";
+import { getUrlTypes } from "../utils/helpers/urlTypes";
 
 export const UserProfile = () => {
   const userId = useLocation().pathname.split("/")[2];
   const { userProfile } = useAuthorization();
-
-  const mostRecentPosts =
-    "search?searchBy=date&direction=desc&order=date&limit=5";
-  const mostLikedPosts =
-    "search?searchBy=titles&direction=desc&order=likes&limit=5";
-  const mostAnsweredPosts =
-    "search?searchBy=numAnswers&order=numAnswers&numAnswers=0";
-  const mostViewedPosts = "search?&searchBy=content&orderBy=views";
-  const myPosts = `users/${userProfile?.userData?.id}/posts?page=1&limit=5`;
-  const myAnswers = `users/${ userProfile?.userData?.id}/answers?page=1&limit=5`;
+  const asideUrl = getUrlTypes(userProfile?.userData?.id);
 
   return (
       <ContentWrapper className="animate__animated animate__fadeIn">
         <StyledNavbar />
         <AsideWrapper>
-          <AsidePostsInfo url={mostRecentPosts}>⏰ Recent posts</AsidePostsInfo>
-          <AsidePostsInfo url={mostLikedPosts}>⚡ Top rated posts</AsidePostsInfo>
+          <AsidePostsInfo url={asideUrl.mostRecentPosts}>Recent posts</AsidePostsInfo>
+          <AsidePostsInfo url={asideUrl.mostLikedPosts}>Top rated posts</AsidePostsInfo>
           {
             userProfile?.userData &&
-            <AsideAnswersInfo url={myAnswers}>
+            <AsideAnswersInfo url={asideUrl.myAnswers}>
               My Answers
             </AsideAnswersInfo>
           }
         </AsideWrapper>
         <Profile userId={userId} />
         <AsideWrapper>
-          <AsidePostsInfo url={mostAnsweredPosts}>
+          <AsidePostsInfo url={asideUrl.mostAnsweredPosts}>
             📢 Most answered posts
           </AsidePostsInfo>
-          <AsidePostsInfo url={mostViewedPosts}>
+          <AsidePostsInfo url={asideUrl.mostViewedPosts}>
             👀 Most viewed posts
           </AsidePostsInfo>
           { userProfile?.userData?.id && 
-            <AsidePostsInfo url={myPosts}>My posts</AsidePostsInfo>
+            <AsidePostsInfo url={asideUrl.myPosts}>My posts</AsidePostsInfo>
           }
         </AsideWrapper>
       </ContentWrapper>

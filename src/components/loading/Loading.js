@@ -9,7 +9,7 @@ export const Loading = () => {
         <UseAnimations
             size={100}
             animation={loading2}
-            fillColor='rgba(255, 204, 3, 1)'
+            fillColor='rgb(255, 2, 90)'
         />
     </LoadingWrapper>
   )

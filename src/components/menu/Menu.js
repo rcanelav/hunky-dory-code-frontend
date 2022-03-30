@@ -85,11 +85,8 @@ const StyledTextfied = styled(TextField)`
             font-size: 1.2em;
             color: black;
         }
-        & .MuiInput-underline {
-            color: black;
-        }
     }
-    `;
+`;
 
 const StyledLogout = styled(FiLogOut)`
     font-size: 1em;
@@ -116,7 +113,9 @@ const StyledMenu = styled.nav`
   border-radius: 0 70% 0 0;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
   transition: all 0.3s ease-in-out;
-  border: 2px solid rgba(0,0,0,0.2);
+  border: 3px solid rgba(0,0,0,1);
+  border-left: none;
+  animation: 3s infinite alternate ease-in-out breathing-colour;
 
   & >:first-child {
       margin: 0 auto 15% 10%;
@@ -133,10 +132,6 @@ const StyledMenu = styled.nav`
     color: black;
     text-decoration: none;
     transition: color 0.3s linear;
-
-    &:hover {
-      color: rgba(255, 204, 3, 1);
-    }
 
     &:last-child {
         margin-top: 7em;
