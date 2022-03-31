@@ -47,7 +47,6 @@ export const PostDetails = () => {
 
   const asideUrl = getUrlTypes(userProfile?.userData?.id);
   if( isLoading ) return <Loading />;
-
   return (
     <>
       <ContentWrapper className='animate__animated animate__fadeIn'>
@@ -78,7 +77,7 @@ export const PostDetails = () => {
                     animation={alertOctagon}
                     strokeColor='red'
                 />
-                <p>Debes ser experto en esta tecnología para responder a esa pregunta.</p>
+                <p>Only experts in <u>{ postInfo?.technology?.name}</u> are allowed to reply.</p>
             </div>
           }
           <PostAnswers key={postedAnswer + new Date()} post={postInfo} />
