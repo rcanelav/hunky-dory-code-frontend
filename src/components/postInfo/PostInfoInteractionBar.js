@@ -62,7 +62,7 @@ const StyledLikeButton = styled.div`
         font-size: 0.65em;
         transition: all 0.3s ease-in-out;
         &:hover {
-            background-color: ${({ isLiked }) => !isLiked ? 'rgb(255, 2, 90)' :'2px solid rgb(255, 255, 255)' };
+            background-color: ${({ isLiked }) => !isLiked ? 'rgb(255, 2, 90)' :'rgb(255, 255, 255)' };
             color: ${({ isLiked }) => !isLiked ? 'white': 'black' };
         }
     }
