@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { setLikeToPublication } from '../../services/posts/setLikeToPublication';
@@ -20,15 +20,25 @@ export const PostInfoInteractionBar = ({ likes, postData, type = 'posts' }) => {
         setIsLiked(!isLiked);
     }
 
-    useEffect(() => {
-        setPostLikes( likes.totalLikes );
-        likes?.answerLikes?.forEach( like => {
-            if( userProfile && like.user_id === userProfile?.userData?.id ){
+    const setLikedPublications = useCallback(( publications ) => {
+        publications.forEach( like => {
+            if(  like.user_id === userProfile?.userData?.id  ){
                 setIsLiked( prev => !prev);
             }
         });
+    },[userProfile?.userData?.id]);
 
-    }, [ likes.totalLikes, likes.answerLikes, userProfile ]);
+    useEffect(() => {
+        setPostLikes( likes.totalLikes );
+        if(userProfile){
+            if( type === 'posts'){
+                setLikedPublications(likes.postLikes);
+            }
+            if( type === 'answers'){
+                setLikedPublications(likes.answerLikes);
+            }
+        }
+    }, [ likes.totalLikes, likes.answerLikes, userProfile, type, setLikedPublications, likes.postLikes  ]);
 
     return (
     <>
@@ -57,8 +67,6 @@ const StyledLikeButton = styled.div`
         border: 2px solid ${({ isDisabled }) => isDisabled ? 'transparent' : 'rgb(255, 2, 90)'};
         color: ${({ isLiked }) => !isLiked ? 'black' :'white' };
         background-color: ${({ isLiked }) => !isLiked ? 'rgb(255, 255, 255)' :'rgb(255, 2, 90)' };
-    }
-    & > button {
         font-size: 0.65em;
         transition: all 0.3s ease-in-out;
         &:hover {
