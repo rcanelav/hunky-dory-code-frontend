@@ -28,11 +28,20 @@ _It is a web platform where people can share their doubts and knowledge about te
     <a href="https://github.com/rcanelav/Hunky-Dory-Code-Docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://rcanelav.github.io/hunky-dory-code-frontend/">View Demo</a>
     ·
-    <a href="https://github.com/rcanelav/Hunky-Dory-Code-Frontend/issues">Report a Bug</a>
+    <a href="https://rcanelav.github.io/hunky-dory-code-frontend/">HDC access</a>
     ·
-    <a href="https://github.com/rcanelav/Hunky-Dory-Code-Frontend/issues">Request a Feature</a>
+    <a href="https://github.com/rcanelav/hunky-dory-code-frontend/issues">Report a Bug</a>
+    ·
+    <a href="https://github.com/rcanelav/hunky-dory-code-frontend/issues">Request a Feature</a>
+    ·
+    <br />
+    <br />
+    ·
+    <a href="https://www.canva.com/design/DAE8j0Sj8-w/8aSldd_rtR6_juoM6_wGjw/view?utm_content=DAE8j0Sj8-w&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink#8">View mobile wireframe</a>
+    ⚡
+    <a href="https://www.canva.com/design/DAE8kcPqWGg/37VHBw4-6ZIdTRghsDZUcg/view?utm_content=DAE8kcPqWGg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">View desktop wireframe</a>
+    ·
   </p>
 </div>
 <br />
@@ -113,6 +122,8 @@ $ npm start
 * [HDC Backend](https://github.com/rcanelav/Hunky-Dory-Code-Backend) - Hunky Dory Code Backend RESTful API
 * [HDC Docs](https://github.com/rcanelav/Hunky-Dory-Code-Docs) - Hunky Dory Code Docs
 * [HDC API docs](https://documenter.getpostman.com/view/11049007/UVRGEPag) - Postman API Docs
+* [Mobile Wireframe](https://www.canva.com/design/DAE8j0Sj8-w/8aSldd_rtR6_juoM6_wGjw/view?utm_content=DAE8j0Sj8-w&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink#8) - online view
+* [Desktop Wireframe](https://www.canva.com/design/DAE8kcPqWGg/37VHBw4-6ZIdTRghsDZUcg/view?utm_content=DAE8kcPqWGg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink) - online view
 <p align="right">(<a href="#top">back to top ⬆</a>)</p>
 </br>
 
