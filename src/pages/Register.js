@@ -12,6 +12,17 @@ import { displayModal } from '../utils/helpers/displayModal';
 export const Register = () => {
     const { signInWithFirebaseAuth } = useAuthorization();
     const navigate = useNavigate();
+
+    const handleRoleEspecificationModal = ( role ) => {
+        return displayModal(
+            'info',
+            role === 'EXPERT' ? 'Expert role' : 'Student role',
+            role === 'EXPERT'
+            ? 'Being an expert, you can post new questions and answer them. You can also vote for questions and answers. After create an user, you must access to your profile and select your technology expertice.'
+            : 'Being an student, you can post new questions and answer them. You can also vote for questions and answers.'
+        );
+    }
+
     const handleRegister = async( userData ) => {
         try{
             const {msg} = await registerUser( userData );
@@ -180,8 +191,20 @@ export const Register = () => {
                                         value={values.role}
                                         row
                                     >
-                                        <FormControlLabel value="STUDENT" control={<Radio />} label="Student" />
-                                        <FormControlLabel value="EXPERT" control={<Radio />} label="Expert" />
+                                        <FormControlLabel
+                                            value="STUDENT"
+                                            control={<Radio />}
+                                            label="Student"
+                                            id='student-role'
+                                            onClick={ (e) => handleRoleEspecificationModal(e.target.value)}
+                                            />
+                                        <FormControlLabel
+                                            value="EXPERT"
+                                            control={<Radio />}
+                                            label="Expert"
+                                            id='expert-role'
+                                            onClick={ (e) => handleRoleEspecificationModal(e.target.value)}
+                                        />
                                     </RadioGroup>
                                 </StyledFieldWrapper>
                                 <StyledButton type="submit" variant="contained" >
