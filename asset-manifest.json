@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/hunky-dory-code-frontend/static/js/main.da72cda9.js",
+    "main.js": "/hunky-dory-code-frontend/static/js/main.3f80f82b.js",
     "static/media/background.jpg": "/hunky-dory-code-frontend/static/media/background.5fc3cfa332218fec4535.jpg",
     "static/media/hunky.png": "/hunky-dory-code-frontend/static/media/hunky.3fd24f468fb9f940170b.png",
     "static/media/Helvetica.otf": "/hunky-dory-code-frontend/static/media/Helvetica.65117ef0693e338e7620.otf",
     "index.html": "/hunky-dory-code-frontend/index.html",
-    "main.da72cda9.js.map": "/hunky-dory-code-frontend/static/js/main.da72cda9.js.map"
+    "main.3f80f82b.js.map": "/hunky-dory-code-frontend/static/js/main.3f80f82b.js.map"
   },
   "entrypoints": [
-    "static/js/main.da72cda9.js"
+    "static/js/main.3f80f82b.js"
   ]
 }
